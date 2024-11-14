@@ -1,25 +1,25 @@
-import {StyledHeader} from "./Header.style.ts";
-import {Link} from "@tanstack/react-router";
-import {SearchTextField} from "@yourssu/design-system-react";
+import {StyledHeader, StyledLink, StyledNav, StyledSpace} from "./Header.style.ts";
 
 function Header() {
     return <StyledHeader>
-        <SearchTextField></SearchTextField>
-        <Link to="/">
-            공간오픈/관리
-        </Link>
-        <Link to="/about">
-            공간찾기
-        </Link>
-        <Link>
-            교내회의실
-        </Link>
-        <Link>
-            로그인
-        </Link>
-        <Link>
-            로그아웃
-        </Link>
+        <StyledNav>
+            <StyledLink to="/">
+                공간오픈/관리
+            </StyledLink>
+            <StyledLink to="/about">
+                공간찾기
+            </StyledLink>
+            <StyledLink>
+                교내회의실
+            </StyledLink>
+            <StyledLink>
+                로그인
+            </StyledLink>
+            <StyledLink>
+                로그아웃
+            </StyledLink>
+        </StyledNav>
+        <StyledSpace />
     </StyledHeader>
 }
 
