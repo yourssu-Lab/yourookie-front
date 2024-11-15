@@ -6,7 +6,7 @@ function Header() {
             <StyledLink to="/">
                 공간오픈/관리
             </StyledLink>
-            <StyledLink to="/about">
+            <StyledLink to="/find-organization">
                 공간찾기
             </StyledLink>
             <StyledLink>
