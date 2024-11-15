@@ -6,7 +6,6 @@ export const StyledHeader = styled.header`
     align-items: center;
     width: 100%;
     height: 4rem;
-    padding-right: 10vw;
     position: sticky;
     top: 0;
     background-color: rgb(255, 255, 255);
@@ -37,3 +36,7 @@ export const StyledLink = styled(Link)`
 export const StyledSpace = styled.div`
     flex-grow: 1;
 `
+
+export const StyledAuth = styled.div`
+    display: flex;
+`;
