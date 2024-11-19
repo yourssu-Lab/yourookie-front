@@ -7,22 +7,28 @@ export const StyledContainer = styled.div`
   padding: 40px 20px;
 `;
 
-export const StyledSpaceSection = styled.section`
-  background: white;
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 24px;
-`;
-
 export const StyledSpaceGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 24px;
 `;
 
-export const StyledAddButton = styled.div`
+export const StyledAddSpaceButton = styled.button`
   display: flex;
-  padding: 20px;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  margin-bottom: 30px;
+  background: #f0f2f5;
+  border: none;
+  border-radius: 20px;
+  color: #1976d2;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #e3f2fd;
+  }
 `;

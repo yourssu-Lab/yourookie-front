@@ -1,12 +1,11 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { BoxButton } from "@yourssu/design-system-react";
 import { useState } from "react";
 import { OrganizationInfoCard } from "../../-components/OrganizationInfoCard/OrganizationInfoCard";
 import { SpaceCard } from "../../-components/SpaceCard/SpaceCard";
 import { mockOrganization, mockSpaces } from "../../../mock/organizationData";
 import { Organization, Space } from "../../../types/organization.type";
 import {
-  StyledAddButton,
+  StyledAddSpaceButton,
   StyledContainer,
   StyledSpaceGrid,
 } from "./-index.style";
@@ -23,8 +22,9 @@ function RouteComponent() {
     // 단체 정보 수정 페이지로 이동
   };
 
-  const handleEditSpace = () => {
+  const handleEditSpace = (spaceId: number) => {
     // 공간 정보 수정 페이지로 이동
+    console.log("Edit space:", spaceId);
   };
 
   const handleAddSpace = () => {
@@ -37,28 +37,23 @@ function RouteComponent() {
         name={organization.name}
         description={organization.description}
         image={organization.logoImageUrl}
+        tags={organization.tags}
         onEditClick={handleEditOrganization}
       />
+
+      <StyledAddSpaceButton onClick={handleAddSpace}>
+        + 공간 추가
+      </StyledAddSpaceButton>
 
       <StyledSpaceGrid>
         {spaces.map((space) => (
           <SpaceCard
-            onEditClick={handleEditSpace}
+            onEditClick={() => handleEditSpace(space.id)}
             key={space.id}
             space={space}
           />
         ))}
       </StyledSpaceGrid>
-      <StyledAddButton>
-        <BoxButton
-          onClick={handleAddSpace}
-          size="large"
-          variant="filled"
-          rounding={8}
-        >
-          새 공간 오픈하기
-        </BoxButton>
-      </StyledAddButton>
     </StyledContainer>
   );
 }
