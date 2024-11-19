@@ -14,13 +14,13 @@ import {
   StyledLabel,
   StyledLabelRow,
   StyledTitle,
-} from "./-edit.style";
+} from "./-index.style";
 
-export const Route = createLazyFileRoute("/organizations/$organizationId/edit")(
-  {
-    component: RouteComponent,
-  }
-);
+export const Route = createLazyFileRoute(
+  "/organizations/$organizationId/edit/"
+)({
+  component: RouteComponent,
+});
 
 interface GroupFormData {
   name: string;
