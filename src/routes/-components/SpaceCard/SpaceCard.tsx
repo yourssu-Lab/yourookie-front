@@ -1,16 +1,17 @@
-import { BoxButton } from "@yourssu/design-system-react";
+import pencil from "../../../assets/Pencil.svg";
 import { Space } from "../../../types/organization.type";
 import {
-  StyledCapacity,
   StyledCard,
-  StyledContent,
-  StyledImage,
-  StyledLocation,
-  StyledName,
-  StyledRow,
-  StyledTime,
+  StyledEditIcon,
+  StyledHeader,
+  StyledSpaceCapacity,
+  StyledSpaceContent,
+  StyledSpaceHeader,
+  StyledSpaceImage,
+  StyledSpaceInfo,
+  StyledSpaceLocation,
+  StyledSpaceTime,
   StyledTitle,
-  StyledTitledRow,
 } from "./SpaceCard.style";
 
 interface SpaceCardProps {
@@ -21,28 +22,27 @@ interface SpaceCardProps {
 export const SpaceCard = ({ space, onEditClick }: SpaceCardProps) => {
   return (
     <StyledCard>
-      <StyledTitledRow>
-        <StyledTitle>개설된 공간 정보</StyledTitle>
-        <BoxButton
-          onClick={onEditClick}
-          size="small"
-          variant="filled"
-          rounding={8}
-        >
-          수정
-        </BoxButton>
-      </StyledTitledRow>
-      <StyledImage src={space.spaceImageUrl} alt={space.name} />
-      <StyledContent>
-        <StyledRow>
-          <StyledName>{space.name}</StyledName>
-          <StyledLocation>{space.location}</StyledLocation>
-        </StyledRow>
-        <StyledTime>
-          {space.openingTime} ~ {space.closingTime}
-        </StyledTime>
-        <StyledCapacity>수용인원 {space.capacity}명</StyledCapacity>
-      </StyledContent>
+      <StyledHeader>
+        <StyledTitle>{space.name}</StyledTitle>
+        <StyledEditIcon onClick={onEditClick}>
+          <img src={pencil} alt="수정하기" />
+        </StyledEditIcon>
+      </StyledHeader>
+      <StyledSpaceImage>
+        <img src={space.spaceImageUrl} alt={space.name} />
+      </StyledSpaceImage>
+
+      <StyledSpaceContent>
+        <StyledSpaceHeader>
+          <StyledSpaceLocation>{space.location}</StyledSpaceLocation>
+        </StyledSpaceHeader>
+        <StyledSpaceInfo>
+          <StyledSpaceTime>
+            {space.openingTime} ~ {space.closingTime}
+          </StyledSpaceTime>
+          <StyledSpaceCapacity>최대 {space.capacity}인</StyledSpaceCapacity>
+        </StyledSpaceInfo>
+      </StyledSpaceContent>
     </StyledCard>
   );
 };
