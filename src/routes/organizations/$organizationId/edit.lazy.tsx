@@ -30,7 +30,7 @@ interface GroupFormData {
 }
 
 function RouteComponent() {
-  const imageInputRef = useRef<HTMLInputElement>(null);
+  const imageInputRef = useRef<HTMLInputElement | null>(null);
   const { register, handleSubmit, watch, setValue } = useForm<GroupFormData>({
     defaultValues: {
       name: "",
@@ -97,6 +97,10 @@ function RouteComponent() {
             <StyledAdd>+</StyledAdd>
           )}
           <StyledImageInput
+            ref={(e) => {
+              imageInputRef.current = e;
+              register("image").ref(e);
+            }}
             id="imageInput"
             type="file"
             accept="image/*"
