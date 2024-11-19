@@ -33,7 +33,10 @@ function RouteComponent() {
   };
 
   const handleAddSpace = () => {
-    // 새 공간 오픈 페이지로 이동
+    navigate({
+      to: "/organizations/$organizationId/open",
+      params: { organizationId },
+    });
   };
 
   return (
