@@ -28,8 +28,13 @@ function RouteComponent() {
   };
 
   const handleEditSpace = (spaceId: number) => {
-    // 공간 정보 수정 페이지로 이동
-    console.log("Edit space:", spaceId);
+    navigate({
+      to: "/organizations/$organizationId/spaceEdit/$spaceId",
+      params: {
+        organizationId,
+        spaceId: spaceId.toString(),
+      },
+    });
   };
 
   const handleAddSpace = () => {
