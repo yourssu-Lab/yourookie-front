@@ -34,7 +34,7 @@ function Header() {
                 <StyledLink>
                     로그인
                 </StyledLink>
-                <StyledLink>
+                <StyledLink to="/signup">
                     회원가입
                 </StyledLink>
             </StyledAuth>
