@@ -1,4 +1,4 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
+import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { OrganizationInfoCard } from "../../-components/OrganizationInfoCard/OrganizationInfoCard";
 import { SpaceCard } from "../../-components/SpaceCard/SpaceCard";
@@ -17,18 +17,31 @@ export const Route = createLazyFileRoute("/organizations/$organizationId/")({
 function RouteComponent() {
   const [organization] = useState<Organization>(mockOrganization);
   const [spaces] = useState<Space[]>(mockSpaces);
+  const { organizationId } = Route.useParams();
+  const navigate = useNavigate();
 
   const handleEditOrganization = () => {
-    // 단체 정보 수정 페이지로 이동
+    navigate({
+      to: "/organizations/$organizationId/edit",
+      params: { organizationId },
+    });
   };
 
   const handleEditSpace = (spaceId: number) => {
-    // 공간 정보 수정 페이지로 이동
-    console.log("Edit space:", spaceId);
+    navigate({
+      to: "/organizations/$organizationId/spaceEdit/$spaceId",
+      params: {
+        organizationId,
+        spaceId: spaceId.toString(),
+      },
+    });
   };
 
   const handleAddSpace = () => {
-    // 새 공간 오픈 페이지로 이동
+    navigate({
+      to: "/organizations/$organizationId/open",
+      params: { organizationId },
+    });
   };
 
   return (
