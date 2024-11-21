@@ -1,4 +1,5 @@
 import Logo from "../assets/mockLogo.svg";
+import testLogo from "../assets/test.jpg";
 import { Organization, Space } from "../types/organization.type";
 
 export const mockOrganization: Organization = {
@@ -23,7 +24,7 @@ export const mockSpaces: Space[] = [
   {
     id: 2,
     name: "유어슈 동방",
-    spaceImageUrl: Logo,
+    spaceImageUrl: testLogo,
     location: "창신관 407호",
     openingTime: "10:00",
     closingTime: "18:00",
@@ -50,7 +51,7 @@ export const mockSpaces: Space[] = [
   {
     id: 5,
     name: "유어슈 창신관",
-    spaceImageUrl: Logo,
+    spaceImageUrl: testLogo,
     location: "창신관 407호",
     openingTime: "10:00",
     closingTime: "18:00",
