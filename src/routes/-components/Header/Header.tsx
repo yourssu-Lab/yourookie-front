@@ -11,12 +11,15 @@ import {
 import {useLoginState} from "../../../hooks/useLoginState.ts";
 import LogoIcon from "../../../assets/logo.svg?react"
 import SearchIcon from "../../../assets/search.svg?react";
+import {Link} from "@tanstack/react-router";
 
 function Header() {
     const {isLoggedIn} = useLoginState();
 
     return <StyledHeader>
-        <LogoIcon style={{ minWidth: '144px' }} />
+        <Link to="/">
+            <LogoIcon style={{ minWidth: '144px' }} />
+        </Link>
         <StyledSpace />
         <StyledNav>
             <StyledLink to="/">
