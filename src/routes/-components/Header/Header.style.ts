@@ -3,14 +3,12 @@ import {Link} from "@tanstack/react-router";
 
 export const StyledHeader = styled.header`
     display: flex;
-    align-items: center;
     width: 100%;
-    height: 4rem;
-    position: sticky;
-    top: 0;
-    background-color: rgb(255, 255, 255);
-    border-bottom: 1px solid rgba(16, 17, 18, 0.1);
-    z-index: 9;
+    padding: 0 30px;
+    align-items: center;
+    
+    gap: 174px;
+    background: #0095DE;
 `;
 
 export const StyledNav = styled.nav`

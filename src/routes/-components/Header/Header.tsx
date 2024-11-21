@@ -1,13 +1,15 @@
 import {StyledAuth, StyledHeader, StyledLink, StyledNav, StyledSpace} from "./Header.style.ts";
 import {useLoginState} from "../../../hooks/useLoginState.ts";
 import {SearchTextField} from "@yourssu/design-system-react";
+import LogoIcon from "../../../assets/logo.svg?react"
 
 function Header() {
     const {isLoggedIn} = useLoginState();
 
+    console.log(LogoIcon);
+
     return <StyledHeader>
-        <StyledSpace />
-        <h2>OpenSSUpot</h2>
+        <LogoIcon style={{ minWidth: '144px' }} />
         <StyledSpace />
         <StyledNav>
             <SearchTextField />
