@@ -1,20 +1,24 @@
 import {
     IconContainer,
-    SearchBar, SearchContainer,
+    SearchBar,
+    SearchContainer,
     StyledAuth,
     StyledHeader,
-    StyledLink,
-    StyledLoginButton,
+    StyledLink, StyledLoginButton,
     StyledNav,
     StyledSpace
 } from "./Header.style.ts";
 import {useLoginState} from "../../../hooks/useLoginState.ts";
+import SignIn from "../SignIn/SignIn.tsx";
+import {useState} from "react";
 import LogoIcon from "../../../assets/logo.svg?react"
 import SearchIcon from "../../../assets/search.svg?react";
 import {Link} from "@tanstack/react-router";
 
 function Header() {
     const {isLoggedIn} = useLoginState();
+    const [signInModalOpen, setSignInModalOpen] = useState(false);
+    const closeModal = () => setSignInModalOpen(false);
 
     return <StyledHeader>
         <Link to="/">
@@ -47,7 +51,10 @@ function Header() {
             </StyledAuth>
         }
         {
-            !isLoggedIn && <StyledLoginButton>로그인</StyledLoginButton>
+            !isLoggedIn && <StyledLoginButton onClick={() => setSignInModalOpen(true)}>로그인</StyledLoginButton>
+        }
+        {
+            !isLoggedIn && <SignIn open={signInModalOpen} closeModal={closeModal} />
         }
     </StyledHeader>
 }

@@ -6,6 +6,8 @@ import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 
 import {YDSWrapper} from "@yourssu/design-system-react";
+import Modal from "react-modal";
+import Provider from "./Provider.tsx";
 
 // Create a new router instance
 const router = createRouter({ routeTree })
@@ -17,6 +19,8 @@ declare module '@tanstack/react-router' {
     }
 }
 
+Modal.setAppElement('#root');
+
 // Render the app
 const rootElement = document.getElementById('root')!
 if (!rootElement.innerHTML) {
@@ -24,7 +28,9 @@ if (!rootElement.innerHTML) {
     root.render(
         <StrictMode>
             <YDSWrapper>
-                <RouterProvider router={router} />
+                <Provider>
+                    <RouterProvider router={router} />
+                </Provider>
             </YDSWrapper>
         </StrictMode>,
     )
