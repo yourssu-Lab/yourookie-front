@@ -1,9 +1,13 @@
 import {StyledAuth, StyledHeader, StyledLink, StyledNav, StyledSpace} from "./Header.style.ts";
 import {useLoginState} from "../../../hooks/useLoginState.ts";
 import {SearchTextField} from "@yourssu/design-system-react";
+import SignIn from "../SignIn/SignIn.tsx";
+import {useState} from "react";
 
 function Header() {
     const {isLoggedIn} = useLoginState();
+    const [signInModalOpen, setSignInModalOpen] = useState(false);
+    const closeModal = () => setSignInModalOpen(false);
 
     return <StyledHeader>
         <StyledSpace />
@@ -31,12 +35,13 @@ function Header() {
         }
         {
             !isLoggedIn && <StyledAuth>
-                <StyledLink>
+                <StyledLink onClick={() => setSignInModalOpen(true)}>
                     로그인
                 </StyledLink>
                 <StyledLink to="/signup">
                     회원가입
                 </StyledLink>
+                <SignIn open={signInModalOpen} closeModal={closeModal} />
             </StyledAuth>
         }
         <StyledSpace />
