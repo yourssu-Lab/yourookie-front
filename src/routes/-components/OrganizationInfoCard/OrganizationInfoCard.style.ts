@@ -1,25 +1,24 @@
 import styled from "styled-components";
 
-export const StyledSection = styled.section`
-  background: #fff;
-  border-radius: 16px;
-  padding: 32px;
-  margin-bottom: 30px;
-  border: 1px solid #edf0f3;
-`;
+export const StyledSection = styled.section``;
 
 export const StyledHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
-  padding: 0px 20px;
+  margin-bottom: 16px;
+  padding: 0px 10px;
 `;
 
 export const StyledTitle = styled.h2`
-  font-size: 24px;
-  font-weight: 600;
-  color: #333;
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+`;
+
+export const StyledHr = styled.div`
+  width: 100%;
+  border-top: 0.5px solid #858585;
 `;
 
 export const StyledEditIcon = styled.div`
@@ -35,14 +34,14 @@ export const StyledEditIcon = styled.div`
 
 export const StyledContent = styled.div`
   display: flex;
-  gap: 32px;
-  justify-content: space-between;
+  margin: 40px 0px;
+  gap: 40px;
+  align-items: center;
 `;
 
 export const StyledImageWrapper = styled.div`
-  width: 200px;
-  height: 200px;
-  overflow: hidden;
+  width: 280px;
+  height: 184px;
 `;
 
 export const StyledImage = styled.img`
@@ -52,13 +51,13 @@ export const StyledImage = styled.img`
 `;
 
 export const StyledInfo = styled.div`
-  flex: 1;
+  margin: 12px 0px;
 `;
 
 export const StyledName = styled.p`
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
 `;
 
 export const StyledDescription = styled.p`
@@ -70,16 +69,18 @@ export const StyledDescription = styled.p`
 
 export const StyledTags = styled.div`
   display: flex;
-  gap: 8px;
+  gap: 20px;
   flex-wrap: wrap;
 `;
 
 export const StyledTag = styled.span`
-  padding: 6px 12px;
-  background: #f0f2f5;
-  border-radius: 16px;
-  font-size: 14px;
-  color: #666;
+  padding: 10px 20px;
+  background: #ffffff;
+  border-radius: 45px;
+  border: 0.5px solid #858585;
+  font-size: 18px;
+  font-weight: 500;
+  color: #3a3a3a;
 `;
 
 export const StyledEditButton = styled.div`

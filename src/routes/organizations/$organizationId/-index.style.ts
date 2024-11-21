@@ -2,29 +2,30 @@ import styled from "styled-components";
 
 export const StyledContainer = styled.div`
   width: 100%;
-  max-width: 1200px;
+  max-width: 1220px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 60px 0;
 `;
 
 export const StyledSpaceGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 16px 18px;
 `;
 
 export const StyledAddSpaceButton = styled.button`
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  margin-bottom: 30px;
-  background: #f0f2f5;
+  gap: 2px;
+  padding: 10px;
+  margin: 20px 0px 16px 0px;
+  background: #e2ecf7;
   border: none;
-  border-radius: 20px;
-  color: #1976d2;
-  font-size: 14px;
+  border-radius: 12px;
+  color: #1781ee;
+  font-size: 20px;
   font-weight: 500;
+  letter-spacing: 0.4px;
   cursor: pointer;
   transition: all 0.2s;
 

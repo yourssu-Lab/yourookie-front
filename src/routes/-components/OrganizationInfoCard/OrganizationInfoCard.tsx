@@ -1,9 +1,10 @@
+import pencil from "../../../assets/Pencil.svg";
 import {
   StyledContent,
   StyledDescription,
-  StyledEditButton,
   StyledEditIcon,
   StyledHeader,
+  StyledHr,
   StyledImage,
   StyledImageWrapper,
   StyledInfo,
@@ -13,8 +14,6 @@ import {
   StyledTags,
   StyledTitle,
 } from "./OrganizationInfoCard.style";
-
-import pencil from "../../../assets/Pencil.svg";
 
 interface OrganizationInfoProps {
   name: string;
@@ -39,6 +38,7 @@ export const OrganizationInfoCard = ({
           <img src={pencil} alt="수정하기" />
         </StyledEditIcon>
       </StyledHeader>
+      <StyledHr />
       <StyledContent>
         <StyledImageWrapper>
           <StyledImage src={image} alt={name} />
@@ -53,9 +53,7 @@ export const OrganizationInfoCard = ({
           </StyledTags>
         </StyledInfo>
       </StyledContent>
-      <StyledEditButton onClick={onEditClick}>
-        <img src={pencil} alt="수정하기" />
-      </StyledEditButton>
+      <StyledHr />
     </StyledSection>
   );
 };
