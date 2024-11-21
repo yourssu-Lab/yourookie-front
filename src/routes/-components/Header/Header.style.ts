@@ -38,3 +38,24 @@ export const StyledSpace = styled.div`
 export const StyledAuth = styled.div`
     display: flex;
 `;
+
+export const StyledLoginButton = styled.button`
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    border-radius: 45px;
+    background: #FFF;
+    border: none;
+    min-width: fit-content;
+
+    color: #1781EE;
+    text-align: center;
+
+    /* 일반/18/설명&일반글씨/medium */
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+`;

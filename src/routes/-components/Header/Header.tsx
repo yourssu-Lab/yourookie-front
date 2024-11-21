@@ -1,4 +1,4 @@
-import {StyledAuth, StyledHeader, StyledLink, StyledNav, StyledSpace} from "./Header.style.ts";
+import {StyledAuth, StyledHeader, StyledLink, StyledLoginButton, StyledNav, StyledSpace} from "./Header.style.ts";
 import {useLoginState} from "../../../hooks/useLoginState.ts";
 import {SearchTextField} from "@yourssu/design-system-react";
 import LogoIcon from "../../../assets/logo.svg?react"
@@ -20,7 +20,6 @@ function Header() {
                 교내회의실 찾기
             </StyledLink>
         </StyledNav>
-        <StyledSpace />
         {
             isLoggedIn && <StyledAuth>
                 <StyledLink>
@@ -32,16 +31,8 @@ function Header() {
             </StyledAuth>
         }
         {
-            !isLoggedIn && <StyledAuth>
-                <StyledLink>
-                    로그인
-                </StyledLink>
-                <StyledLink to="/signup">
-                    회원가입
-                </StyledLink>
-            </StyledAuth>
+            !isLoggedIn && <StyledLoginButton>로그인</StyledLoginButton>
         }
-        <StyledSpace />
     </StyledHeader>
 }
 
