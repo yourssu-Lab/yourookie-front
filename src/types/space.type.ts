@@ -4,5 +4,5 @@ export interface SpaceFormData {
   openTime: string;
   closeTime: string;
   capacity: number | string;
-  image: File | null;
+  images: File[];
 }
