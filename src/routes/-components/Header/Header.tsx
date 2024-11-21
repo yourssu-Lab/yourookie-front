@@ -1,6 +1,14 @@
-import {StyledAuth, StyledHeader, StyledLink, StyledNav, StyledSpace} from "./Header.style.ts";
+import {
+    IconContainer,
+    SearchBar,
+    SearchContainer,
+    StyledAuth,
+    StyledHeader,
+    StyledLink, StyledLoginButton,
+    StyledNav,
+    StyledSpace
+} from "./Header.style.ts";
 import {useLoginState} from "../../../hooks/useLoginState.ts";
-import {SearchTextField} from "@yourssu/design-system-react";
 import SignIn from "../SignIn/SignIn.tsx";
 import {useState} from "react";
 import LogoIcon from "../../../assets/logo.svg?react"
@@ -45,6 +53,7 @@ function Header() {
         {
             !isLoggedIn && <StyledLoginButton onClick={() => setSignInModalOpen(true)}>로그인</StyledLoginButton>
         }
+        {
             !isLoggedIn && <SignIn open={signInModalOpen} closeModal={closeModal} />
         }
     </StyledHeader>
