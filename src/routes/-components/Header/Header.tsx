@@ -3,6 +3,9 @@ import {useLoginState} from "../../../hooks/useLoginState.ts";
 import {SearchTextField} from "@yourssu/design-system-react";
 import SignIn from "../SignIn/SignIn.tsx";
 import {useState} from "react";
+import LogoIcon from "../../../assets/logo.svg?react"
+import SearchIcon from "../../../assets/search.svg?react";
+import {Link} from "@tanstack/react-router";
 
 function Header() {
     const {isLoggedIn} = useLoginState();
@@ -10,17 +13,23 @@ function Header() {
     const closeModal = () => setSignInModalOpen(false);
 
     return <StyledHeader>
-        <StyledSpace />
-        <h2>OpenSSUpot</h2>
+        <Link to="/">
+            <LogoIcon style={{ minWidth: '144px' }} />
+        </Link>
         <StyledSpace />
         <StyledNav>
-            <SearchTextField />
             <StyledLink to="/">
                 공간오픈/관리
             </StyledLink>
             <StyledLink>
                 교내회의실 찾기
             </StyledLink>
+            <SearchContainer>
+                <SearchBar placeholder="검색어를 입력하세요" />
+                <IconContainer>
+                    <SearchIcon style={{ minWidth: '25px' }} />
+                </IconContainer>
+            </SearchContainer>
         </StyledNav>
         <StyledSpace />
         {
@@ -34,17 +43,10 @@ function Header() {
             </StyledAuth>
         }
         {
-            !isLoggedIn && <StyledAuth>
-                <StyledLink onClick={() => setSignInModalOpen(true)}>
-                    로그인
-                </StyledLink>
-                <StyledLink to="/signup">
-                    회원가입
-                </StyledLink>
-                <SignIn open={signInModalOpen} closeModal={closeModal} />
-            </StyledAuth>
+            !isLoggedIn && <StyledLoginButton onClick={() => setSignInModalOpen(true)}>로그인</StyledLoginButton>
         }
-        <StyledSpace />
+            !isLoggedIn && <SignIn open={signInModalOpen} closeModal={closeModal} />
+        }
     </StyledHeader>
 }
 
