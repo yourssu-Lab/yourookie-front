@@ -2,35 +2,35 @@ import styled from "styled-components";
 
 export const StyledContainer = styled.form`
   width: 100%;
-  max-width: 520px;
-  margin: 0 auto;
-  padding: 20px;
+  padding: 35px 50px;
+  background: white;
 `;
 
-export const StyledTitle = styled.h1`
-  font-size: 24px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 32px;
-  text-align: center;
+export const StyledTitle = styled.p`
+  display: flex;
+  font-size: 28px;
+  font-weight: 700;
+  color: #3a3a3a;
+  padding: 10px 10px 10px 0;
+  margin-bottom: 16px;
 `;
 
 export const StyledFieldGroup = styled.div`
-  margin-bottom: 24px;
+  margin-bottom: 40px;
 `;
 
 export const StyledLabel = styled.div`
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
-  margin-bottom: 8px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #3a3a3a;
 `;
 
 export const StyledDetailLabel = styled.div`
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 400;
   color: #4f4f4f;
   margin-bottom: 8px;
+  margin-left: 4px;
 `;
 
 export const StyledLabelRow = styled.div`
@@ -40,44 +40,58 @@ export const StyledLabelRow = styled.div`
 `;
 
 export const StyledInput = styled.input`
+  margin-top: 16px;
   width: 100%;
-  padding: 12px;
-  border: 1px solid #e1e1e8;
-  border-radius: 8px;
-  font-size: 14px;
+  padding: 12px 20px;
+  border: none;
+  box-shadow: 0 0 0 0.5px #858585;
+  border-radius: 5px;
+  font-size: 18px;
 
   &::placeholder {
-    font-size: 12px;
-    color: #b3b3b3;
+    font-size: 14px;
+    color: #858585;
   }
+`;
+
+export const StyledImageRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 18px;
 `;
 
 export const StyledImageUpload = styled.div`
-  width: 100%;
-  height: 100px;
-  border: 1px solid #e1e1e8;
-  border-radius: 8px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  padding: 6px 12px;
+  background-color: #e2ecf7;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 12px;
   cursor: pointer;
-  margin-bottom: 16px;
 
   &:hover {
-    background: #e1e1e8;
+    background-color: #e5e9f2;
   }
 `;
 
+export const StyledButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
 export const StyledButton = styled.button`
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #e1e1e8;
-  border-radius: 8px;
+  border-radius: 12px;
+  background: #1781ee;
+  padding: 10px 38px;
+  font-size: 20px;
+  border: none;
   text-align: center;
   cursor: pointer;
+  color: #ffffff;
 
   &:hover {
-    background: #e1e1e8;
   }
 `;
 
@@ -85,10 +99,27 @@ export const StyledImageInput = styled.input`
   display: none;
 `;
 
-export const StyledImage = styled.img`
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
+export const StyledTagRow = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  ${StyledInput} {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
 `;
 
-export const StyledAdd = styled.span``;
+export const StyledLogoWrapper = styled.div`
+  display: inline-block;
+  margin-left: auto;
+  img {
+    width: 132px;
+    height: auto;
+  }
+`;
+
+export const StyledHeaderRow = styled.div`
+  display: flex;
+  align-items: center;
+`;
