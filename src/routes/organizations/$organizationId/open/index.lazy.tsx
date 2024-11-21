@@ -4,15 +4,19 @@ import { useForm } from "react-hook-form";
 import { SpaceFormData } from "../../../../types/space.type";
 import {
   StyledAdd,
+  StyledAddButton,
   StyledButton,
+  StyledButtonWrapper,
   StyledContainer,
+  StyledContents,
   StyledFieldGroup,
   StyledForm,
-  StyledImage,
   StyledImageInput,
-  StyledImageUpload,
+  StyledImageSection,
+  StyledImageUploadBox,
   StyledInput,
   StyledLabel,
+  StyledPlaceholder,
   StyledRow,
   StyledTimeContainer,
   StyledTimeInput,
@@ -34,30 +38,37 @@ function RouteComponent() {
       openTime: "",
       closeTime: "",
       capacity: "",
-      image: null,
+      images: [],
     },
   });
 
-  const imageFile = watch("image");
+  const images = watch("images") || [];
 
   const onSubmit = (data: SpaceFormData) => {
     console.log(data);
   };
 
-  const handleImageUploadClick = () => {
-    if (imageInputRef.current) {
-      imageInputRef.current.click();
-    }
+  const handleImageUpload = () => {
+    imageInputRef.current?.click();
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
-    setValue("image", file);
+    const files = Array.from(e.target.files || []);
+    if (files.length + images.length > 3) {
+      alert("최대 3장까지만 업로드할 수 있습니다.");
+      return;
+    }
+    setValue("images", [...images, ...files]);
   };
+
+  // const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const files = Array.from(e.target.files || []);
+  //   setValue("images", [...images, ...files]);
+  // };
 
   return (
     <StyledContainer onSubmit={handleSubmit(onSubmit)}>
-      <StyledTitle>공간 오픈</StyledTitle>
+      <StyledTitle>공간 생성</StyledTitle>
 
       <StyledForm>
         <StyledRow>
@@ -80,7 +91,7 @@ function RouteComponent() {
 
         <StyledRow>
           <StyledFieldGroup>
-            <StyledLabel>시간 입력</StyledLabel>
+            <StyledLabel>공간 사용 가능 시간</StyledLabel>
             <StyledTimeContainer>
               <StyledTimeInput
                 type="time"
@@ -105,29 +116,44 @@ function RouteComponent() {
         </StyledRow>
 
         <StyledFieldGroup>
-          <StyledLabel>공간사진</StyledLabel>
-          <StyledImageUpload onClick={handleImageUploadClick}>
-            {imageFile ? (
-              <StyledImage
-                src={URL.createObjectURL(imageFile)}
-                alt="단체 사진"
-              />
-            ) : (
-              <StyledAdd>+</StyledAdd>
-            )}
-            <StyledImageInput
-              ref={(e) => {
-                imageInputRef.current = e;
-                register("image").ref(e);
-              }}
-              id="imageInput"
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-            />
-          </StyledImageUpload>
+          <StyledLabel>공간 사진</StyledLabel>
+          {images.length > 0 ? (
+            <StyledImageSection>
+              {images.map((image, index) => (
+                <StyledImageUploadBox key={index} $isMain={index === 0}>
+                  <img
+                    src={URL.createObjectURL(image)}
+                    alt={`공간 사진 ${index + 1}`}
+                  />
+                </StyledImageUploadBox>
+              ))}
+              {images.length < 3 && (
+                <StyledAddButton onClick={handleImageUpload}>+</StyledAddButton>
+              )}
+            </StyledImageSection>
+          ) : (
+            <StyledImageUploadBox $isEmpty onClick={handleImageUpload}>
+              <StyledContents>
+                <StyledPlaceholder>사진을 추가해주세요</StyledPlaceholder>
+                <StyledAdd>+</StyledAdd>
+              </StyledContents>
+            </StyledImageUploadBox>
+          )}
+          <StyledImageInput
+            ref={(e) => {
+              imageInputRef.current = e;
+              register("images").ref(e);
+            }}
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleImageChange}
+          />
         </StyledFieldGroup>
-        <StyledButton type="submit">생성</StyledButton>
+
+        <StyledButtonWrapper>
+          <StyledButton type="submit">생성</StyledButton>
+        </StyledButtonWrapper>
       </StyledForm>
     </StyledContainer>
   );
