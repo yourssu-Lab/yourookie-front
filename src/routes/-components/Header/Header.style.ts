@@ -13,22 +13,53 @@ export const StyledHeader = styled.header`
 
 export const StyledNav = styled.nav`
     display: flex;
-    margin-left: 7.5rem;
+    align-items: center;
+    gap: 53px;
+    padding: 10px;
+`;
+
+export const SearchContainer = styled.div`
+    position: relative;
+    width: 342px;
+    display: flex;
+    align-items: center;
+`;
+
+// 기존 input 스타일 수정 (패딩 오른쪽 증가)
+export const SearchBar = styled.input`
+    border-radius: 23px;
+    background: #FFF;
+    height: 44px;
+    width: 100%;
+    border: none;
+    font-size: 18px;
+    padding: 0 44px 0 12px; // 오른쪽 패딩 증가
+    
+    &:focus {
+        outline: none;
+    }
+`;
+
+// 아이콘을 위한 컨테이너
+export const IconContainer = styled.div`
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666; // 아이콘 색상
 `;
 
 export const StyledLink = styled(Link)`
-    font-size: 12px;
+    color: #FFF;
+    font-size: 20px;
+    font-style: normal;
     font-weight: 500;
-    line-height: 1.3;
-    letter-spacing: 0;
-    font-family: "Spoqa Han Sans Neo", "sans-serif";
-    display: flex;
-    position: relative;
-    padding: 1.5rem;
-    color: rgb(142, 147, 152);
-    text-decoration: none;
-    cursor: pointer;
     white-space: nowrap;
+    width: fit-content;
+    text-decoration: none;
 `
 
 export const StyledSpace = styled.div`
