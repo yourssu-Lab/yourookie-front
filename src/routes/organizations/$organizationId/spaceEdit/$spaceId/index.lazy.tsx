@@ -133,7 +133,6 @@ function RouteComponent() {
         <StyledFieldGroup>
           <StyledImageRow>
             <StyledLabel>공간 사진</StyledLabel>
-
             <StyledImageUpload onClick={handleImageUploadClick}>
               파일 선택
               <StyledImageInput

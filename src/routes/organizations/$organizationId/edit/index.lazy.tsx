@@ -33,7 +33,7 @@ interface GroupFormData {
   name: string;
   secretNumber: string;
   description: string;
-  image: File | null;
+  images: File[];
   tags: string[];
 }
 
@@ -54,12 +54,12 @@ function RouteComponent() {
       name: "",
       secretNumber: "",
       description: "",
-      image: null,
+      images: [],
       tags: [],
     },
   });
 
-  const imageFile = watch("image");
+  const images = watch("images");
 
   const onSubmit = (data: GroupFormData) => {
     console.log(data);
@@ -72,8 +72,12 @@ function RouteComponent() {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
-    setValue("image", file);
+    const files = Array.from(e.target.files || []);
+    if (files.length + images.length > 3) {
+      alert("최대 3장까지만 업로드할 수 있습니다.");
+      return;
+    }
+    setValue("images", [...images, ...files]);
   };
 
   return (
@@ -126,7 +130,7 @@ function RouteComponent() {
               <StyledImageInput
                 ref={(e) => {
                   imageInputRef.current = e;
-                  register("image").ref(e);
+                  register("images").ref(e);
                 }}
                 id="imageInput"
                 type="file"
@@ -136,12 +140,11 @@ function RouteComponent() {
             </StyledImageUpload>
           </StyledImageRow>
           <StyledInput
-            value={imageFile?.name || ""}
+            value={images.map((file) => file.name).join(", ")}
             readOnly
             placeholder="파일을 첨부하세요"
           />
         </StyledFieldGroup>
-
         <StyledFieldGroup>
           <StyledLabel>해시태그</StyledLabel>
           <StyledTagRow>
