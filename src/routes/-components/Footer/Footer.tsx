@@ -1,18 +1,7 @@
-import { Link, useRouter } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { StyledContainer, StyledFooter } from "./Footer.style.ts";
 
 function Footer() {
-  const router = useRouter();
-
-  const isModalRoute =
-    router.matchRoute({
-      to: "/organizations/$organizationId/edit",
-    }) ||
-    router.matchRoute({
-      to: "/organizations/$organizationId/spaceEdit/$spaceId",
-    });
-
-  if (isModalRoute) return null;
   return (
     <StyledFooter>
       <StyledContainer>
