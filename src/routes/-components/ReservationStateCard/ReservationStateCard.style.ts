@@ -9,6 +9,7 @@ export const StyledContainer = styled.div`
   overflow: hidden;
   align-items: center;
   gap: 40px;
+  cursor: pointer;
 `;
 
 export const StyledImageSection = styled.div`
@@ -72,4 +73,36 @@ export const StyledReservationSection = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 21px;
+`;
+
+export const StyledModalTitle = styled.h2`
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 20px;
+`;
+
+export const StyledModalInput = styled.input`
+  width: 100%;
+  padding: 10px 0 10px 50px;
+  border: 1px solid #e5e8eb;
+  border-radius: 8px;
+  font-size: 18px;
+  margin-bottom: 40px;
+
+  &::placeholder {
+    color: #858585;
+  }
+`;
+
+export const StyledModalButton = styled.button`
+  padding: 10px 20px;
+  background: #1781ee;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  display: block;
+  margin: 0 auto;
+  font-size: 20px;
+  cursor: pointer;
 `;
