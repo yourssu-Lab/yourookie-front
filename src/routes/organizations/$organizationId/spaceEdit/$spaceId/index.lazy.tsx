@@ -78,11 +78,11 @@ function RouteComponent() {
       isOpen={true}
       onRequestClose={closeModal}
       style={modalStyles}
-      contentLabel="단체 정보 수정"
+      contentLabel="공간 정보 수정"
     >
       <StyledContainer onSubmit={handleSubmit(onSubmit)}>
         <StyledHeaderRow>
-          <StyledTitle>단체 정보 수정</StyledTitle>
+          <StyledTitle>공간 정보 수정</StyledTitle>
           <StyledLogoWrapper>
             <img src={Logo} alt="단체 로고" />
           </StyledLogoWrapper>
