@@ -1,4 +1,8 @@
-import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
+import {
+  createLazyFileRoute,
+  Outlet,
+  useNavigate,
+} from "@tanstack/react-router";
 import { useState } from "react";
 import { OrganizationInfoCard } from "../../-components/OrganizationInfoCard/OrganizationInfoCard";
 import { SpaceCard } from "../../-components/SpaceCard/SpaceCard";
@@ -67,6 +71,7 @@ function RouteComponent() {
           />
         ))}
       </StyledSpaceGrid>
+      <Outlet />
     </StyledContainer>
   );
 }
