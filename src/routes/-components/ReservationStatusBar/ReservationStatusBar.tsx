@@ -74,6 +74,10 @@ export const ReservationStatusBar = ({
   const [selectedSlots, setSelectedSlots] = useState<
     { hour: number; minute: number }[]
   >([]);
+  const [selectionStart, setSelectionStart] = useState<{
+    hour: number;
+    minute: number;
+  } | null>(null);
   const timeSlots = generateTimeSlots(6, 21, mockData);
 
   const handleSelect = (hour: number, minute: number) => {
@@ -81,15 +85,43 @@ export const ReservationStatusBar = ({
       (slot) => slot.hour === hour && slot.minute === minute
     );
 
-    if (slot?.status !== "reserved") {
-      const newSelectedSlots = selectedSlots.some(
-        (s) => s.hour === hour && s.minute === minute
-      )
-        ? selectedSlots.filter((s) => !(s.hour === hour && s.minute === minute))
-        : [...selectedSlots, { hour, minute }];
+    if (slot?.status === "reserved") return;
+
+    if (!selectionStart) {
+      setSelectionStart({ hour, minute });
+      setSelectedSlots([{ hour, minute }]);
+      onTimeSelect([{ hour, minute }]);
+    } else {
+      const startTime = selectionStart.hour * 60 + selectionStart.minute;
+      const endTime = hour * 60 + minute;
+
+      const [rangeStart, rangeEnd] =
+        startTime < endTime ? [startTime, endTime] : [endTime, startTime];
+
+      const newSelectedSlots = [];
+      for (
+        let currentTime = rangeStart;
+        currentTime <= rangeEnd;
+        currentTime += 30
+      ) {
+        const slotHour = Math.floor(currentTime / 60);
+        const slotMinute = currentTime % 60;
+
+        const isReserved = timeSlots.some(
+          (slot) =>
+            slot.hour === slotHour &&
+            slot.minute === slotMinute &&
+            slot.status === "reserved"
+        );
+
+        if (!isReserved) {
+          newSelectedSlots.push({ hour: slotHour, minute: slotMinute });
+        }
+      }
 
       setSelectedSlots(newSelectedSlots);
       onTimeSelect(newSelectedSlots);
+      //   setSelectionStart(null);
     }
   };
 
@@ -131,6 +163,10 @@ export const ReservationStatusBar = ({
                       : timeSlots.find(
                           (slot) => slot.hour === hour && slot.minute === minute
                         )?.status || "available"
+                  }
+                  $isSelectionStart={
+                    selectionStart?.hour === hour &&
+                    selectionStart?.minute === minute
                   }
                   onClick={() => handleSelect(hour, minute)}
                 />
