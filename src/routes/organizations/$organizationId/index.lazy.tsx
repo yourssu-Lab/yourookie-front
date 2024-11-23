@@ -1,13 +1,15 @@
+import { useQuery } from "@tanstack/react-query";
 import {
   createLazyFileRoute,
   Outlet,
   useNavigate,
 } from "@tanstack/react-router";
-import { useState } from "react";
 import { OrganizationInfoCard } from "../../-components/OrganizationInfoCard/OrganizationInfoCard";
 import { SpaceCard } from "../../-components/SpaceCard/SpaceCard";
-import { mockOrganization, mockSpaces } from "../../../mock/organizationData";
-import { Organization, Space } from "../../../types/organization.type";
+import {
+  getOrganizationSpaces,
+  OrganizationSpacesResponse,
+} from "../../../api/getOrganizationSpaces";
 import {
   StyledAddSpaceButton,
   StyledContainer,
@@ -19,11 +21,23 @@ export const Route = createLazyFileRoute("/organizations/$organizationId/")({
 });
 
 function RouteComponent() {
-  const [organization] = useState<Organization>(mockOrganization);
-  const [spaces] = useState<Space[]>(mockSpaces);
   const { organizationId } = Route.useParams();
   const navigate = useNavigate();
 
+  const { data, isLoading, isError } = useQuery<OrganizationSpacesResponse>({
+    queryKey: ["organizationSpaces", organizationId],
+    queryFn: () => getOrganizationSpaces(organizationId),
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError || !data) {
+    return <div>Error loading data.</div>;
+  }
+
+  const { organization, spaces = [] } = data;
   const handleEditOrganization = () => {
     navigate({
       to: "/organizations/$organizationId/edit",
@@ -48,13 +62,14 @@ function RouteComponent() {
     });
   };
 
+  if (!organization) {
+    return null;
+  }
+
   return (
     <StyledContainer>
       <OrganizationInfoCard
-        name={organization.name}
-        description={organization.description}
-        image={organization.logoImageUrl}
-        tags={organization.tags}
+        organization={organization}
         onEditClick={handleEditOrganization}
       />
 
@@ -63,7 +78,7 @@ function RouteComponent() {
       </StyledAddSpaceButton>
 
       <StyledSpaceGrid>
-        {spaces.map((space) => (
+        {spaces?.map((space) => (
           <SpaceCard
             onEditClick={() => handleEditSpace(space.id)}
             key={space.id}
