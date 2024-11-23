@@ -1,103 +1,208 @@
 import {createLazyFileRoute} from '@tanstack/react-router'
-import {BoxButton, PasswordTextField, SimpleTextField} from "@yourssu/design-system-react";
 import {useForm} from "react-hook-form";
 import {
-    FieldWrapper,
-    FileInput,
-    FormContainer,
-    Section,
-    SectionTitle, StyledTag, StyledTagList,
-    SubTitle, TextArea,
-    Title
+    StyledFieldWrapper,
+    StyledFormContainer,
+    StyledSection,
+    StyledSectionTitle,
+    StyledContainer,
+    StyledInput,
+    StyledTitle,
+    StyledEmailCheckButton,
+    StyledFieldLabel,
+    StyledFieldDescription,
+    StyledSectionDescription,
+    StyledFieldSuccessMessage,
+    StyledFieldErrorMessage,
+    StyledSubmitButton,
+    StyledUploadBackground,  StyledUploadDescription
 } from "./-index.style.ts";
-import {useState} from "react";
+import {PostOrganizationParams} from "../../api/postOrganization.ts";
+import {getCheckEmail} from "../../api/getCheckEmail.ts";
+import {ChangeEvent, useEffect, useState} from "react";
+import {isEmail} from "@yourssu/utils";
+import {usePostOrganization} from "../../hooks/usePostOrganization.ts";
+import UploadImage from "../../assets/upload.svg?react"
 
 export const Route = createLazyFileRoute('/signup/')({
     component: RouteComponent,
 })
 
-function RouteComponent() {
-    const {register, handleSubmit} = useForm();
-    const [tagList, ] = useState<string[]>([]);
+interface SignUpFormFields extends PostOrganizationParams {
+    passwordConfirm: string;
+}
 
-    const onSubmit = handleSubmit(() => {
+function RouteComponent() {
+    const {register, handleSubmit, watch} = useForm<SignUpFormFields>();
+    const [emailValidated, setEmailValidated] = useState<boolean | null>(null);
+    const postOrganizationMutation = usePostOrganization();
+    const [previewUrl, setPreviewUrl] = useState<string>('');
+
+    const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewUrl(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            setPreviewUrl('');
+        }
+    };
+
+    const onSubmit = handleSubmit((data) => {
+        console.log("asd");
+        postOrganizationMutation.mutate(data);
     });
 
+    const emailValue = watch("email");
+    useEffect(() => {
+        setEmailValidated(null);
+    }, [emailValue]);
+
+    const onEmailCheck = async () => {
+        const email = watch("email");
+
+        if (!isEmail(email)) return;
+
+        const {validated} = await getCheckEmail({email});
+        setEmailValidated(validated);
+    }
+
     return (
-        <FormContainer onSubmit={onSubmit}>
-            <Title>OpenSSUpot</Title>
-            <SubTitle>회원가입</SubTitle>
+        <StyledContainer>
+            <StyledTitle>회원가입</StyledTitle>
+            <StyledFormContainer onSubmit={onSubmit}>
+                <StyledSection>
+                    <StyledSectionTitle>1. 필수정보</StyledSectionTitle>
+                    <StyledFieldWrapper>
+                        <StyledFieldLabel>단체명</StyledFieldLabel>
+                        <StyledInput
+                            placeholder="단체명"
+                            {...register("name", {required: true})}
+                        />
+                    </StyledFieldWrapper>
 
-            <Section>
-                <SectionTitle>필수정보</SectionTitle>
-                <FieldWrapper>
-                    <SimpleTextField
-                        placeholder="이메일"
-                        {...register("email", {required: true})}
-                    />
+                    <StyledFieldWrapper>
+                        <StyledFieldLabel>이메일</StyledFieldLabel>
+                        <div style={{display: "flex", gap: "50px"}}>
+                            <StyledInput
+                                placeholder="이메일을 입력하세요"
+                                {...register("email", {required: true})}
+                            />
+                            <StyledEmailCheckButton
+                                type="button"
+                                onClick={onEmailCheck}
+                            >
+                                이메일 확인
+                            </StyledEmailCheckButton>
+                        </div>
+                        {
+                            emailValidated === true &&
+                            <StyledFieldSuccessMessage>사용 가능한 이메일입니다!</StyledFieldSuccessMessage>
+                        }
+                        {
+                            emailValidated === false &&
+                            <StyledFieldErrorMessage>이미 사용중인 이메일입니다.</StyledFieldErrorMessage>
+                        }
+                    </StyledFieldWrapper>
 
-                </FieldWrapper>
+                    <StyledFieldWrapper>
+                        <div style={{display: "flex", gap: "40px", width: "100%"}}>
+                            <div style={{flex: 1}}>
+                                <StyledFieldLabel>비밀번호</StyledFieldLabel>
+                                <StyledInput
+                                    placeholder="비밀번호를 입력하세요"
+                                    {...register("password", {required: true})}
+                                    type="password"
+                                />
+                                <StyledFieldDescription>영어와 숫자를 섞어 8자리 이상 입력하세요.</StyledFieldDescription>
+                            </div>
+                            <div style={{flex: 1}}>
+                                <StyledFieldLabel>비밀번호 확인</StyledFieldLabel>
+                                <StyledInput
+                                    placeholder="비밀번호를 입력하세요"
+                                    {...register("passwordConfirm", {required: true})}
+                                    type="password"
+                                />
+                                {
+                                    watch("password") !== watch("passwordConfirm") &&
+                                    <StyledFieldErrorMessage>비밀번호 확인이 올바르지 않습니다.</StyledFieldErrorMessage>
+                                }
+                            </div>
+                        </div>
+                    </StyledFieldWrapper>
 
-                <FieldWrapper>
-                    <BoxButton
-                        size="medium"
-                        variant="filled"
-                        rounding={4}
-                        type="button"
-                    >
-                        이메일 중복 확인
-                    </BoxButton>
-                </FieldWrapper>
+                    <StyledFieldWrapper>
+                        <div style={{display: "flex", gap: "40px", width: "100%"}}>
+                            <div style={{flex: 1}}>
+                                <StyledFieldLabel>단체 비밀번호 입력</StyledFieldLabel>
+                                <StyledInput
+                                    type="password"
+                                    placeholder="단체 비밀번호를 입력하세요"
+                                    {...register("reservationPassword",
+                                        {required: true})}
+                                />
+                            </div>
+                            <div style={{flex: 1}}></div>
+                        </div>
 
-                <FieldWrapper>
-                    <PasswordTextField
-                        placeholder="비밀번호"
-                        {...register("password", {required: true})}
-                    />
-                </FieldWrapper>
+                    </StyledFieldWrapper>
+                </StyledSection>
 
-                <FieldWrapper>
-                    <PasswordTextField
-                        placeholder="비밀번호 확인"
-                        {...register("password_confirm", {required: true})}
-                    />
-                </FieldWrapper>
+                <StyledSection>
+                    <StyledSectionTitle>
+                        2. 선택 정보 <StyledSectionDescription>단체 페이지에 사용되는 정보입니다!</StyledSectionDescription>
+                    </StyledSectionTitle>
 
-                <FieldWrapper>
-                    <PasswordTextField
-                        placeholder="단체 비밀번호"
-                        {...register("group_password", {required: true})}
-                    />
-                </FieldWrapper>
-            </Section>
+                    <StyledFieldWrapper>
+                        <input
+                            {...register("image")}
+                            id="inputFile"
+                            type="file"
+                            accept=".jpg, .jpeg, .png, .gif"
+                            style={{display: "none"}}
+                            onChange={handleImageChange}
+                        />
 
-            <Section>
-                <SectionTitle>선택 정보</SectionTitle>
-                <FileInput
-                    {...register("image", {required: true})}
-                    id="inputFile"
-                    type="file"
-                    accept=".jpg, .jpeg, .png, .gif"
-                />
-                <TextArea
-                    {...register("explain")}
-                    placeholder="자기소개를 입력해주세요"
-                />
-                {tagList.length !== 0 &&
-                    <StyledTagList>
-                        {tagList.map((tag) => <StyledTag key={tag}>{tag}</StyledTag>)}
-                    </StyledTagList>
-                }
-            </Section>
+                        <StyledFieldLabel>단체 사진</StyledFieldLabel>
+                        <StyledUploadBackground style={{backgroundImage: `url(${previewUrl})`}} htmlFor="inputFile">
+                            {!previewUrl && <>
+                                <UploadImage style={{minWidth: '52px', minHeight: '52px'}} />
+                                <StyledUploadDescription>사진을 추가해주세요</StyledUploadDescription>
+                            </>}
+                        </StyledUploadBackground>
+                    </StyledFieldWrapper>
 
-            <BoxButton
-                size="medium"
-                variant="filled"
-                rounding={4}
-                type="submit"
-            >
-                회원가입
-            </BoxButton>
-        </FormContainer>
+                    <StyledFieldWrapper>
+                        <StyledFieldLabel>단체 소개</StyledFieldLabel>
+                        <StyledInput {...register("description")} />
+                    </StyledFieldWrapper>
+
+                    <div style={{display: "flex", gap: "40px", width: "100%"}}>
+                        <div style={{flex: 1}}>
+                            <StyledFieldLabel>해시태그 1</StyledFieldLabel>
+                            <StyledInput {...register(`hashtags.${0}`)} />
+                        </div>
+                        <div style={{flex: 1}}>
+                            <StyledFieldLabel>해시태그 2</StyledFieldLabel>
+                            <StyledInput {...register(`hashtags.${1}`)} />
+                        </div>
+                        <div style={{flex: 1}}>
+                            <StyledFieldLabel>해시태그 3</StyledFieldLabel>
+                            <StyledInput {...register(`hashtags.${2}`)} />
+                        </div>
+                    </div>
+                </StyledSection>
+
+                <StyledSubmitButton
+                    type="submit"
+                >
+                    회원가입
+                </StyledSubmitButton>
+            </StyledFormContainer>
+        </StyledContainer>
+
     );
 }
