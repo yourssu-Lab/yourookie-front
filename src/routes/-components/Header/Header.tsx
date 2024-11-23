@@ -23,7 +23,7 @@ function Header() {
             <StyledLink to="/">
                 공간오픈/관리
             </StyledLink>
-            <StyledLink>
+            <StyledLink to="/meetingRooms">
                 교내회의실 찾기
             </StyledLink>
             <SearchContainer>
