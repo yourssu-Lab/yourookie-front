@@ -3,16 +3,13 @@ import {
     SearchBar,
     SearchContainer,
     StyledHeader,
-    StyledLink, StyledLoginButton,
+    StyledLink, StyledLoginButton, StyledLogo,
     StyledNav,
-    StyledSpace
 } from "./Header.style.ts";
 import {useLoginState} from "../../../hooks/useLoginState.ts";
 import SignIn from "../SignIn/SignIn.tsx";
 import {useState} from "react";
-import LogoIcon from "../../../assets/logo.svg?react"
 import SearchIcon from "../../../assets/search.svg?react";
-import {Link} from "@tanstack/react-router";
 import {api} from "../../../service/TokenService.ts";
 
 function Header() {
@@ -21,10 +18,7 @@ function Header() {
     const closeModal = () => setSignInModalOpen(false);
 
     return <StyledHeader>
-        <Link to="/">
-            <LogoIcon style={{ minWidth: '144px' }} />
-        </Link>
-        <StyledSpace />
+        <StyledLogo to='/'>OPENSSUpot</StyledLogo>
         <StyledNav>
             <StyledLink to="/">
                 공간오픈/관리
@@ -39,16 +33,20 @@ function Header() {
                 </IconContainer>
             </SearchContainer>
         </StyledNav>
-        <StyledSpace />
-        {
-            isLoggedIn && <StyledLoginButton onClick={() => {api.logout(); window.location.reload();}}>로그아웃</StyledLoginButton>
-        }
-        {
-            !isLoggedIn && <StyledLoginButton onClick={() => setSignInModalOpen(true)}>로그인</StyledLoginButton>
-        }
-        {
-            !isLoggedIn && <SignIn open={signInModalOpen} closeModal={closeModal} />
-        }
+        <div>
+            {isLoggedIn ? (
+                <StyledLoginButton onClick={() => {api.logout(); window.location.reload();}}>
+                    로그아웃
+                </StyledLoginButton>
+            ) : (
+                <>
+                    <StyledLoginButton onClick={() => setSignInModalOpen(true)}>
+                        로그인
+                    </StyledLoginButton>
+                    <SignIn open={signInModalOpen} closeModal={closeModal} />
+                </>
+            )}
+        </div>
     </StyledHeader>
 }
 
