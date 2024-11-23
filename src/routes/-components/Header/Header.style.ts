@@ -3,29 +3,51 @@ import {Link} from "@tanstack/react-router";
 
 export const StyledHeader = styled.header`
     display: flex;
-    width: 100%;
-    padding: 0 30px;
+    max-width: 100%;
+    padding: 0 46px;
     align-items: center;
-    
-    gap: 174px;
-    background: #0095DE;
+    justify-content: space-between;
+    height: 84px;
+    background: #FFF;
 `;
+
+export const StyledLogo = styled(Link)`
+    color: #1781EE;
+    font-family: Inter;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: -1.1px;
+    text-decoration: none;
+    
+    display: flex;
+    width: 144px;
+    height: 28px;
+    padding: 0 5px;
+    align-items: center;
+    flex-shrink: 0;
+`
 
 export const StyledNav = styled.nav`
     display: flex;
     align-items: center;
-    gap: 53px;
+    gap: 50px;
     padding: 10px;
 `;
 
 export const SearchContainer = styled.div`
-    position: relative;
-    width: 342px;
+    width: 439px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    border: 1px solid #858585;
+    background: #FFF;
     display: flex;
     align-items: center;
+    position: relative;
 `;
 
-// 기존 input 스타일 수정 (패딩 오른쪽 증가)
 export const SearchBar = styled.input`
     border-radius: 23px;
     background: #FFF;
@@ -43,7 +65,7 @@ export const SearchBar = styled.input`
 // 아이콘을 위한 컨테이너
 export const IconContainer = styled.div`
   position: absolute;
-  right: 12px;
+  right: 24px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -53,7 +75,8 @@ export const IconContainer = styled.div`
 `;
 
 export const StyledLink = styled(Link)`
-    color: #FFF;
+    color: #1781EE;
+    font-family: Pretendard;
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
@@ -62,30 +85,19 @@ export const StyledLink = styled(Link)`
     text-decoration: none;
 `
 
-export const StyledSpace = styled.div`
-    flex-grow: 1;
-`
-
-export const StyledAuth = styled.div`
-    display: flex;
-`;
-
 export const StyledLoginButton = styled.button`
     display: flex;
-    padding: 10px;
+    height: 50px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    white-space: nowrap;
-    border-radius: 45px;
-    background: #FFF;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: #1781EE;
     border: none;
-    min-width: fit-content;
+    padding: 8px 20px;
 
-    color: #1781EE;
-    text-align: center;
-
-    /* 일반/18/설명&일반글씨/medium */
+    color: #FFF;
+    font-family: Pretendard;
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
