@@ -1,6 +1,7 @@
-import axios from 'axios';
+import axios, {AxiosError, AxiosResponse} from 'axios';
 
 import {api} from "../service/TokenService.ts";
+import {postRefreshToken} from "./postRefreshToken.ts";
 
 export const customAxios = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
@@ -12,35 +13,33 @@ export const customAxios = axios.create({
 
 customAxios.interceptors.request.use((config) => {
     if (config.headers && api.getAccessToken()) {
-        config.headers.Authorization = `Bearer ${api.getAccessToken()}`;
+        config.headers.Authorization = api.getAccessToken();
     }
     return config;
 });
 
-// soomsilClient.interceptors.response.use(
-//     (response: AxiosResponse) => response,
-//     async (error: AxiosError) => {
-//         const originalConfig = error.config;
-//         const data = error.response?.data as AuthErrorData;
-//
-//         if (originalConfig && error.response?.status === 401 && data?.error === 'Auth-002') {
-//             try {
-//                 const { accessToken, accessTokenExpiredIn, refreshToken, refreshTokenExpiredIn } =
-//                     await postRefreshToken();
-//
-//                 api.setAccessToken(accessToken, accessTokenExpiredIn);
-//                 api.setRefreshToken(refreshToken, refreshTokenExpiredIn);
-//
-//                 return soomsilClient.request({
-//                     ...originalConfig,
-//                 });
-//             } catch (error) {
-//                 api.logout();
-//                 sessionStorage.removeItem('user');
-//                 window.location.reload();
-//                 return Promise.reject(error);
-//             }
-//         }
-//         return Promise.reject(error);
-//     }
-// );
+customAxios.interceptors.response.use(
+    (response: AxiosResponse) => response,
+    async (error: AxiosError) => {
+        const originalConfig = error.config;
+
+        if (originalConfig && error.response?.status === 401) {
+            try {
+                const { accessToken, refreshToken } =
+                    await postRefreshToken();
+
+                api.setAccessToken(accessToken);
+                api.setRefreshToken(refreshToken);
+
+                return customAxios.request({
+                    ...originalConfig,
+                });
+            } catch (error) {
+                api.logout();
+                window.location.reload();
+                return Promise.reject(error);
+            }
+        }
+        return Promise.reject(error);
+    }
+);

@@ -2,7 +2,6 @@ import {
     IconContainer,
     SearchBar,
     SearchContainer,
-    StyledAuth,
     StyledHeader,
     StyledLink, StyledLoginButton,
     StyledNav,
@@ -14,6 +13,7 @@ import {useState} from "react";
 import LogoIcon from "../../../assets/logo.svg?react"
 import SearchIcon from "../../../assets/search.svg?react";
 import {Link} from "@tanstack/react-router";
+import {api} from "../../../service/TokenService.ts";
 
 function Header() {
     const {isLoggedIn} = useLoginState();
@@ -41,14 +41,7 @@ function Header() {
         </StyledNav>
         <StyledSpace />
         {
-            isLoggedIn && <StyledAuth>
-                <StyledLink>
-                    로그아웃
-                </StyledLink>
-                <StyledLink>
-                    마이페이지
-                </StyledLink>
-            </StyledAuth>
+            isLoggedIn && <StyledLoginButton onClick={() => {api.logout(); window.location.reload();}}>로그아웃</StyledLoginButton>
         }
         {
             !isLoggedIn && <StyledLoginButton onClick={() => setSignInModalOpen(true)}>로그인</StyledLoginButton>
