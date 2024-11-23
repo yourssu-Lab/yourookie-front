@@ -15,7 +15,7 @@ export const customAxios = axios.create({
 customAxios.interceptors.request.use((config) => {
   // 특정 요청에 skipAuth 설정이 있다면 Authorization 제거해서 요청 보냄!
   if (config.headers && !config.headers.skipAuth && api.getAccessToken()) {
-    config.headers.Authorization = `Bearer ${api.getAccessToken()}`;
+    config.headers.Authorization = `${api.getAccessToken()}`;
   } else if (config.headers?.skipAuth) {
     delete config.headers.Authorization;
   }
