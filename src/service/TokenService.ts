@@ -14,6 +14,14 @@ class TokenService {
     this.cookie.set("userId", id, { path: "/" });
   }
 
+  setPassword(password: string) {
+    this.cookie.set("password", password, { path: "/" });
+  }
+
+  getPassword() {
+    return this.cookie.get("password");
+  }
+
   getUserId() {
     return this.cookie.get("userId");
   }
@@ -29,6 +37,7 @@ class TokenService {
     this.cookie.remove("accessToken", { path: "/" });
     this.cookie.remove("refreshToken", { path: "/" });
     this.cookie.remove("userId", { path: "/" });
+    this.cookie.remove("password", { path: "/" });
   }
 
   get headers() {
