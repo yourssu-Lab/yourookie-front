@@ -3,11 +3,11 @@ import { Cookies } from 'react-cookie';
 class TokenService {
     cookie = new Cookies();
 
-    setAccessToken(token: string, expireTime: number) {
-        this.cookie.set('accessToken', token, { path: '/', expires: new Date(expireTime) });
+    setAccessToken(token: string) {
+        this.cookie.set('accessToken', token, { path: '/' });
     }
-    setRefreshToken(token: string, expireTime: number) {
-        this.cookie.set('refreshToken', token, { path: '/', expires: new Date(expireTime) });
+    setRefreshToken(token: string) {
+        this.cookie.set('refreshToken', token, { path: '/' });
     }
 
     getAccessToken() {
@@ -25,7 +25,7 @@ class TokenService {
     get headers() {
         if (this.getAccessToken())
             return {
-                Authorization: `Bearer ${this.getAccessToken()}`,
+                Authorization: this.getAccessToken(),
             };
         return {};
     }

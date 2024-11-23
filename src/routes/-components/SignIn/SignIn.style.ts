@@ -1,55 +1,62 @@
 import styled from "styled-components";
 import {Link} from "@tanstack/react-router";
 
-export const StyledH2 = styled.h2`
+export const StyledLogo = styled.span`
+    position: absolute;
+    right: 59px;
+    top: 40px;
+
     color: #BDBDBD;
-    font-size: 32px;
+    
+    font-size: 28px;
     font-style: normal;
     font-weight: 700;
-    line-height: normal;
-    text-align: center;
 `;
 
-export const StyledH3 = styled.h3`
+export const StyledH2 = styled.h3`
     color: #000;
-    font-family: "Spoqa Han Sans Neo";
-    font-size: 26px;
+    font-size: 28px;
     font-style: normal;
     font-weight: 700;
-    line-height: normal;
-    text-align: center;
-    margin-top: 29px;
 `;
 
 export const StyledInput = styled.input`
-    border-radius: 4px;
-    border: 1px solid #000;
-    width: 100%;
+    display: flex;
+    width: 380px;
+    height: 50px;
+    padding: 0 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    border-radius: 5px;
+    border: 1px solid #858585;
+    background: #F9F9F9;
+
+    color: #858585;
+    
     font-size: 18px;
-    height: 73px;
-    padding: 0 12px;
+    font-style: normal;
+    font-weight: 500;
 `;
 
 export const StyledFieldLabel = styled.label`
-    color: #000;
-    font-family: "Spoqa Han Sans Neo";
-    font-size: 18px;
+    color: #050505;
+    font-size: 20px;
     font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+    font-weight: 500;
 `;
 
 export const StyledFieldWrapper = styled.div`
     margin-top: 24px;
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 16px;
 `;
 
 export const StyledButtonWrapper = styled.div`
     display: flex;
-    justify-content: space-between;
-    margin-top: 50px;
+    gap: 12px;
 `;
 
 interface StyledButtonProps {
@@ -59,42 +66,27 @@ interface StyledButtonProps {
 export const StyledButton = styled.button<StyledButtonProps>`
     ${props => props.$type === 'primary'
             ? `
-                background: #0095DE;
                 color: #FFF;
                 border: none;
-               
-               &:hover {
-                    background: #007AB8; // 좀 더 진한 파란색
-                    cursor: pointer;
-                    transition: background-color 0.2s ease;
-                }
+                background: #1781EE;
             `
             : `
+                border-radius: 12px;
+                border: 1px solid #858585;
                 background: #FFF;
-                color: #0095DE;
-                border: 1px solid #000;
-                
-                &:hover {
-                    background: #F0F0F0; // 살짝 회색 배경
-                    border: 1px solid #0095DE;
-                    cursor: pointer;
-                    transition: all 0.2s ease;
-                }
             `
-    } // button 
-    border-radius: 4px;
+    } 
     display: flex;
-    width: 190px;
+    flex: 1;
+    height: 50px;
     padding: 10px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-
-    // font
-    font-family: "Spoqa Han Sans Neo";
-    font-size: 24px;
+    border-radius: 12px;
+    
+    font-size: 20px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
 
     cursor: pointer;
 `;
@@ -107,14 +99,17 @@ export const StyledContent = styled.div`
 
 export const StyledLink = styled(Link)`
     text-decoration-line: none;
+    display: flex;
+    flex: 1;
 `
 
 export const StyledErrorMessage = styled.div`
-    color: #0095DE;
-    font-family: "Spoqa Han Sans Neo";
-    font-size: 18px;
+    color: #EB0000;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     text-align: center;
-    margin-top: 31px;
+    height: 35px;
+    align-self: stretch;
+    margin: 8px 0;
 `
