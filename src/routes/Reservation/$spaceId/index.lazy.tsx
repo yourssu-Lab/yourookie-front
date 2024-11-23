@@ -198,7 +198,7 @@ function RouteComponent() {
   return (
     <StyledContainer onSubmit={handleSubmit(onSubmit)}>
       <StyledName>{organization?.name}</StyledName>
-      <ReservationInfoCard {...space} />
+      <ReservationInfoCard {...space} to={`/reservation/${spaceId}/state/`} />
 
       <StyledInfoSection>
         <StyledTitle>공간 예약</StyledTitle>

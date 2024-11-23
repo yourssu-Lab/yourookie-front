@@ -1,4 +1,7 @@
+import { Link } from "@tanstack/react-router";
 import {
+  StyledButton,
+  StyledButtonWrapper,
   StyledCardWrapper,
   StyledImageSection,
   StyledInfoSection,
@@ -25,6 +28,7 @@ export const ReservationInfoCard = ({
   openingTime,
   closingTime,
   capacity,
+  to,
 }: ReservationInfoCardProps) => {
   console.log(id);
   return (
@@ -41,12 +45,11 @@ export const ReservationInfoCard = ({
         </StyledInfoText>
         <StyledInfoText>최대 {capacity}명</StyledInfoText>
       </StyledInfoSection>
-
-      {/* <StyledEditIcon>
-        <Link to={to}>
-          <img src={pencil} alt="수정하기" />
+      <StyledButtonWrapper>
+        <Link to={to} style={{ textDecoration: "none" }}>
+          <StyledButton>예약 현황 조회</StyledButton>
         </Link>
-      </StyledEditIcon> */}
+      </StyledButtonWrapper>
     </StyledCardWrapper>
   );
 };
