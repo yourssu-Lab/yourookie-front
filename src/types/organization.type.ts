@@ -3,7 +3,7 @@ export interface Organization {
   name: string;
   description: string;
   logoImageUrl: string;
-  tags: string[];
+  hashtags: string[];
 }
 
 export interface Space {

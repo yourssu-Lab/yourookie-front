@@ -1,9 +1,6 @@
-import pencil from "../../../assets/Pencil.svg";
-import { Organization } from "../../../types/organization.type";
 import {
   StyledContent,
   StyledDescription,
-  StyledEditIcon,
   StyledHeader,
   StyledHr,
   StyledImage,
@@ -17,35 +14,33 @@ import {
 } from "./OrganizationInfoCard.style";
 
 interface OrganizationInfoProps {
-  organization: Organization;
-  onEditClick: () => void;
+  name: string;
+  description: string;
+  image: string;
+  hashtags: string[];
 }
 
-export const OrganizationInfoCard = ({
-  organization,
-  onEditClick,
+export const SearchInfoCard = ({
+  name,
+  description,
+  image,
+  hashtags,
 }: OrganizationInfoProps) => {
   return (
     <StyledSection>
       <StyledHeader>
         <StyledTitle>단체 정보</StyledTitle>
-        <StyledEditIcon onClick={onEditClick}>
-          <img src={pencil} alt="수정하기" />
-        </StyledEditIcon>
       </StyledHeader>
       <StyledHr />
       <StyledContent>
         <StyledImageWrapper>
-          <StyledImage
-            src={organization.logoImageUrl}
-            alt={organization.name}
-          />
+          <StyledImage src={image} alt={name} />
         </StyledImageWrapper>
         <StyledInfo>
-          <StyledName>{organization.name}</StyledName>
-          <StyledDescription>{organization.description}</StyledDescription>
+          <StyledName>{name}</StyledName>
+          <StyledDescription>{description}</StyledDescription>
           <StyledTags>
-            {organization.hashtags?.map((tag) => (
+            {hashtags.map((tag) => (
               <StyledTag key={`tag-${tag}`}>#{tag}</StyledTag>
             ))}
           </StyledTags>

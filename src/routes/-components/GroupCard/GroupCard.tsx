@@ -24,7 +24,7 @@ export const GroupCard = ({ group, onClick }: GroupCardProps) => {
         <GroupName>{group.name}</GroupName>
         <GroupDescription>{group.description}</GroupDescription>
         <StyledTags>
-          {group.tags.map((tag) => (
+          {group.hashtags.map((tag) => (
             <StyledTag key={tag}>#{tag}</StyledTag>
           ))}
         </StyledTags>

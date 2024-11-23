@@ -4,19 +4,20 @@ import {
   Outlet,
   useNavigate,
 } from "@tanstack/react-router";
-import { OrganizationInfoCard } from "../../-components/OrganizationInfoCard/OrganizationInfoCard";
-import { SpaceCard } from "../../-components/SpaceCard/SpaceCard";
+import { SearchInfoCard } from "../../../../-components/OrganizationInfoCard/SearchInfoCard";
+import { SearchSpaceCard } from "../../../../-components/SpaceCard/SearchSpaceCard";
 import {
   getOrganizationSpaces,
   OrganizationSpacesResponse,
-} from "../../../api/getOrganizationSpaces";
+} from "../../../../../api/getOrganizationSpaces";
 import {
   StyledAddSpaceButton,
   StyledContainer,
   StyledSpaceGrid,
 } from "./-index.style";
-
-export const Route = createLazyFileRoute("/organizations/$organizationId/")({
+export const Route = createLazyFileRoute(
+  "/SearchResult/$query/organizations/$organizationId/"
+)({
   component: RouteComponent,
 });
 
@@ -38,49 +39,29 @@ function RouteComponent() {
   }
 
   const { organization, spaces = [] } = data;
-  const handleEditOrganization = () => {
-    navigate({
-      to: "/organizations/$organizationId/edit",
-      params: { organizationId },
-    });
-  };
 
-  const handleEditSpace = (spaceId: number) => {
+  const handleReservationSpace = (spaceId: number) => {
     navigate({
-      to: "/organizations/$organizationId/spaceEdit/$spaceId",
+      to: "/Reservation/$spaceId",
       params: {
-        organizationId,
         spaceId: spaceId.toString(),
       },
     });
   };
 
-  const handleAddSpace = () => {
-    navigate({
-      to: "/organizations/$organizationId/open",
-      params: { organizationId },
-    });
-  };
-
-  if (!organization) {
-    return null;
-  }
-
   return (
     <StyledContainer>
-      <OrganizationInfoCard
-        organization={organization}
-        onEditClick={handleEditOrganization}
+      <SearchInfoCard
+        name={organization.name}
+        description={organization.description}
+        image={organization.logoImageUrl}
+        hashtags={organization.hashtags}
       />
-
-      <StyledAddSpaceButton onClick={handleAddSpace}>
-        + 공간 추가
-      </StyledAddSpaceButton>
-
+      <StyledAddSpaceButton />
       <StyledSpaceGrid>
-        {spaces?.map((space) => (
-          <SpaceCard
-            onEditClick={() => handleEditSpace(space.id)}
+        {spaces.map((space) => (
+          <SearchSpaceCard
+            onClick={() => handleReservationSpace(space.id)}
             key={space.id}
             space={space}
           />
