@@ -150,7 +150,6 @@ export const StyledUploadBackground = styled.label`
     display: flex;
     width: 400px;
     height: 300px;
-    padding: 43px 0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
