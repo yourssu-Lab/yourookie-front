@@ -7,7 +7,7 @@ export interface PostOrganizationParams {
     description: string;
     reservationPassword: string;
     hashtags: string[];
-    image: File;
+    image: File | null;
 
 }
 
@@ -21,12 +21,13 @@ export const postOrganization = async (
         hashtags,
         image
     }: PostOrganizationParams) => {
+    console.log(image);
     const formData = new FormData();
     const request = new Blob([JSON.stringify({email, name, password, reservationPassword, hashtags, description})], {
         type: 'application/json',
     });
     formData.append('request', request);
-    formData.set("image", image);
+    if (image) formData.set("image", image);
     await customAxios.post('/organizations', formData, {
         headers: {
             "Content-Type": "multipart/form-data"

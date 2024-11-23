@@ -28,7 +28,7 @@ export const Route = createLazyFileRoute('/signup/')({
     component: RouteComponent,
 })
 
-interface SignUpFormFields extends PostOrganizationParams {
+interface SignUpFormFields extends Omit<PostOrganizationParams, "image"> {
     passwordConfirm: string;
 }
 
@@ -37,9 +37,11 @@ function RouteComponent() {
     const [emailValidated, setEmailValidated] = useState<boolean | null>(null);
     const postOrganizationMutation = usePostOrganization();
     const [previewUrl, setPreviewUrl] = useState<string>('');
+    const [image, setImage] = useState<File | null>(null);
 
     const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
+        setImage(file ?? null);
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -52,8 +54,10 @@ function RouteComponent() {
     };
 
     const onSubmit = handleSubmit((data) => {
-        console.log("asd");
-        postOrganizationMutation.mutate(data);
+        if (watch("password") !== watch("passwordConfirm")) return;
+        if (!emailValidated) return;
+
+        postOrganizationMutation.mutate({...data, image});
     });
 
     const emailValue = watch("email");
@@ -158,7 +162,6 @@ function RouteComponent() {
 
                     <StyledFieldWrapper>
                         <input
-                            {...register("image")}
                             id="inputFile"
                             type="file"
                             accept=".jpg, .jpeg, .png, .gif"
