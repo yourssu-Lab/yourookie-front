@@ -21,6 +21,7 @@ function Header() {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const closeModal = () => setSignInModalOpen(false);
+  const userId = api.getUserId();
 
   const handleSearch = (e: FormEvent) => {
     e.preventDefault();
@@ -37,7 +38,9 @@ function Header() {
     <StyledHeader>
       <StyledLogo to="/">OPENSSUpot</StyledLogo>
       <StyledNav>
-        <StyledLink to="/">공간오픈/관리</StyledLink>
+        <StyledLink to={isLoggedIn ? `/organizations/${userId}` : "#"}>
+          공간오픈/관리
+        </StyledLink>
         <StyledLink>교내회의실 찾기</StyledLink>
         <SearchContainer>
           <form onSubmit={handleSearch}>
