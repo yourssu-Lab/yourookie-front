@@ -11,6 +11,7 @@ export const StyledName = styled.p`
   font-size: 28px;
   font-weight: 700;
   color: #3a3a3a;
+  margin-bottom: 20px;
 `;
 
 export const StyledTitle = styled.p`
