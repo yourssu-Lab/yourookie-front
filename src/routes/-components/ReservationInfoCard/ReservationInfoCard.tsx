@@ -21,7 +21,6 @@ export interface ReservationInfoCardProps {
 }
 
 export const ReservationInfoCard = ({
-  id,
   name,
   spaceImageUrl,
   location,
@@ -30,7 +29,6 @@ export const ReservationInfoCard = ({
   capacity,
   to,
 }: ReservationInfoCardProps) => {
-  console.log(id);
   return (
     <StyledCardWrapper>
       <StyledImageSection>
