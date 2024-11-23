@@ -17,3 +17,17 @@ export const getOneSpace = async (spaceId: number): Promise<Space> => {
   );
   return data.space;
 };
+
+export const getOneSpaceOrga = async (
+  spaceId: number
+): Promise<Organization> => {
+  const { data } = await customAxios.get<GetOneSpaceResponse>(
+    `/spaces/${spaceId}`,
+    {
+      headers: {
+        skipAuth: true,
+      },
+    }
+  );
+  return data.organization;
+};

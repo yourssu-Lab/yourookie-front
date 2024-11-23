@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { ReservationCalendar } from "../../-components/ReservationCalendar/ReservationCalendar";
 import { ReservationInfoCard } from "../../-components/ReservationInfoCard/ReservationInfoCard";
 import { ReservationStatusBar } from "../../-components/ReservationStatusBar/ReservationStatusBar";
-import { getOneSpace } from "../../../api/getOneSpace";
+import { getOneSpace, getOneSpaceOrga } from "../../../api/getOneSpace";
 import { getReservationInfo } from "../../../api/getReservationInfo";
 import {
   postSpaceReservation,
@@ -56,6 +56,13 @@ function RouteComponent() {
     queryFn: () => getOneSpace(Number(spaceId)),
     enabled: !!spaceId,
   });
+
+  const { data: organization } = useQuery({
+    queryKey: ["organization", spaceId],
+    queryFn: () => getOneSpaceOrga(Number(spaceId)),
+    enabled: !!spaceId,
+  });
+
   const { data: reservations } = useQuery({
     queryKey: [
       "reservations",
@@ -190,7 +197,7 @@ function RouteComponent() {
 
   return (
     <StyledContainer onSubmit={handleSubmit(onSubmit)}>
-      <StyledName>{space?.name}</StyledName>
+      <StyledName>{organization?.name}</StyledName>
       <ReservationInfoCard {...space} />
 
       <StyledInfoSection>
