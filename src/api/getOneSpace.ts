@@ -15,6 +15,5 @@ export const getOneSpace = async (spaceId: number): Promise<Space> => {
       },
     }
   );
-
   return data.space;
 };

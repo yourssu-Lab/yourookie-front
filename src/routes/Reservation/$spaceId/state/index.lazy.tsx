@@ -22,8 +22,6 @@ function RouteComponent() {
     enabled: !!spaceId,
   });
 
-  console.log(reservations);
-
   const handleCardSelect = (id: number) => {
     setSelectedCardId(selectedCardId === id ? null : id);
   };
@@ -36,6 +34,7 @@ function RouteComponent() {
           reservations.map((reservation) => (
             <ReservationStateCard
               key={reservation.id}
+              spaceId={Number(spaceId)}
               {...reservation}
               isSelected={selectedCardId === reservation.id}
               onCardSelect={() => handleCardSelect(reservation.id)}

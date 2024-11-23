@@ -22,6 +22,7 @@ import {
 
 interface ReservationStateCardProps {
   id: number;
+  spaceId: number;
   startDateTime: string;
   endDateTime: string;
   isSelected: boolean;
@@ -30,6 +31,7 @@ interface ReservationStateCardProps {
 
 export const ReservationStateCard = ({
   id,
+  spaceId,
   startDateTime,
   endDateTime,
   isSelected,
@@ -40,9 +42,9 @@ export const ReservationStateCard = ({
   const queryClient = useQueryClient();
 
   const { data: space } = useQuery({
-    queryKey: ["space", id],
-    queryFn: () => getOneSpace(id),
-    enabled: !!id,
+    queryKey: ["space", spaceId],
+    queryFn: () => getOneSpace(spaceId),
+    enabled: !!spaceId,
   });
 
   const deleteMutation = useMutation({

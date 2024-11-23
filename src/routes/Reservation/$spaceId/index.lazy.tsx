@@ -56,9 +56,6 @@ function RouteComponent() {
     queryFn: () => getOneSpace(Number(spaceId)),
     enabled: !!spaceId,
   });
-
-  // console.log(space);
-
   const { data: reservations } = useQuery({
     queryKey: [
       "reservations",
@@ -80,7 +77,10 @@ function RouteComponent() {
       postSpaceReservation(Number(spaceId), data),
     onSuccess: () => {
       alert("예약이 완료되었습니다.");
-      navigate({ to: "/ReservationState" });
+      navigate({
+        to: "/Reservation/$spaceId/state",
+        params: { spaceId },
+      });
     },
     onError: () => {
       alert("예약에 실패했습니다. 다시 시도해주세요.");
