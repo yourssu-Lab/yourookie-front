@@ -2,6 +2,7 @@ import axios, {AxiosError, AxiosResponse} from 'axios';
 
 import {api} from "../service/TokenService.ts";
 import {postRefreshToken} from "./postRefreshToken.ts";
+import {ErrorData} from "./type.ts";
 
 export const customAxios = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
@@ -20,10 +21,10 @@ customAxios.interceptors.request.use((config) => {
 
 customAxios.interceptors.response.use(
     (response: AxiosResponse) => response,
-    async (error: AxiosError) => {
+    async (error: AxiosError<ErrorData>) => {
         const originalConfig = error.config;
 
-        if (originalConfig && error.response?.status === 401) {
+        if (originalConfig && error.response?.status === 401 && error.response?.data.refreshRequired) {
             try {
                 const { accessToken, refreshToken } =
                     await postRefreshToken();
