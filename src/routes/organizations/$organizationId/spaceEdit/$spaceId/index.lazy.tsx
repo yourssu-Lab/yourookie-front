@@ -41,18 +41,16 @@ function RouteComponent() {
   };
 
   const imageInputRef = useRef<HTMLInputElement | null>(null);
-  const { register, handleSubmit, watch, setValue } = useForm<SpaceFormData>({
+  const { register, handleSubmit, setValue } = useForm<SpaceFormData>({
     defaultValues: {
       name: "",
       location: "",
       openTime: "",
       closeTime: "",
       capacity: "",
-      images: [],
+      image: null,
     },
   });
-
-  const images = watch("images");
 
   const onSubmit = (data: SpaceFormData) => {
     console.log(data);
@@ -65,12 +63,8 @@ function RouteComponent() {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
-    if (files.length + images.length > 3) {
-      alert("최대 3장까지만 업로드할 수 있습니다.");
-      return;
-    }
-    setValue("images", [...images, ...files]);
+    const file = e.target.files?.[0] || null;
+    setValue("image", file);
   };
 
   return (
@@ -138,7 +132,7 @@ function RouteComponent() {
               <StyledImageInput
                 ref={(e) => {
                   imageInputRef.current = e;
-                  register("images").ref(e);
+                  register("image").ref(e);
                 }}
                 id="imageInput"
                 type="file"
@@ -148,7 +142,7 @@ function RouteComponent() {
             </StyledImageUpload>
           </StyledImageRow>
           <StyledInput
-            value={images.map((file) => file.name).join(", ")}
+            value={"image"}
             readOnly
             placeholder="파일을 첨부하세요"
           />

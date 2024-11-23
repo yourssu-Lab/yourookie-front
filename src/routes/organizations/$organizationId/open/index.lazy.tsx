@@ -1,10 +1,11 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
+import { useMutation } from "@tanstack/react-query";
+import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
+import { postOpen, SpaceParams } from "../../../../api/postOpen";
 import { SpaceFormData } from "../../../../types/space.type";
 import {
   StyledAdd,
-  StyledAddButton,
   StyledButton,
   StyledButtonWrapper,
   StyledContainer,
@@ -30,6 +31,8 @@ export const Route = createLazyFileRoute(
 });
 
 function RouteComponent() {
+  const { organizationId } = Route.useParams();
+  const navigate = useNavigate();
   const imageInputRef = useRef<HTMLInputElement | null>(null);
   const { register, handleSubmit, watch, setValue } = useForm<SpaceFormData>({
     defaultValues: {
@@ -38,14 +41,37 @@ function RouteComponent() {
       openTime: "",
       closeTime: "",
       capacity: "",
-      images: [],
+      image: null,
     },
   });
 
-  const images = watch("images") || [];
+  const image = watch("image");
+
+  const mutation = useMutation({
+    mutationFn: (data: SpaceParams) => postOpen(data),
+    onSuccess: () => {
+      navigate({
+        to: "/organizations/$organizationId",
+        params: { organizationId },
+      });
+    },
+    onError: (error) => {
+      console.error("공간 생성 실패:", error);
+      alert("공간 생성에 실패했습니다. 다시 시도해주세요.");
+    },
+  });
 
   const onSubmit = (data: SpaceFormData) => {
-    console.log(data);
+    const spaceParams: SpaceParams = {
+      name: data.name,
+      location: data.location,
+      openingTime: data.openTime,
+      closingTime: data.closeTime,
+      capacity: Number(data.capacity),
+      image: data.image,
+    };
+
+    mutation.mutate(spaceParams);
   };
 
   const handleImageUpload = () => {
@@ -53,18 +79,9 @@ function RouteComponent() {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
-    if (files.length + images.length > 3) {
-      alert("최대 3장까지만 업로드할 수 있습니다.");
-      return;
-    }
-    setValue("images", [...images, ...files]);
+    const file = e.target.files?.[0] || null;
+    setValue("image", file);
   };
-
-  // const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const files = Array.from(e.target.files || []);
-  //   setValue("images", [...images, ...files]);
-  // };
 
   return (
     <StyledContainer onSubmit={handleSubmit(onSubmit)}>
@@ -117,19 +134,11 @@ function RouteComponent() {
 
         <StyledFieldGroup>
           <StyledLabel>공간 사진</StyledLabel>
-          {images.length > 0 ? (
+          {image ? (
             <StyledImageSection>
-              {images.map((image, index) => (
-                <StyledImageUploadBox key={index} $isMain={index === 0}>
-                  <img
-                    src={URL.createObjectURL(image)}
-                    alt={`공간 사진 ${index + 1}`}
-                  />
-                </StyledImageUploadBox>
-              ))}
-              {images.length < 3 && (
-                <StyledAddButton onClick={handleImageUpload}>+</StyledAddButton>
-              )}
+              <StyledImageUploadBox>
+                <img src={URL.createObjectURL(image)} alt="공간 사진" />
+              </StyledImageUploadBox>
             </StyledImageSection>
           ) : (
             <StyledImageUploadBox $isEmpty onClick={handleImageUpload}>
@@ -142,17 +151,18 @@ function RouteComponent() {
           <StyledImageInput
             ref={(e) => {
               imageInputRef.current = e;
-              register("images").ref(e);
+              register("image").ref(e);
             }}
             type="file"
             accept="image/*"
-            multiple
             onChange={handleImageChange}
           />
         </StyledFieldGroup>
 
         <StyledButtonWrapper>
-          <StyledButton type="submit">생성</StyledButton>
+          <StyledButton type="submit" disabled={mutation.isPending}>
+            생성
+          </StyledButton>
         </StyledButtonWrapper>
       </StyledForm>
     </StyledContainer>
