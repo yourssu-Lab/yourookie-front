@@ -6,8 +6,7 @@ import {
     StyledFieldLabel,
     StyledFieldWrapper,
     StyledH2,
-    StyledH3,
-    StyledInput, StyledLink
+    StyledInput, StyledLink, StyledLogo
 } from "./SignIn.style.ts";
 import {useForm} from "react-hook-form";
 import {usePostLogin} from "../../../hooks/usePostLogin.ts";
@@ -21,8 +20,7 @@ const customStyles = {
         bottom: 'auto',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
-        width: '622px',
-        padding: '72px 71px 76px 76px'
+        padding: '50px'
     },
 };
 
@@ -35,8 +33,9 @@ type SignInFormFields = PostLoginParams;
 
 const SignIn = ({open, closeModal}: SignInProps) => {
     const {register, handleSubmit, formState} = useForm<SignInFormFields>();
-    const isError = formState.isSubmitted && !formState.isValid;
-    const postLoginMutation = usePostLogin();
+    const postLoginMutation = usePostLogin({
+        then: closeModal
+    });
     const onSubmit = handleSubmit((data) => {
         postLoginMutation.mutate(data);
     })
@@ -49,21 +48,29 @@ const SignIn = ({open, closeModal}: SignInProps) => {
             contentLabel="Example Modal"
         >
             <StyledContent>
-                <StyledH2>OpenSSUpot</StyledH2>
-                <StyledH3>로그인</StyledH3>
+                <StyledLogo>OpenSSUpot</StyledLogo>
+                <StyledH2>로그인</StyledH2>
+
                 <form onSubmit={onSubmit}>
                     <StyledFieldWrapper>
                         <StyledFieldLabel htmlFor="email">이메일</StyledFieldLabel>
-                        <StyledInput id="email" {...register("email", {required: true})} type="email" />
+                        <StyledInput 
+                            id="email" 
+                            {...register("email", {required: true})} 
+                            type="email"
+                            placeholder="이메일을 입력하세요"
+                        />
                     </StyledFieldWrapper>
                     <StyledFieldWrapper>
                         <StyledFieldLabel htmlFor="password">비밀번호</StyledFieldLabel>
-                        <StyledInput id="password" {...register("password", {required: true})} type="password"/>
+                        <StyledInput 
+                            id="password" 
+                            {...register("password", {required: true})} 
+                            type="password"
+                            placeholder="비밀번호를 입력하세요"
+                        />
                     </StyledFieldWrapper>
-                    {
-                        isError &&
-                        <StyledErrorMessage>이메일과 비밀번호를 확인해주세요.</StyledErrorMessage>
-                    }
+                    <StyledErrorMessage>{(formState.errors.email || formState.errors.password || postLoginMutation.isError) && "이메일과 비밀번호를 확인해주세요."}</StyledErrorMessage>
                     <StyledButtonWrapper>
                         <StyledLink to={'/signup'}>
                             <StyledButton type="button" onClick={closeModal} $type="normal">
