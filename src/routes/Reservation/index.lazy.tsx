@@ -1,7 +1,9 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import logo from "../../assets/mockLogo.svg";
 
+import dayjs from "dayjs";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { ReservationCalendar } from "../-components/ReservationCalendar/ReservationCalendar";
 import { ReservationInfoCard } from "../-components/ReservationInfoCard/ReservationInfoCard";
 import { ReservationStatusBar } from "../-components/ReservationStatusBar/ReservationStatusBar";
@@ -25,6 +27,14 @@ import {
 export const Route = createLazyFileRoute("/Reservation/")({
   component: RouteComponent,
 });
+
+interface ReservationFormData {
+  name: string;
+  startDateTime: string;
+  endDateTime: string;
+  password: string;
+  personalPassword: string;
+}
 
 const mock = {
   organization: {
@@ -51,6 +61,33 @@ function RouteComponent() {
     start: { hour: number; minute: number };
     end: { hour: number; minute: number };
   } | null>(null);
+
+  const { register, handleSubmit } = useForm<ReservationFormData>();
+
+  const onSubmit = (data: ReservationFormData) => {
+    if (!selectedDate || !selectedTime) {
+      alert("날짜와 시간을 선택해주세요");
+      return;
+    }
+
+    const startDateTime = dayjs(selectedDate)
+      .hour(selectedTime.start.hour)
+      .minute(selectedTime.start.minute)
+      .format("YYYY-MM-DDTHH:mm:00");
+
+    const endDateTime = dayjs(selectedDate)
+      .hour(selectedTime.end.hour)
+      .minute(selectedTime.end.minute)
+      .format("YYYY-MM-DDTHH:mm:00");
+
+    const reservationData = {
+      ...data,
+      startDateTime,
+      endDateTime,
+    };
+
+    console.log(reservationData);
+  };
 
   const formatDate = (date: Date) => {
     const days = ["일", "월", "화", "수", "목", "금", "토"];
@@ -104,7 +141,7 @@ function RouteComponent() {
   };
 
   return (
-    <StyledContainer>
+    <StyledContainer onSubmit={handleSubmit(onSubmit)}>
       <StyledName>{mock.organization.name}</StyledName>
       <ReservationInfoCard
         {...mock.space}
@@ -136,14 +173,21 @@ function RouteComponent() {
         <ReservationStatusBar onTimeSelect={handleTimeSelect} />
       </StyledInfoSection>
       <StyledTitle>예약자 명</StyledTitle>
-      <StyledInput type="text" placeholder="예약자 명을 입력하세요" />
+      <StyledInput
+        {...register("name", { required: true })}
+        type="text"
+        placeholder="예약자 명을 입력하세요"
+        autoComplete="new-password"
+      />
 
       <StyledImageSection>
         <StyledPasswordSection>
           <StyledTitle>공간 비밀번호</StyledTitle>
           <StyledInput
+            {...register("password", { required: true })}
             type="password"
             placeholder="공간 비밀번호를 입력하세요"
+            autoComplete="new-password"
           />
         </StyledPasswordSection>
 
@@ -153,13 +197,15 @@ function RouteComponent() {
             <StyledDetailLabel>예약 취소 시 사용됩니다.</StyledDetailLabel>
           </StyledLabelRow>
           <StyledInput
+            {...register("personalPassword", { required: true })}
             type="password"
             placeholder="개인 비밀번호를 입력하세요"
+            autoComplete="new-password"
           />
         </StyledPasswordSection>
       </StyledImageSection>
       <StyledButtonContainer>
-        <StyledButton>예약</StyledButton>
+        <StyledButton type="submit">예약</StyledButton>
       </StyledButtonContainer>
     </StyledContainer>
   );
