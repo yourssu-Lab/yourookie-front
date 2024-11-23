@@ -1,12 +1,11 @@
+import { useQuery } from "@tanstack/react-query";
 import {
   createLazyFileRoute,
   useParams,
   useRouter,
 } from "@tanstack/react-router";
 import { GroupCard } from "../../-components/GroupCard/GroupCard";
-import { Organization } from "../../-components/GroupCard/GroupCard.style";
-import logo from "../../../assets/mockLogo.svg";
-import logo2 from "../../../assets/test.jpg";
+import { getOrganization } from "../../../api/getOrganization";
 import {
   SearchContainer,
   SearchHeader,
@@ -19,57 +18,16 @@ export const Route = createLazyFileRoute("/SearchResult/$query/")({
 });
 
 function SearchResults() {
+  const router = useRouter();
   const { query } = useParams({
     from: "/SearchResult/$query/",
   });
-  const router = useRouter();
 
-  const groups: Organization[] = [
-    {
-      id: 1,
-      name: "동아리 A",
-      description:
-        "유어슈 서로를 존중하고 커뮤니케이션 하는 동아리입니다. 성장하는 문화를 통해 같이 있는 것만으로 즐겁게 배울 수 있는 동아리입니다.",
-      logoImageUrl: logo,
-      tags: ["공간 1", "공간 2", "공간 3", "공간 4"],
-    },
-    {
-      id: 2,
-      name: "동아리 A",
-      description: "동아리 A에 대한 설명입니다.",
-      logoImageUrl: logo,
-      tags: ["공간 1", "공간 2", "공간 3", "공간 4"],
-    },
-    {
-      id: 3,
-      name: "동아리 A",
-      description: "동아리 A에 대한 설명입니다.",
-      logoImageUrl: logo2,
-      tags: ["공간 1", "공간 2", "공간 3", "공간 4"],
-    },
-    {
-      id: 4,
-      name: "동아리 A",
-      description: "동아리 A에 대한 설명입니다.",
-      logoImageUrl: logo2,
-      tags: ["공간 1", "공간 2", "공간 3", "공간 4"],
-    },
-    {
-      id: 5,
-      name: "동아리 A",
-      description: "동아리 A에 대한 설명입니다.",
-      logoImageUrl: logo2,
-      tags: ["공간 1", "공간 2", "공간 3", "공간 4"],
-    },
-  ];
-
-  // const filteredGroups = groups.filter((group) =>
-  //   group.name.includes(query || "")
-  // );
-
-  // const handleSearch = (space: string) => {
-  //   console.log(`Selected space: ${space}`);
-  // };
+  const { data: organizations = [] } = useQuery({
+    queryKey: ["organizations", query],
+    queryFn: () => getOrganization(query),
+    enabled: !!query,
+  });
 
   const handleGroupClick = (space: string, groupId: number) => {
     handleSpaceSelect(space, groupId);
@@ -77,7 +35,7 @@ function SearchResults() {
 
   const handleSpaceSelect = (space: string, id: number) => {
     console.log(`Selected space: ${space}`);
-    router.navigate({ to: `/organizations/${id}` });
+    router.navigate({ to: `/SearchResult/$query/organizations/${id}` });
   };
 
   return (
@@ -85,8 +43,18 @@ function SearchResults() {
       <SearchHeader>단체 정보 / 검색 결과: {query}</SearchHeader>
       <StyledHr />
       <SearchResultsGrid>
-        {groups.map((group) => (
-          <GroupCard key={group.id} group={group} onClick={handleGroupClick} />
+        {organizations.map((org) => (
+          <GroupCard
+            key={org.id}
+            group={{
+              id: org.id,
+              name: org.name,
+              description: org.description,
+              logoImageUrl: org.logoImageUrl,
+              tags: org.hashtags,
+            }}
+            onClick={handleGroupClick}
+          />
         ))}
       </SearchResultsGrid>
     </SearchContainer>
