@@ -1,16 +1,15 @@
+import { useQuery } from "@tanstack/react-query";
 import {
   createLazyFileRoute,
   Outlet,
   useNavigate,
 } from "@tanstack/react-router";
-import { useState } from "react";
-import { OrganizationInfoCard } from "../../../../-components/OrganizationInfoCard/OrganizationInfoCard";
-import { SpaceCard } from "../../../../-components/SpaceCard/SpaceCard";
+import { SearchInfoCard } from "../../../../-components/OrganizationInfoCard/SearchInfoCard";
+import { SearchSpaceCard } from "../../../../-components/SpaceCard/SearchSpaceCard";
 import {
-  mockOrganization,
-  mockSpaces,
-} from "../../../../../mock/organizationData";
-import { Organization, Space } from "../../../../../types/organization.type";
+  getOrganizationSpaces,
+  OrganizationSpacesResponse,
+} from "../../../../../api/getOrganizationSpaces";
 import {
   StyledAddSpaceButton,
   StyledContainer,
@@ -23,21 +22,27 @@ export const Route = createLazyFileRoute(
 });
 
 function RouteComponent() {
-  const [organization] = useState<Organization>(mockOrganization);
-  const [spaces] = useState<Space[]>(mockSpaces);
   const { organizationId } = Route.useParams();
   const navigate = useNavigate();
 
-  const handleEditOrganization = () => {
-    navigate({
-      to: "/organizations/$organizationId/edit",
-      params: { organizationId },
-    });
-  };
+  const { data, isLoading, isError } = useQuery<OrganizationSpacesResponse>({
+    queryKey: ["organizationSpaces", organizationId],
+    queryFn: () => getOrganizationSpaces(organizationId),
+  });
 
-  const handleEditSpace = (spaceId: number) => {
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError || !data) {
+    return <div>Error loading data.</div>;
+  }
+
+  const { organization, spaces = [] } = data;
+
+  const handleReservationSpace = (spaceId: number) => {
     navigate({
-      to: "/organizations/$organizationId/spaceEdit/$spaceId",
+      to: "/Reservation",
       params: {
         organizationId,
         spaceId: spaceId.toString(),
@@ -45,31 +50,19 @@ function RouteComponent() {
     });
   };
 
-  const handleAddSpace = () => {
-    navigate({
-      to: "/organizations/$organizationId/open",
-      params: { organizationId },
-    });
-  };
-
   return (
     <StyledContainer>
-      <OrganizationInfoCard
+      <SearchInfoCard
         name={organization.name}
         description={organization.description}
         image={organization.logoImageUrl}
-        tags={organization.tags}
-        onEditClick={handleEditOrganization}
+        hashtags={organization.hashtags}
       />
-
-      <StyledAddSpaceButton onClick={handleAddSpace}>
-        + 공간 추가
-      </StyledAddSpaceButton>
-
+      <StyledAddSpaceButton />
       <StyledSpaceGrid>
         {spaces.map((space) => (
-          <SpaceCard
-            onEditClick={() => handleEditSpace(space.id)}
+          <SearchSpaceCard
+            onClick={() => handleReservationSpace(space.id)}
             key={space.id}
             space={space}
           />

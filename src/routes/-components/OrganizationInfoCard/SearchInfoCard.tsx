@@ -17,14 +17,14 @@ interface OrganizationInfoProps {
   name: string;
   description: string;
   image: string;
-  tags: string[];
+  hashtags: string[];
 }
 
 export const SearchInfoCard = ({
   name,
   description,
   image,
-  tags,
+  hashtags,
 }: OrganizationInfoProps) => {
   return (
     <StyledSection>
@@ -40,7 +40,7 @@ export const SearchInfoCard = ({
           <StyledName>{name}</StyledName>
           <StyledDescription>{description}</StyledDescription>
           <StyledTags>
-            {tags.map((tag) => (
+            {hashtags.map((tag) => (
               <StyledTag key={`tag-${tag}`}>#{tag}</StyledTag>
             ))}
           </StyledTags>
