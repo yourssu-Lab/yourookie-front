@@ -10,7 +10,6 @@ import {
     StyledInput, StyledLink
 } from "./SignIn.style.ts";
 import {useForm} from "react-hook-form";
-import {useEffect} from "react";
 import {usePostLogin} from "../../../hooks/usePostLogin.ts";
 import {PostLoginParams} from "../../../api/postLogin.ts";
 
@@ -41,10 +40,6 @@ const SignIn = ({open, closeModal}: SignInProps) => {
     const onSubmit = handleSubmit((data) => {
         postLoginMutation.mutate(data);
     })
-
-    useEffect(() => {
-        console.log(formState.isSubmitted);
-    }, [formState])
 
     return (
         <Modal
