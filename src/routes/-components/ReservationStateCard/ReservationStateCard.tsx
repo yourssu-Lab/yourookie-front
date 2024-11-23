@@ -2,6 +2,9 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import Modal from "react-modal";
 
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { deleteReservation } from "../../../api/deleteReservation";
+import { getOneSpace } from "../../../api/getOneSpace";
 import { SmallModalStyles } from "../../../styles/editModal";
 import {
   StyledButton,
@@ -19,32 +22,44 @@ import {
 
 interface ReservationStateCardProps {
   id: number;
-  name: string;
   startDateTime: string;
   endDateTime: string;
-  location?: string;
-  maxCapacity?: number;
-  operatingHours?: string;
-  image?: string;
-  secretNumber?: string;
   isSelected: boolean;
   onCardSelect: () => void;
 }
 
 export const ReservationStateCard = ({
-  name,
-  location,
-  operatingHours,
-  maxCapacity,
+  id,
   startDateTime,
   endDateTime,
-  image,
-  secretNumber = "1234",
   isSelected,
   onCardSelect,
 }: ReservationStateCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [password, setPassword] = useState("");
+  const queryClient = useQueryClient();
+
+  const { data: space } = useQuery({
+    queryKey: ["space", id],
+    queryFn: () => getOneSpace(id),
+    enabled: !!id,
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: (password: string) => deleteReservation(id, password),
+    onSuccess: () => {
+      setIsModalOpen(false);
+      queryClient.invalidateQueries({
+        queryKey: ["reservations"],
+      });
+    },
+    onError: () => {
+      alert("비밀번호가 일치하지 않습니다");
+    },
+    onSettled: () => {
+      setPassword("");
+    },
+  });
 
   const date = dayjs(startDateTime).format("YYYY.MM.DD");
   const time = `${dayjs(startDateTime).format("HH:mm")}~${dayjs(endDateTime).format("HH:mm")}`;
@@ -55,44 +70,46 @@ export const ReservationStateCard = ({
   };
 
   const handleConfirm = () => {
-    if (password === secretNumber) {
-      alert("예약이 취소되었습니다");
-      setIsModalOpen(false);
-      // 여기에 예약 삭제 로직 추가
-    } else {
-      alert("비밀번호가 일치하지 않습니다");
+    if (!password) {
+      alert("비밀번호를 입력해주세요");
+      return;
     }
-    setPassword("");
+    deleteMutation.mutate(password);
   };
 
   return (
     <StyledContainer onClick={onCardSelect}>
       <StyledImageSection>
-        <img src={image} alt={name} />
+        <img src={space?.spaceImageUrl} alt={space?.name} />
       </StyledImageSection>
 
       <StyledInfoSection>
-        <StyledTitle>{name}</StyledTitle>
-        <StyledInfoText>{location}</StyledInfoText>
-        <StyledInfoText>{operatingHours}</StyledInfoText>
-        <StyledInfoText>최대 {maxCapacity}명</StyledInfoText>
+        <StyledTitle>{space?.name}</StyledTitle>
+        <StyledInfoText>{space?.location}</StyledInfoText>
+        <StyledInfoText>{`${space?.openingTime} ~ ${space?.closingTime}`}</StyledInfoText>
+        <StyledInfoText>최대 {space?.capacity}명</StyledInfoText>
       </StyledInfoSection>
 
       <StyledReservationSection>
+        <StyledReservationInfo>{date}</StyledReservationInfo>
+        <StyledReservationInfo>{time}</StyledReservationInfo>
         {isSelected && (
-          <>
-            <StyledReservationInfo>{date}</StyledReservationInfo>
-            <StyledReservationInfo>{time}</StyledReservationInfo>
-            <StyledButton onClick={handleDelete}>삭제</StyledButton>
-          </>
+          <StyledButton
+            onClick={handleDelete}
+            disabled={deleteMutation.isPending}
+          >
+            삭제
+          </StyledButton>
         )}
       </StyledReservationSection>
 
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => {
-          setIsModalOpen(false);
-          setPassword("");
+          if (!deleteMutation.isPending) {
+            setIsModalOpen(false);
+            setPassword("");
+          }
         }}
         style={SmallModalStyles}
         contentLabel="비밀번호 입력"
@@ -102,9 +119,15 @@ export const ReservationStateCard = ({
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="비밀번호를 입력하세요"
+          placeholder="예약 시 입력한 개인 비밀번호를 입력하세요"
+          disabled={deleteMutation.isPending}
         />
-        <StyledModalButton onClick={handleConfirm}>확인</StyledModalButton>
+        <StyledModalButton
+          onClick={handleConfirm}
+          disabled={deleteMutation.isPending}
+        >
+          {deleteMutation.isPending ? "처리 중..." : "확인"}
+        </StyledModalButton>
       </Modal>
     </StyledContainer>
   );
