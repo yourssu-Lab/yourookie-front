@@ -51,7 +51,7 @@ function SearchResults() {
               name: org.name,
               description: org.description,
               logoImageUrl: org.logoImageUrl,
-              tags: org.hashtags,
+              hashtags: org.hashtags,
             }}
             onClick={handleGroupClick}
           />

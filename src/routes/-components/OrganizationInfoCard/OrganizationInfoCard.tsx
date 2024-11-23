@@ -1,4 +1,5 @@
 import pencil from "../../../assets/Pencil.svg";
+import { Organization } from "../../../types/organization.type";
 import {
   StyledContent,
   StyledDescription,
@@ -16,20 +17,15 @@ import {
 } from "./OrganizationInfoCard.style";
 
 interface OrganizationInfoProps {
-  name: string;
-  description: string;
-  image: string;
-  tags: string[];
+  organization: Organization;
   onEditClick: () => void;
 }
 
 export const OrganizationInfoCard = ({
-  name,
-  description,
-  image,
-  tags,
+  organization,
   onEditClick,
 }: OrganizationInfoProps) => {
+  console.log(organization);
   return (
     <StyledSection>
       <StyledHeader>
@@ -41,13 +37,16 @@ export const OrganizationInfoCard = ({
       <StyledHr />
       <StyledContent>
         <StyledImageWrapper>
-          <StyledImage src={image} alt={name} />
+          <StyledImage
+            src={organization.logoImageUrl}
+            alt={organization.name}
+          />
         </StyledImageWrapper>
         <StyledInfo>
-          <StyledName>{name}</StyledName>
-          <StyledDescription>{description}</StyledDescription>
+          <StyledName>{organization.name}</StyledName>
+          <StyledDescription>{organization.description}</StyledDescription>
           <StyledTags>
-            {tags.map((tag) => (
+            {organization.hashtags?.map((tag) => (
               <StyledTag key={`tag-${tag}`}>#{tag}</StyledTag>
             ))}
           </StyledTags>
