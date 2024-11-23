@@ -1,9 +1,5 @@
-import { Link } from "@tanstack/react-router";
-import pencil from "../../../assets/Pencil.svg";
-
 import {
   StyledCardWrapper,
-  StyledEditIcon,
   StyledImageSection,
   StyledInfoSection,
   StyledInfoText,
@@ -29,7 +25,6 @@ export const ReservationInfoCard = ({
   openingTime,
   closingTime,
   capacity,
-  to,
 }: ReservationInfoCardProps) => {
   console.log(id);
   return (
@@ -47,11 +42,11 @@ export const ReservationInfoCard = ({
         <StyledInfoText>최대 {capacity}명</StyledInfoText>
       </StyledInfoSection>
 
-      <StyledEditIcon>
+      {/* <StyledEditIcon>
         <Link to={to}>
           <img src={pencil} alt="수정하기" />
         </Link>
-      </StyledEditIcon>
+      </StyledEditIcon> */}
     </StyledCardWrapper>
   );
 };

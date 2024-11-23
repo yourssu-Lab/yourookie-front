@@ -1,6 +1,6 @@
 import { customAxios } from ".";
 
-interface SpaceReservationRequest {
+export interface SpaceReservationRequest {
   name: string;
   startDateTime: string;
   endDateTime: string;
@@ -8,7 +8,7 @@ interface SpaceReservationRequest {
   personalPassword: string;
 }
 
-interface SpaceReservationResponse {
+export interface SpaceReservationResponse {
   location: string;
 }
 

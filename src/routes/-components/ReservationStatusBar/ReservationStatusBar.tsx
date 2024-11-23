@@ -22,56 +22,21 @@ interface Reservation {
 interface TimeSlot {
   hour: number;
   minute: number;
-  status: "available" | "reserved" | "selected";
+  status: "available" | "reserved" | "selected" | "disabled";
 }
-
-// const mockData: Reservation[] = [
-//   {
-//     id: 1,
-//     startDateTime: "2024-11-23T09:00:00",
-//     endDateTime: "2024-11-23T11:00:00",
-//   },
-// ];
-
-const generateTimeSlots = (
-  startHour: number,
-  endHour: number,
-  reservations: Reservation[]
-) => {
-  const slots: TimeSlot[] = [];
-
-  for (let hour = startHour; hour <= endHour; hour++) {
-    for (const minute of [0, 30]) {
-      const currentTime = hour * 60 + minute;
-
-      const reserved = reservations.some((res) => {
-        const startTime =
-          new Date(res.startDateTime).getHours() * 60 +
-          new Date(res.startDateTime).getMinutes();
-        const endTime =
-          new Date(res.endDateTime).getHours() * 60 +
-          new Date(res.endDateTime).getMinutes();
-        return currentTime >= startTime && currentTime < endTime;
-      });
-
-      slots.push({
-        hour,
-        minute,
-        status: reserved ? "reserved" : "available",
-      });
-    }
-  }
-  return slots;
-};
 
 interface ReservationStatusBarProps {
   onTimeSelect: (slots: { hour: number; minute: number }[]) => void;
   reservations: Reservation[];
+  openingTime: string;
+  closingTime: string;
 }
 
 export const ReservationStatusBar = ({
   onTimeSelect,
   reservations,
+  openingTime,
+  closingTime,
 }: ReservationStatusBarProps) => {
   const [selectedSlots, setSelectedSlots] = useState<
     { hour: number; minute: number }[]
@@ -81,6 +46,58 @@ export const ReservationStatusBar = ({
     minute: number;
   } | null>(null);
 
+  const openTime = {
+    hour: parseInt(openingTime.split(":")[0]),
+    minute: parseInt(openingTime.split(":")[1]),
+  };
+  const closeTime = {
+    hour: parseInt(closingTime.split(":")[0]),
+    minute: parseInt(closingTime.split(":")[1]),
+  };
+
+  const generateTimeSlots = (
+    startHour: number,
+    endHour: number,
+    reservations: Reservation[]
+  ) => {
+    const slots: TimeSlot[] = [];
+
+    for (let hour = startHour; hour <= endHour; hour++) {
+      for (const minute of [0, 30]) {
+        const currentTime = hour * 60 + minute;
+        const openMinutes = openTime.hour * 60 + openTime.minute;
+        const closeMinutes = closeTime.hour * 60 + closeTime.minute;
+
+        // 운영 시간 외의 시간은 비활성화
+        if (currentTime < openMinutes || currentTime >= closeMinutes) {
+          slots.push({
+            hour,
+            minute,
+            status: "disabled", // 새로운 상태 추가
+          });
+          continue;
+        }
+
+        const reserved = reservations.some((res) => {
+          const startTime =
+            new Date(res.startDateTime).getHours() * 60 +
+            new Date(res.startDateTime).getMinutes();
+          const endTime =
+            new Date(res.endDateTime).getHours() * 60 +
+            new Date(res.endDateTime).getMinutes();
+          return currentTime >= startTime && currentTime < endTime;
+        });
+
+        slots.push({
+          hour,
+          minute,
+          status: reserved ? "reserved" : "available",
+        });
+      }
+    }
+    return slots;
+  };
+
   const timeSlots = generateTimeSlots(6, 21, reservations);
 
   const handleSelect = (hour: number, minute: number) => {
@@ -88,7 +105,7 @@ export const ReservationStatusBar = ({
       (slot) => slot.hour === hour && slot.minute === minute
     );
 
-    if (slot?.status === "reserved") return;
+    if (slot?.status === "reserved" || slot?.status === "disabled") return;
 
     if (!selectionStart) {
       setSelectionStart({ hour, minute });

@@ -1,6 +1,6 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
+import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
 
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -9,6 +9,10 @@ import { ReservationInfoCard } from "../../-components/ReservationInfoCard/Reser
 import { ReservationStatusBar } from "../../-components/ReservationStatusBar/ReservationStatusBar";
 import { getOneSpace } from "../../../api/getOneSpace";
 import { getReservationInfo } from "../../../api/getReservationInfo";
+import {
+  postSpaceReservation,
+  SpaceReservationRequest,
+} from "../../../api/postSpaceReservation";
 import {
   StyledButton,
   StyledButtonContainer,
@@ -38,27 +42,9 @@ interface ReservationFormData {
   personalPassword: string;
 }
 
-// const mock = {
-//   organization: {
-//     id: 1,
-//     name: "유어슈",
-//     description: "이곳은 Soongsil University의 공간 예약 플랫폼입니다.",
-//     logoImageUrl: logo,
-//     hashtags: ["#소통", "#편리한예약", "#학생회관"],
-//   },
-//   space: {
-//     id: 1,
-//     name: "학생회관 2층 213호",
-//     spaceImageUrl: logo,
-//     location: "학생회관 2층 213호",
-//     openingTime: "09:00",
-//     closingTime: "22:00",
-//     capacity: 12,
-//   },
-// };
-
 function RouteComponent() {
   const { spaceId } = Route.useParams();
+  const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [selectedTime, setSelectedTime] = useState<{
     start: { hour: number; minute: number };
@@ -71,7 +57,8 @@ function RouteComponent() {
     enabled: !!spaceId,
   });
 
-  // 예약 정보 가져오기
+  // console.log(space);
+
   const { data: reservations } = useQuery({
     queryKey: [
       "reservations",
@@ -87,6 +74,18 @@ function RouteComponent() {
   });
 
   const { register, handleSubmit } = useForm<ReservationFormData>();
+
+  const mutation = useMutation({
+    mutationFn: (data: SpaceReservationRequest) =>
+      postSpaceReservation(Number(spaceId), data),
+    onSuccess: () => {
+      alert("예약이 완료되었습니다.");
+      navigate({ to: "/ReservationState" });
+    },
+    onError: () => {
+      alert("예약에 실패했습니다. 다시 시도해주세요.");
+    },
+  });
 
   const onSubmit = (data: ReservationFormData) => {
     if (!selectedDate || !selectedTime) {
@@ -104,13 +103,15 @@ function RouteComponent() {
       .minute(selectedTime.end.minute)
       .format("YYYY-MM-DDTHH:mm:00");
 
-    const reservationData = {
-      ...data,
+    const reservationData: SpaceReservationRequest = {
+      name: data.name,
       startDateTime,
       endDateTime,
+      password: data.password,
+      personalPassword: data.personalPassword,
     };
 
-    console.log(reservationData);
+    mutation.mutate(reservationData);
   };
 
   const formatDate = (date: Date) => {
@@ -217,6 +218,8 @@ function RouteComponent() {
         <ReservationStatusBar
           onTimeSelect={handleTimeSelect}
           reservations={reservations || []}
+          openingTime={space?.openingTime || "00:00:00"}
+          closingTime={space?.closingTime || "23:59:59"}
         />
       </StyledInfoSection>
       <StyledTitle>예약자 명</StyledTitle>
@@ -252,7 +255,9 @@ function RouteComponent() {
         </StyledPasswordSection>
       </StyledImageSection>
       <StyledButtonContainer>
-        <StyledButton type="submit">예약</StyledButton>
+        <StyledButton type="submit" disabled={mutation.isPending}>
+          예약
+        </StyledButton>
       </StyledButtonContainer>
     </StyledContainer>
   );

@@ -25,7 +25,6 @@ export const OrganizationInfoCard = ({
   organization,
   onEditClick,
 }: OrganizationInfoProps) => {
-  console.log(organization);
   return (
     <StyledSection>
       <StyledHeader>

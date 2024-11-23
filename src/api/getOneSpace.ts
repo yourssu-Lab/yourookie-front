@@ -1,12 +1,20 @@
 import { customAxios } from ".";
-import { Space } from "../types/organization.type";
+import { Organization, Space } from "../types/organization.type";
 
-export const getOneSpace = async (spaceId: number) => {
-  const { data } = await customAxios.get<Space>(`/spaces/${spaceId}`, {
-    headers: {
-      skipAuth: true,
-    },
-  });
+export interface GetOneSpaceResponse {
+  organization: Organization;
+  space: Space;
+}
 
-  return data;
+export const getOneSpace = async (spaceId: number): Promise<Space> => {
+  const { data } = await customAxios.get<GetOneSpaceResponse>(
+    `/spaces/${spaceId}`,
+    {
+      headers: {
+        skipAuth: true,
+      },
+    }
+  );
+
+  return data.space;
 };
