@@ -103,20 +103,34 @@ function RouteComponent() {
     start: { hour: number; minute: number };
     end: { hour: number; minute: number };
   }) => {
-    const formatHourMinute = (time: { hour: number; minute: number }) =>
-      `${String(time.hour).padStart(2, "0")}:${String(time.minute).padStart(2, "0")}`;
+    const formatHour = (time: { hour: number; minute: number }) => {
+      if (time.minute === 60) {
+        return `${time.hour + 1}:00`;
+      }
+      return `${time.hour}:${time.minute === 30 ? "30" : "00"}`;
+    };
 
     const startMinutes = time.start.hour * 60 + time.start.minute;
-    const endMinutes = time.end.hour * 60 + time.end.minute;
-    const diffHours = Math.floor((endMinutes - startMinutes) / 60);
-    const diffMinutes = (endMinutes - startMinutes) % 60;
+    let endMinutes = time.end.hour * 60 + time.end.minute;
 
-    const duration =
-      diffMinutes > 0
-        ? `${diffHours}시간 ${diffMinutes}분`
-        : `${diffHours}시간`;
+    if (time.end.minute === 60) {
+      endMinutes = time.end.hour * 60 + 60;
+    }
 
-    return `${formatHourMinute(time.start)} ~ ${formatHourMinute(time.end)} (${duration})`;
+    const diffMinutes = endMinutes - startMinutes;
+    const diffHours = Math.floor(diffMinutes / 60);
+    const remainingMinutes = diffMinutes % 60;
+
+    let duration = "";
+    if (diffHours > 0 && remainingMinutes > 0) {
+      duration = `${diffHours}시간 ${remainingMinutes}분`;
+    } else if (diffHours > 0) {
+      duration = `${diffHours}시간`;
+    } else {
+      duration = `${remainingMinutes}분`;
+    }
+
+    return `${formatHour(time.start)} ~ ${formatHour(time.end)} (${duration})`;
   };
 
   const handleTimeSelect = (slots: { hour: number; minute: number }[]) => {
@@ -125,14 +139,23 @@ function RouteComponent() {
         (a, b) => a.hour * 60 + a.minute - (b.hour * 60 + b.minute)
       );
 
+      const lastSlot = sortedSlots[sortedSlots.length - 1];
+      let endHour = lastSlot.hour;
+      let endMinute = lastSlot.minute + 30;
+
+      if (endMinute === 60) {
+        endHour += 1;
+        endMinute = 0;
+      }
+
       setSelectedTime({
         start: {
           hour: sortedSlots[0].hour,
           minute: sortedSlots[0].minute,
         },
         end: {
-          hour: sortedSlots[sortedSlots.length - 1].hour,
-          minute: sortedSlots[sortedSlots.length - 1].minute + 30,
+          hour: endHour,
+          minute: endMinute,
         },
       });
     } else {
