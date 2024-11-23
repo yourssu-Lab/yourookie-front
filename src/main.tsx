@@ -1,16 +1,16 @@
-import { StrictMode } from 'react'
+import {StrictMode} from 'react'
 import ReactDOM from 'react-dom/client'
-import { RouterProvider, createRouter } from '@tanstack/react-router'
+import {RouterProvider, createRouter} from '@tanstack/react-router'
+import './index.css';  // CSS 파일 import
 
 // Import the generated route tree
-import { routeTree } from './routeTree.gen'
+import {routeTree} from './routeTree.gen'
 
-import {YDSWrapper} from "@yourssu/design-system-react";
 import Modal from "react-modal";
 import Provider from "./Provider.tsx";
 
 // Create a new router instance
-const router = createRouter({ routeTree })
+const router = createRouter({routeTree})
 
 // Register the router instance for type safety
 declare module '@tanstack/react-router' {
@@ -27,11 +27,9 @@ if (!rootElement.innerHTML) {
     const root = ReactDOM.createRoot(rootElement)
     root.render(
         <StrictMode>
-            <YDSWrapper>
-                <Provider>
-                    <RouterProvider router={router} />
-                </Provider>
-            </YDSWrapper>
+            <Provider>
+                <RouterProvider router={router}/>
+            </Provider>
         </StrictMode>,
     )
 }

@@ -5,6 +5,12 @@ export interface PostLoginParams {
     password: string;
 }
 
+interface PostLoginResponse {
+    accessToken: string;
+    refreshToken: string;
+}
+
 export const postLogin = async (params: PostLoginParams) => {
-    return await customAxios.post('/login', params);
+    const {data} = await customAxios.post<PostLoginResponse>('/login', params);
+    return data;
 }
