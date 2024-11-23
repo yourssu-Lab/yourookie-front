@@ -25,13 +25,13 @@ interface TimeSlot {
   status: "available" | "reserved" | "selected";
 }
 
-const mockData: Reservation[] = [
-  {
-    id: 1,
-    startDateTime: "2024-11-23T09:00:00",
-    endDateTime: "2024-11-23T11:00:00",
-  },
-];
+// const mockData: Reservation[] = [
+//   {
+//     id: 1,
+//     startDateTime: "2024-11-23T09:00:00",
+//     endDateTime: "2024-11-23T11:00:00",
+//   },
+// ];
 
 const generateTimeSlots = (
   startHour: number,
@@ -66,10 +66,12 @@ const generateTimeSlots = (
 
 interface ReservationStatusBarProps {
   onTimeSelect: (slots: { hour: number; minute: number }[]) => void;
+  reservations: Reservation[];
 }
 
 export const ReservationStatusBar = ({
   onTimeSelect,
+  reservations,
 }: ReservationStatusBarProps) => {
   const [selectedSlots, setSelectedSlots] = useState<
     { hour: number; minute: number }[]
@@ -78,7 +80,8 @@ export const ReservationStatusBar = ({
     hour: number;
     minute: number;
   } | null>(null);
-  const timeSlots = generateTimeSlots(6, 21, mockData);
+
+  const timeSlots = generateTimeSlots(6, 21, reservations);
 
   const handleSelect = (hour: number, minute: number) => {
     const slot = timeSlots.find(

@@ -42,9 +42,8 @@ function RouteComponent() {
 
   const handleReservationSpace = (spaceId: number) => {
     navigate({
-      to: "/Reservation",
+      to: "/Reservation/$spaceId",
       params: {
-        organizationId,
         spaceId: spaceId.toString(),
       },
     });

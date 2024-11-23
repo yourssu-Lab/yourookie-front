@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import pencil from "../../../assets/Pencil.svg";
-import { Space } from "../../../types/organization.type";
 
 import {
   StyledCardWrapper,
@@ -11,8 +10,15 @@ import {
   StyledTitle,
 } from "./ReservationInfoCard.style";
 
-export interface ReservationInfoCardProps extends Space {
-  to: string;
+export interface ReservationInfoCardProps {
+  id?: number;
+  name?: string;
+  spaceImageUrl?: string;
+  location?: string;
+  openingTime?: string;
+  closingTime?: string;
+  capacity?: number;
+  to?: string;
 }
 
 export const ReservationInfoCard = ({
