@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import { FormEvent, useState } from "react";
 import SearchIcon from "../../../assets/search.svg?react";
 import { useLoginState } from "../../../hooks/useLoginState.ts";
 import { api } from "../../../service/TokenService.ts";
@@ -17,8 +18,21 @@ import {
 function Header() {
   const { isLoggedIn } = useLoginState();
   const [signInModalOpen, setSignInModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
   const closeModal = () => setSignInModalOpen(false);
   const userId = api.getUserId();
+
+  const handleSearch = (e: FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate({
+        to: "/SearchResult/$query",
+        params: { query: searchQuery },
+      });
+      setSearchQuery("");
+    }
+  };
 
   return (
     <StyledHeader>
@@ -29,10 +43,16 @@ function Header() {
         </StyledLink>
         <StyledLink>교내회의실 찾기</StyledLink>
         <SearchContainer>
-          <SearchBar placeholder="검색어를 입력하세요" />
-          <IconContainer>
-            <SearchIcon style={{ minWidth: "25px" }} />
-          </IconContainer>
+          <form onSubmit={handleSearch}>
+            <SearchBar
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="검색어를 입력하세요"
+            />
+            <IconContainer onClick={handleSearch}>
+              <SearchIcon style={{ minWidth: "25px" }} />
+            </IconContainer>
+          </form>
         </SearchContainer>
       </StyledNav>
       <div>

@@ -1,22 +1,26 @@
 import { Link } from "@tanstack/react-router";
-import pencil from "../../../assets/Pencil.svg";
-import { Space } from "../../../types/organization.type";
-
 import {
+  StyledButton,
+  StyledButtonWrapper,
   StyledCardWrapper,
-  StyledEditIcon,
   StyledImageSection,
   StyledInfoSection,
   StyledInfoText,
   StyledTitle,
 } from "./ReservationInfoCard.style";
 
-export interface ReservationInfoCardProps extends Space {
-  to: string;
+export interface ReservationInfoCardProps {
+  id?: number;
+  name?: string;
+  spaceImageUrl?: string;
+  location?: string;
+  openingTime?: string;
+  closingTime?: string;
+  capacity?: number;
+  to?: string;
 }
 
 export const ReservationInfoCard = ({
-  id,
   name,
   spaceImageUrl,
   location,
@@ -25,7 +29,6 @@ export const ReservationInfoCard = ({
   capacity,
   to,
 }: ReservationInfoCardProps) => {
-  console.log(id);
   return (
     <StyledCardWrapper>
       <StyledImageSection>
@@ -40,12 +43,11 @@ export const ReservationInfoCard = ({
         </StyledInfoText>
         <StyledInfoText>최대 {capacity}명</StyledInfoText>
       </StyledInfoSection>
-
-      <StyledEditIcon>
-        <Link to={to}>
-          <img src={pencil} alt="수정하기" />
+      <StyledButtonWrapper>
+        <Link to={to} style={{ textDecoration: "none" }}>
+          <StyledButton>예약 현황 조회</StyledButton>
         </Link>
-      </StyledEditIcon>
+      </StyledButtonWrapper>
     </StyledCardWrapper>
   );
 };
