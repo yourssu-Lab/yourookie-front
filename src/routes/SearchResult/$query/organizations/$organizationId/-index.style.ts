@@ -13,23 +13,10 @@ export const StyledSpaceGrid = styled.div`
   gap: 16px 18px;
 `;
 
-export const StyledAddSpaceButton = styled.button`
+export const StyledAddSpaceButton = styled.div`
   display: flex;
   align-items: center;
   gap: 2px;
   padding: 10px;
   margin: 20px 0px 16px 0px;
-  background: #e2ecf7;
-  border: none;
-  border-radius: 12px;
-  color: #1781ee;
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: 0.4px;
-  cursor: pointer;
-  transition: all 0.2s;
-
-  &:hover {
-    background: #e3f2fd;
-  }
 `;
