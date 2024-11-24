@@ -65,7 +65,11 @@ function RouteComponent() {
         imageFile: data.image,
       });
     },
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
+      const currentPassword = api.getPassword();
+      if (variables.secretNumber !== currentPassword) {
+        api.setPassword(variables.secretNumber);
+      }
       queryClient.invalidateQueries({
         queryKey: ["organization", organizationId],
       });
