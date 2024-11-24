@@ -15,6 +15,16 @@ export interface GetMeetingRoomsParams {
 }
 
 export const getMeetingRooms = async (params: GetMeetingRoomsParams) => {
-    const {data} = await customAxios.get<GetMeetingRoomsResponse[]>('/meetingrooms', {params});
-    return data;
+    try {
+        const {data} = await customAxios.get<GetMeetingRoomsResponse[]>(
+            '/meetingrooms',
+            {
+                params,
+                headers: {skipAuth: true}
+            },
+        );
+        return data;
+    } catch (e: unknown) {
+        console.log(e);
+    }
 }

@@ -36,7 +36,7 @@ interface MeetingRoomsResultProps {
 }
 
 const MeetingRoomResult = ({open, closeModal, meetingRoomParams}: MeetingRoomsResultProps) => {
-    const {data: results} = useGetMeetingRooms(meetingRoomParams);
+    const {data: results, error} = useGetMeetingRooms(meetingRoomParams);
 
     return (
         <Modal
@@ -52,7 +52,10 @@ const MeetingRoomResult = ({open, closeModal, meetingRoomParams}: MeetingRoomsRe
                 <StyledTitle>조회 결과</StyledTitle>
                 <StyledCardWrapper>
                     {
-                        results.map((result) => (
+                        error && "서버에서 에러가 발생했습니다."
+                    }
+                    {
+                        results && results.map((result) => (
                             <StyledCard key={result.name}>
                                 <StyledCardTitle>{result.name}</StyledCardTitle>
                                 <img style={{marginTop: "16px"}} width="100%" src={result.spaceImageUrl}/>
