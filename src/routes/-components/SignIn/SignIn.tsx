@@ -13,6 +13,9 @@ import {usePostLogin} from "../../../hooks/usePostLogin.ts";
 import {PostLoginParams} from "../../../api/postLogin.ts";
 
 const customStyles = {
+    overlay: {
+        background: 'rgba(50, 49, 49, 0.40)',
+    },
     content: {
         top: '50%',
         left: '50%',
@@ -45,7 +48,6 @@ const SignIn = ({open, closeModal}: SignInProps) => {
             isOpen={open}
             onRequestClose={closeModal}
             style={customStyles}
-            contentLabel="Example Modal"
         >
             <StyledContent>
                 <StyledHeader>

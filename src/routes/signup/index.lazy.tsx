@@ -35,7 +35,7 @@ interface SignUpFormFields extends Omit<PostOrganizationParams, "image"> {
 }
 
 function RouteComponent() {
-    const {register, handleSubmit, watch} = useForm<SignUpFormFields>();
+    const {register, handleSubmit, watch, formState} = useForm<SignUpFormFields>();
     const [emailValidated, setEmailValidated] = useState<boolean | null>(null);
     const postOrganizationMutation = usePostOrganization();
     const [previewUrl, setPreviewUrl] = useState<string>('');
@@ -203,6 +203,11 @@ function RouteComponent() {
                 {
                     postOrganizationMutation.error && <StyledErrorMessage>
                         {(postOrganizationMutation.error as AxiosError<{message: string}>).response?.data?.message}
+                    </StyledErrorMessage>
+                }
+                {
+                    formState.isSubmitted && !emailValidated && <StyledErrorMessage>
+                        이메일 인증을 해주세요
                     </StyledErrorMessage>
                 }
 

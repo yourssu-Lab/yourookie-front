@@ -1,5 +1,12 @@
 import {customAxios} from "./index.ts";
 
+interface PostOrganizationResponse {
+    id: number;
+    name: string;
+    accessToken: string;
+    refreshToken: string;
+}
+
 export interface PostOrganizationParams {
     email: string;
     password: string;
@@ -26,7 +33,7 @@ export const postOrganization = async (
     });
     formData.append('request', request);
     if (image) formData.set("image", image);
-    return await customAxios.post('/organizations', formData, {
+    return await customAxios.post<PostOrganizationResponse>('/organizations', formData, {
         headers: {
             "Content-Type": "multipart/form-data"
         }
