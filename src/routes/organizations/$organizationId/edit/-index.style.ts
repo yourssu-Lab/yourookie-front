@@ -29,7 +29,6 @@ export const StyledDetailLabel = styled.div`
   font-size: 12px;
   font-weight: 400;
   color: #4f4f4f;
-  margin-bottom: 8px;
   margin-left: 4px;
 `;
 

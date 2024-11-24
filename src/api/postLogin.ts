@@ -5,7 +5,7 @@ export interface PostLoginParams {
   password: string;
 }
 
-interface PostLoginResponse {
+export interface PostLoginResponse {
   id: number;
   name: string;
   accessToken: string;
