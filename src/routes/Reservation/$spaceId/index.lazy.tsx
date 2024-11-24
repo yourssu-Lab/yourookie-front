@@ -227,6 +227,7 @@ function RouteComponent() {
           reservations={reservations || []}
           openingTime={space?.openingTime || "00:00:00"}
           closingTime={space?.closingTime || "23:59:59"}
+          type="reservation"
         />
       </StyledInfoSection>
       <StyledTitle>예약자 명</StyledTitle>
