@@ -58,7 +58,7 @@ const MeetingRoomResult = ({open, closeModal, meetingRoomParams}: MeetingRoomsRe
                         results && results.map((result) => (
                             <StyledCard key={result.name}>
                                 <StyledCardTitle>{result.name}</StyledCardTitle>
-                                <img style={{marginTop: "16px"}} width="100%" src={result.spaceImageUrl}/>
+                                <img style={{width: '100%', height: '153px', marginTop: "16px"}} width="100%" src={result.spaceImageUrl}/>
                                 <StyledContentWrapper>
                                     <div style={{width: '100%'}}>
                                         <StyledContentTitle>위치</StyledContentTitle>

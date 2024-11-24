@@ -23,6 +23,7 @@ export const StyledCard = styled.div`
     min-width: 338px;
     max-width: 338px;
     flex-direction: column;
+    justify-content: space-between;
 `;
 
 export const StyledCardWrapper = styled.div`
@@ -69,7 +70,6 @@ export const StyledContent = styled.p`
 `;
 
 export const StyledButton = styled.button`
-    margin-top: 40px;
     display: flex;
     width: 190px;
     height: 50px;
@@ -91,4 +91,5 @@ export const StyledButton = styled.button`
 
 export const StyledLink = styled(Link)`
     text-decoration: none;
+    margin-top: 40px;
 `;
