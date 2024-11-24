@@ -148,8 +148,8 @@ export const StyledSubmitButton = styled.button`
 
 export const StyledUploadBackground = styled.label`
     display: flex;
-    width: 400px;
-    height: 300px;
+    width: 561px;
+    height: 420px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -163,6 +163,8 @@ export const StyledUploadBackground = styled.label`
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    
+    position: relative;
 `;
 
 export const StyledUploadDescription = styled.div`
@@ -170,4 +172,27 @@ export const StyledUploadDescription = styled.div`
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
+`;
+
+export const StyledEditImage = styled.span`
+    display: flex;
+    width: 55px;
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 12px;
+    background: #E2ECF7;
+    position: absolute;
+    top: 17px;
+    right: 15px;
+`;
+
+export const StyledErrorMessage = styled.div`
+    color: #EB0000;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 40px;
 `;

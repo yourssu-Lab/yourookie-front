@@ -42,10 +42,10 @@ export const StyledFirstSectionSecondText = styled.h1`
 
 export const StyledFirstSectionLastText = styled.h1`
     color: #FFF;
-    font-family: "Pretendard Variable";
-    font-size: 71px;
+    font-family: "Mungyeong Gamhong Apple";
+    font-size: 55px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     line-height: normal;
     margin-top: 24px;
 `;
@@ -61,10 +61,10 @@ export const StyledSecondSection = styled.section`
 
 export const StyledSecondSectionFirstText = styled.h1`
     color: #1781EE;
-    font-family: "Pretendard Variable";
-    font-size: 60px;
+    font-family: "Mungyeong Gamhong Apple";
+    font-size: 50px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     line-height: normal;
 `;
 

@@ -5,7 +5,7 @@ import {
     StyledContent, StyledErrorMessage,
     StyledFieldLabel,
     StyledFieldWrapper,
-    StyledH2,
+    StyledH2, StyledHeader,
     StyledInput, StyledLink, StyledLogo
 } from "./SignIn.style.ts";
 import {useForm} from "react-hook-form";
@@ -48,8 +48,10 @@ const SignIn = ({open, closeModal}: SignInProps) => {
             contentLabel="Example Modal"
         >
             <StyledContent>
-                <StyledLogo>OpenSSUpot</StyledLogo>
-                <StyledH2>로그인</StyledH2>
+                <StyledHeader>
+                    <StyledH2>로그인</StyledH2>
+                    <StyledLogo>openssupot</StyledLogo>
+                </StyledHeader>
 
                 <form onSubmit={onSubmit}>
                     <StyledFieldWrapper>

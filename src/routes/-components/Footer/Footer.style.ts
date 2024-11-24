@@ -29,10 +29,10 @@ export const StyledLink = styled(Link)`
 export const StyledLogo = styled.span`
     margin-left: 77px;
     color: #1781EE;
-    font-family: "Pretendard Variable";
+    font-family: "Mungyeong Gamhong Apple";
     font-size: 20px;
     font-style: normal;
-    font-weight: 800;
+    font-weight: 400;
     line-height: normal;
 `
 
