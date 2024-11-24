@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { formatTime } from "../../../utils/formatTime";
 import {
   StyledButton,
   StyledButtonWrapper,
@@ -39,7 +40,7 @@ export const ReservationInfoCard = ({
         <StyledTitle>{name}</StyledTitle>
         <StyledInfoText>{location}</StyledInfoText>
         <StyledInfoText>
-          {openingTime}~{closingTime}
+          {formatTime(openingTime || "")}~{formatTime(closingTime || "")}
         </StyledInfoText>
         <StyledInfoText>최대 {capacity}명</StyledInfoText>
       </StyledInfoSection>

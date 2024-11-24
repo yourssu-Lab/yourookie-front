@@ -32,7 +32,7 @@ export const StyledEditIcon = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 1;
+  /* z-index: 1; */
 
   img {
     width: 35px;

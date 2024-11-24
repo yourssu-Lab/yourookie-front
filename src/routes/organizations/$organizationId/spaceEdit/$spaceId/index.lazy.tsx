@@ -15,6 +15,7 @@ import {
   StyledButton,
   StyledButtonWrapper,
   StyledContainer,
+  StyledDetailLabel,
   StyledFieldGroup,
   StyledHeaderRow,
   StyledImageInput,
@@ -22,6 +23,7 @@ import {
   StyledImageUpload,
   StyledInput,
   StyledLabel,
+  StyledLabelRow,
   StyledLogoWrapper,
   StyledRow,
   StyledTimeContainer,
@@ -150,16 +152,27 @@ function RouteComponent() {
         </StyledRow>
 
         <StyledFieldGroup>
-          <StyledLabel>시간 입력</StyledLabel>
+          <StyledLabelRow>
+            <StyledLabel>공간 사용 가능 시간</StyledLabel>
+            <StyledDetailLabel>
+              예약 가능한 시간은 6-21시로 제한됩니다
+            </StyledDetailLabel>
+          </StyledLabelRow>
           <StyledTimeContainer>
             <StyledTimeInput
               type="time"
+              step="1800"
+              min="06:00"
+              max="21:00"
               {...register("openingTime", { required: true })}
               placeholder="오픈 시간을 선택하세요"
             />
             <span>~</span>
             <StyledTimeInput
               type="time"
+              step="1800"
+              min="06:00"
+              max="21:00"
               {...register("closingTime", { required: true })}
               placeholder="종료 시간을 선택하세요"
             />

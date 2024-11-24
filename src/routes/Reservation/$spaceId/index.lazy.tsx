@@ -216,8 +216,10 @@ function RouteComponent() {
             </StyledDateTimeBox>
           </StyledPasswordSection>
         </StyledImageSection>
-
-        <StyledDate>날짜 및 시간 선택</StyledDate>
+        <StyledLabelRow>
+          <StyledDate>날짜 및 시간 선택</StyledDate>
+          <StyledDetailLabel>1시간 이상 선택해주세요</StyledDetailLabel>
+        </StyledLabelRow>
         <ReservationCalendar
           selectedDate={selectedDate}
           onDateSelect={setSelectedDate}
@@ -227,6 +229,7 @@ function RouteComponent() {
           reservations={reservations || []}
           openingTime={space?.openingTime || "00:00:00"}
           closingTime={space?.closingTime || "23:59:59"}
+          type="reservation"
         />
       </StyledInfoSection>
       <StyledTitle>예약자 명</StyledTitle>

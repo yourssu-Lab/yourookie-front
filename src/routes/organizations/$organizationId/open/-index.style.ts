@@ -84,9 +84,9 @@ export const StyledImageUploadBox = styled.div<{
   $isEmpty?: boolean;
   $isMain?: boolean;
 }>`
-  width: ${(props) => (props.$isEmpty ? "100%" : "260px")};
-  aspect-ratio: ${(props) => (props.$isEmpty ? "auto" : "16/10")};
-  min-height: ${(props) => (props.$isEmpty ? "200px" : "auto")};
+  width: ${(props) => (props.$isEmpty ? "560px" : "560px")};
+  /* aspect-ratio: ${(props) => (props.$isEmpty ? "auto" : "16/10")}; */
+  min-height: ${(props) => (props.$isEmpty ? "420px" : "420px")};
   border: 1px solid #e5e8eb;
   border-radius: 5px;
   display: flex;
@@ -180,4 +180,18 @@ export const StyledAdd = styled.div`
 export const StyledAddButton = styled(StyledAdd)`
   margin-top: 105px;
   cursor: pointer;
+`;
+
+export const StyledDetailLabel = styled.div`
+  font-size: 12px;
+  font-weight: 400;
+  color: #4f4f4f;
+  margin-bottom: 10px;
+  margin-left: 4px;
+`;
+
+export const StyledLabelRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `;

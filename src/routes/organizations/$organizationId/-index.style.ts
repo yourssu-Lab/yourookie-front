@@ -17,7 +17,7 @@ export const StyledAddSpaceButton = styled.button`
   display: flex;
   align-items: center;
   gap: 2px;
-  padding: 10px;
+  padding: 10px 42px;
   margin: 20px 0px 16px 0px;
   background: #e2ecf7;
   border: none;
@@ -25,6 +25,7 @@ export const StyledAddSpaceButton = styled.button`
   color: #1781ee;
   font-size: 20px;
   font-weight: 500;
+  line-height: 119.33%;
   letter-spacing: 0.4px;
   cursor: pointer;
   transition: all 0.2s;

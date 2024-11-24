@@ -4,12 +4,14 @@ import {
   Outlet,
   useNavigate,
 } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { OrganizationInfoCard } from "../../-components/OrganizationInfoCard/OrganizationInfoCard";
 import { SpaceCard } from "../../-components/SpaceCard/SpaceCard";
 import {
   getOrganizationSpaces,
   OrganizationSpacesResponse,
 } from "../../../api/getOrganizationSpaces";
+import { useLoginState } from "../../../hooks/useLoginState";
 import {
   StyledAddSpaceButton,
   StyledContainer,
@@ -23,6 +25,13 @@ export const Route = createLazyFileRoute("/organizations/$organizationId/")({
 function RouteComponent() {
   const { organizationId } = Route.useParams();
   const navigate = useNavigate();
+  const { isLoggedIn } = useLoginState();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate({ to: "/" });
+    }
+  }, [isLoggedIn, navigate]);
 
   const { data, isLoading, isError } = useQuery<OrganizationSpacesResponse>({
     queryKey: ["organizationSpaces", organizationId],

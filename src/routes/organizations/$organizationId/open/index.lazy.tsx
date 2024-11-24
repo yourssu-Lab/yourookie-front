@@ -1,8 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { postOpen, SpaceParams } from "../../../../api/postOpen";
+import { useLoginState } from "../../../../hooks/useLoginState";
 import { SpaceFormData } from "../../../../types/space.type";
 import {
   StyledAdd,
@@ -10,6 +11,7 @@ import {
   StyledButtonWrapper,
   StyledContainer,
   StyledContents,
+  StyledDetailLabel,
   StyledFieldGroup,
   StyledForm,
   StyledImageInput,
@@ -17,6 +19,7 @@ import {
   StyledImageUploadBox,
   StyledInput,
   StyledLabel,
+  StyledLabelRow,
   StyledPlaceholder,
   StyledRow,
   StyledTimeContainer,
@@ -33,6 +36,13 @@ export const Route = createLazyFileRoute(
 function RouteComponent() {
   const { organizationId } = Route.useParams();
   const navigate = useNavigate();
+  const { isLoggedIn } = useLoginState();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate({ to: "/" });
+    }
+  }, [isLoggedIn, navigate]);
   const imageInputRef = useRef<HTMLInputElement | null>(null);
   const { register, handleSubmit, watch, setValue } = useForm<SpaceFormData>({
     defaultValues: {
@@ -108,16 +118,27 @@ function RouteComponent() {
 
         <StyledRow>
           <StyledFieldGroup>
-            <StyledLabel>공간 사용 가능 시간</StyledLabel>
+            <StyledLabelRow>
+              <StyledLabel>공간 사용 가능 시간</StyledLabel>
+              <StyledDetailLabel>
+                예약 가능한 시간은 6-21시로 제한됩니다
+              </StyledDetailLabel>
+            </StyledLabelRow>
             <StyledTimeContainer>
               <StyledTimeInput
                 type="time"
+                min="06:00"
+                max="21:00"
+                step="1800"
                 {...register("openingTime", { required: true })}
                 placeholder="오픈 시간을 선택하세요"
               />
               <span>~</span>
               <StyledTimeInput
                 type="time"
+                step="1800"
+                min="06:00"
+                max="21:00"
                 {...register("closingTime", { required: true })}
                 placeholder="종료 시간을 선택하세요"
               />

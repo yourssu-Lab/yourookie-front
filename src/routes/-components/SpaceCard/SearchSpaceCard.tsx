@@ -3,6 +3,7 @@ import marker from "../../../assets/orga/marker.svg";
 import user from "../../../assets/orga/user.svg";
 
 import { Space } from "../../../types/organization.type";
+import { formatTime } from "../../../utils/formatTime";
 import {
   StyledCapacityInfo,
   StyledCard,
@@ -42,7 +43,7 @@ export const SearchSpaceCard = ({ space, onClick }: SpaceCardProps) => {
           <StyledRightContent>
             <StyledTimeInfo>
               <img src={clock} alt="운영 시간" />
-              {space.openingTime}~{space.closingTime}
+              {formatTime(space.openingTime)} ~ {formatTime(space.closingTime)}
             </StyledTimeInfo>
             <StyledCapacityInfo>
               <img src={user} alt="수용 인원" />

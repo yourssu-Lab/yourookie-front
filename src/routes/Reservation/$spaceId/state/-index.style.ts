@@ -18,3 +18,11 @@ export const StyledGrid = styled.div`
   grid-template-columns: repeat(1, 1fr);
   gap: 20px 0;
 `;
+
+export const StyledNoResults = styled.div`
+  width: 100%;
+  text-align: center;
+  padding: 40px 0;
+  color: #666;
+  font-size: 16px;
+`;
