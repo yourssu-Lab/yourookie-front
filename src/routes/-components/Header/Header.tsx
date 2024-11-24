@@ -41,7 +41,7 @@ function Header() {
         <StyledLink to={isLoggedIn ? `/organizations/${userId}` : "#"}>
           공간오픈/관리
         </StyledLink>
-        <StyledLink>교내회의실 찾기</StyledLink>
+        <StyledLink to="/meetingRooms">교내회의실 찾기</StyledLink>
         <SearchContainer>
           <form onSubmit={handleSearch}>
             <SearchBar

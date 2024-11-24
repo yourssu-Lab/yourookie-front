@@ -159,7 +159,7 @@ function RouteComponent() {
               onDateSelect={setSelectedDate}
           />
           <div style={{height: '20px'}}></div>
-          <ReservationStatusBar type="meetingRoom" onTimeSelect={handleTimeSelect} />
+          <ReservationStatusBar reservations={[]} openingTime="" closingTime="" type="meetingRoom" onTimeSelect={handleTimeSelect} />
         </StyledInfoSection>
       </StyledContainer>
   );
