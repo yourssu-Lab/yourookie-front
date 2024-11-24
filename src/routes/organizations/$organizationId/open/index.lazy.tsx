@@ -38,8 +38,8 @@ function RouteComponent() {
     defaultValues: {
       name: "",
       location: "",
-      openTime: "",
-      closeTime: "",
+      openingTime: "",
+      closingTime: "",
       capacity: "",
       image: null,
     },
@@ -65,8 +65,8 @@ function RouteComponent() {
     const spaceParams: SpaceParams = {
       name: data.name,
       location: data.location,
-      openingTime: data.openTime,
-      closingTime: data.closeTime,
+      openingTime: data.openingTime,
+      closingTime: data.closingTime,
       capacity: Number(data.capacity),
       image: data.image,
     };
@@ -112,13 +112,13 @@ function RouteComponent() {
             <StyledTimeContainer>
               <StyledTimeInput
                 type="time"
-                {...register("openTime", { required: true })}
+                {...register("openingTime", { required: true })}
                 placeholder="오픈 시간을 선택하세요"
               />
               <span>~</span>
               <StyledTimeInput
                 type="time"
-                {...register("closeTime", { required: true })}
+                {...register("closingTime", { required: true })}
                 placeholder="종료 시간을 선택하세요"
               />
             </StyledTimeContainer>

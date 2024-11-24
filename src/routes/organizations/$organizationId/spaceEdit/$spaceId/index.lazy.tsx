@@ -1,10 +1,16 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Modal from "react-modal";
+import { getOneSpace } from "../../../../../api/getOneSpace";
+import {
+  patchSpace,
+  SpaceFormData,
+  UpdateSpaceParams,
+} from "../../../../../api/patchSpace";
 import Logo from "../../../../../assets/OPENSSUpot.svg";
 import { modalStyles } from "../../../../../styles/editModal";
-import { SpaceFormData } from "../../../../../types/space.type";
 import {
   StyledButton,
   StyledButtonWrapper,
@@ -30,9 +36,23 @@ export const Route = createLazyFileRoute(
 });
 
 function RouteComponent() {
-  const { organizationId } = Route.useParams();
+  const { organizationId, spaceId } = Route.useParams();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
+  const { data: space } = useQuery({
+    queryKey: ["space", spaceId],
+    queryFn: () => getOneSpace(Number(spaceId)),
+  });
+
+  const updateSpaceMutation = useMutation({
+    mutationFn: (data: SpaceFormData) =>
+      patchSpace(Number(spaceId), data as unknown as UpdateSpaceParams),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["space", spaceId] });
+      closeModal();
+    },
+  });
   const closeModal = () => {
     navigate({
       to: "/organizations/$organizationId",
@@ -41,19 +61,41 @@ function RouteComponent() {
   };
 
   const imageInputRef = useRef<HTMLInputElement | null>(null);
-  const { register, handleSubmit, setValue } = useForm<SpaceFormData>({
+  const { register, handleSubmit, setValue, watch } = useForm<SpaceFormData>({
     defaultValues: {
       name: "",
       location: "",
-      openTime: "",
-      closeTime: "",
-      capacity: "",
+      openingTime: "",
+      closingTime: "",
+      capacity: 0,
       image: null,
     },
   });
 
+  const image = watch("image");
+
+  useEffect(() => {
+    if (space) {
+      setValue("name", space.name);
+      setValue("location", space.location);
+      setValue("openingTime", space.openingTime.slice(0, 5));
+      setValue("closingTime", space.closingTime.slice(0, 5));
+      setValue("capacity", space.capacity);
+    }
+  }, [space, setValue]);
+
   const onSubmit = (data: SpaceFormData) => {
-    console.log(data);
+    const updatedData = {
+      name: data.name,
+      location: data.location,
+      openingTime: data.openingTime,
+      closingTime: data.closingTime,
+      capacity: Number(data.capacity),
+      ...(data.image && { image: data.image }),
+    };
+
+    console.log("Updating with:", updatedData);
+    updateSpaceMutation.mutate(updatedData);
   };
 
   const handleImageUploadClick = () => {
@@ -112,13 +154,13 @@ function RouteComponent() {
           <StyledTimeContainer>
             <StyledTimeInput
               type="time"
-              {...register("openTime", { required: true })}
+              {...register("openingTime", { required: true })}
               placeholder="오픈 시간을 선택하세요"
             />
             <span>~</span>
             <StyledTimeInput
               type="time"
-              {...register("closeTime", { required: true })}
+              {...register("closingTime", { required: true })}
               placeholder="종료 시간을 선택하세요"
             />
           </StyledTimeContainer>
@@ -142,7 +184,7 @@ function RouteComponent() {
             </StyledImageUpload>
           </StyledImageRow>
           <StyledInput
-            value={"image"}
+            value={image ? image.name : "파일을 첨부하세요"}
             readOnly
             placeholder="파일을 첨부하세요"
           />
