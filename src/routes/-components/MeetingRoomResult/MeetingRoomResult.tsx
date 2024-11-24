@@ -57,22 +57,24 @@ const MeetingRoomResult = ({open, closeModal, meetingRoomParams}: MeetingRoomsRe
                     {
                         results && results.map((result) => (
                             <StyledCard key={result.name}>
-                                <StyledCardTitle>{result.name}</StyledCardTitle>
-                                <img style={{width: '100%', height: '153px', marginTop: "16px"}} width="100%" src={result.spaceImageUrl}/>
-                                <StyledContentWrapper>
-                                    <div style={{width: '100%'}}>
-                                        <StyledContentTitle>위치</StyledContentTitle>
-                                        <StyledContent>{result.location}</StyledContent>
-                                    </div>
-                                    <div style={{width: '100%'}}>
-                                        <StyledContentTitle>이용시간</StyledContentTitle>
-                                        <StyledContent>{result.operatingTime}</StyledContent>
-                                    </div>
-                                    <div style={{width: '100%'}}>
-                                        <StyledContentTitle>가능인원</StyledContentTitle>
-                                        <StyledContent>{result.capacity}</StyledContent>
-                                    </div>
-                                </StyledContentWrapper>
+                                <div>
+                                    <StyledCardTitle>{result.name}</StyledCardTitle>
+                                    <img style={{width: '100%', height: '153px', marginTop: "16px"}} width="100%" src={result.spaceImageUrl}/>
+                                    <StyledContentWrapper>
+                                        <div style={{width: '100%'}}>
+                                            <StyledContentTitle>위치</StyledContentTitle>
+                                            <StyledContent>{result.location}</StyledContent>
+                                        </div>
+                                        <div style={{width: '100%'}}>
+                                            <StyledContentTitle>이용시간</StyledContentTitle>
+                                            <StyledContent>{result.operatingTime}</StyledContent>
+                                        </div>
+                                        <div style={{width: '100%'}}>
+                                            <StyledContentTitle>가능인원</StyledContentTitle>
+                                            <StyledContent>{result.capacity}</StyledContent>
+                                        </div>
+                                    </StyledContentWrapper>
+                                </div>
                                 <StyledLink target="_blank" to={result.reservationUrl}>
                                     <StyledButton>예약</StyledButton>
                                 </StyledLink>
