@@ -102,4 +102,5 @@ export const StyledDateTimeBox = styled.div`
   color: #3a3a3a;
   text-align: center;
   margin-bottom: 20px;
+  background-color: white;
 `;
