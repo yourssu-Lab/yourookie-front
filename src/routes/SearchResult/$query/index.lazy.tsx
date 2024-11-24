@@ -11,6 +11,7 @@ import {
   SearchHeader,
   SearchResultsGrid,
   StyledHr,
+  StyledNoResults,
 } from "./-index.style";
 
 export const Route = createLazyFileRoute("/SearchResult/$query/")({
@@ -40,23 +41,27 @@ function SearchResults() {
 
   return (
     <SearchContainer>
-      <SearchHeader>단체 정보 / 검색 결과: {query}</SearchHeader>
+      <SearchHeader>단체 정보</SearchHeader>
       <StyledHr />
-      <SearchResultsGrid>
-        {organizations.map((org) => (
-          <GroupCard
-            key={org.id}
-            group={{
-              id: org.id,
-              name: org.name,
-              description: org.description,
-              logoImageUrl: org.logoImageUrl,
-              hashtags: org.hashtags,
-            }}
-            onClick={handleGroupClick}
-          />
-        ))}
-      </SearchResultsGrid>
+      {organizations.length === 0 ? (
+        <StyledNoResults>검색 결과가 없습니다.</StyledNoResults>
+      ) : (
+        <SearchResultsGrid>
+          {organizations.map((org) => (
+            <GroupCard
+              key={org.id}
+              group={{
+                id: org.id,
+                name: org.name,
+                description: org.description,
+                logoImageUrl: org.logoImageUrl,
+                hashtags: org.hashtags,
+              }}
+              onClick={handleGroupClick}
+            />
+          ))}
+        </SearchResultsGrid>
+      )}
     </SearchContainer>
   );
 }

@@ -4,7 +4,12 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import { ReservationStateCard } from "../../../-components/ReservationStateCard/ReservationStateCard";
 import { getReservationsTime } from "../../../../api/getReservationInfoTime";
-import { StyledContainer, StyledGrid, StyledTitle } from "./-index.style";
+import {
+  StyledContainer,
+  StyledGrid,
+  StyledNoResults,
+  StyledTitle,
+} from "./-index.style";
 
 export const Route = createLazyFileRoute("/Reservation/$spaceId/state/")({
   component: RouteComponent,
@@ -41,7 +46,7 @@ function RouteComponent() {
             />
           ))
         ) : (
-          <div>예약된 내역이 없습니다.</div>
+          <StyledNoResults>예약된 내역이 없습니다.</StyledNoResults>
         )}
       </StyledGrid>
     </StyledContainer>
