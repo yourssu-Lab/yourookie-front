@@ -40,7 +40,7 @@ function SearchResults() {
 
   return (
     <SearchContainer>
-      <SearchHeader>단체 정보 / 검색 결과: {query}</SearchHeader>
+      <SearchHeader>단체 정보</SearchHeader>
       <StyledHr />
       <SearchResultsGrid>
         {organizations.map((org) => (
