@@ -15,7 +15,7 @@ import {
     StyledFieldSuccessMessage,
     StyledFieldErrorMessage,
     StyledSubmitButton,
-    StyledUploadBackground,  StyledUploadDescription
+    StyledUploadBackground, StyledUploadDescription, StyledEditImage, StyledErrorMessage
 } from "./-index.style.ts";
 import {PostOrganizationParams} from "../../api/postOrganization.ts";
 import {getCheckEmail} from "../../api/getCheckEmail.ts";
@@ -23,6 +23,8 @@ import {ChangeEvent, useEffect, useState} from "react";
 import {isEmail} from "@yourssu/utils";
 import {usePostOrganization} from "../../hooks/usePostOrganization.ts";
 import UploadImage from "../../assets/upload.svg?react"
+import EditImage from "../../assets/Pencil.svg?react"
+import {AxiosError} from "axios";
 
 export const Route = createLazyFileRoute('/signup/')({
     component: RouteComponent,
@@ -33,7 +35,7 @@ interface SignUpFormFields extends Omit<PostOrganizationParams, "image"> {
 }
 
 function RouteComponent() {
-    const {register, handleSubmit, watch} = useForm<SignUpFormFields>();
+    const {register, handleSubmit, watch, formState} = useForm<SignUpFormFields>();
     const [emailValidated, setEmailValidated] = useState<boolean | null>(null);
     const postOrganizationMutation = usePostOrganization();
     const [previewUrl, setPreviewUrl] = useState<string>('');
@@ -175,29 +177,39 @@ function RouteComponent() {
                                 <UploadImage style={{minWidth: '52px', minHeight: '52px'}} />
                                 <StyledUploadDescription>사진을 추가해주세요</StyledUploadDescription>
                             </>}
+                            {previewUrl &&
+                                <StyledEditImage>
+                                    <EditImage />
+                                </StyledEditImage>
+                            }
                         </StyledUploadBackground>
                     </StyledFieldWrapper>
 
                     <StyledFieldWrapper>
                         <StyledFieldLabel>단체 소개</StyledFieldLabel>
-                        <StyledInput {...register("description")} />
+                        <StyledInput placeholder="단체 소개를 입력하세요" {...register("description")} />
                     </StyledFieldWrapper>
-
-                    <div style={{display: "flex", gap: "40px", width: "100%"}}>
-                        <div style={{flex: 1}}>
-                            <StyledFieldLabel>해시태그 1</StyledFieldLabel>
-                            <StyledInput {...register(`hashtags.${0}`)} />
-                        </div>
-                        <div style={{flex: 1}}>
-                            <StyledFieldLabel>해시태그 2</StyledFieldLabel>
-                            <StyledInput {...register(`hashtags.${1}`)} />
-                        </div>
-                        <div style={{flex: 1}}>
-                            <StyledFieldLabel>해시태그 3</StyledFieldLabel>
-                            <StyledInput {...register(`hashtags.${2}`)} />
-                        </div>
+                    <div style={{display: "flex", gap: "8px", width: "100%"}}>
+                        {
+                            [1, 2, 3].map((el, index) => (
+                                <div key={el} style={{flex: 1}}>
+                                    <StyledFieldLabel>해시태그 {el}</StyledFieldLabel>
+                                    <StyledInput placeholder="해시태그를 추가하세요" {...register(`hashtags.${index}`)} />
+                                </div>
+                            ))
+                        }
                     </div>
                 </StyledSection>
+                {
+                    postOrganizationMutation.error && <StyledErrorMessage>
+                        {(postOrganizationMutation.error as AxiosError<{message: string}>).response?.data?.message}
+                    </StyledErrorMessage>
+                }
+                {
+                    formState.isSubmitted && !emailValidated && <StyledErrorMessage>
+                        이메일 인증을 해주세요
+                    </StyledErrorMessage>
+                }
 
                 <StyledSubmitButton
                     type="submit"

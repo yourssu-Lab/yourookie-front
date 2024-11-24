@@ -10,7 +10,7 @@ import PretendardRegular from '../assets/fonts/Pretendard-Regular.woff2';
 import PretendardThin from '../assets/fonts/Pretendard-Thin.woff2';
 import PretendardBlack from '../assets/fonts/Pretendard-Black.woff2';
 import PretendardVariable from '../assets/fonts/PretendardVariable.woff2';
-import InterExtraBold from '../assets/fonts/Inter_24pt-ExtraBold.ttf';
+import MungyeongGamhongApple from '../assets/fonts/Mungyeong-Gamhong-Apple.ttf';
 
 export const fonts = css`
     @font-face {
@@ -85,9 +85,9 @@ export const fonts = css`
     }
     
     @font-face {
-        font-family: 'Inter';
-        font-weight: 800;
+        font-family: 'Mungyeong Gamhong Apple';
+        font-weight: 400;
         font-style: normal;;
-        src: url(${InterExtraBold});
+        src: url(${MungyeongGamhongApple});
     }
 `;
