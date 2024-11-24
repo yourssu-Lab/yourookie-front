@@ -1,8 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { postOpen, SpaceParams } from "../../../../api/postOpen";
+import { useLoginState } from "../../../../hooks/useLoginState";
 import { SpaceFormData } from "../../../../types/space.type";
 import {
   StyledAdd,
@@ -33,6 +34,13 @@ export const Route = createLazyFileRoute(
 function RouteComponent() {
   const { organizationId } = Route.useParams();
   const navigate = useNavigate();
+  const { isLoggedIn } = useLoginState();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate({ to: "/" });
+    }
+  }, [isLoggedIn, navigate]);
   const imageInputRef = useRef<HTMLInputElement | null>(null);
   const { register, handleSubmit, watch, setValue } = useForm<SpaceFormData>({
     defaultValues: {
@@ -112,12 +120,18 @@ function RouteComponent() {
             <StyledTimeContainer>
               <StyledTimeInput
                 type="time"
+                step="1800"
+                min="06:00"
+                max="21:00"
                 {...register("openingTime", { required: true })}
                 placeholder="오픈 시간을 선택하세요"
               />
               <span>~</span>
               <StyledTimeInput
                 type="time"
+                step="1800"
+                min="06:00"
+                max="21:00"
                 {...register("closingTime", { required: true })}
                 placeholder="종료 시간을 선택하세요"
               />
