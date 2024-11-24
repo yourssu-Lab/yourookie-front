@@ -1,4 +1,4 @@
-import {StyledContainer, StyledFooter, StyledLink, StyledLogo, StyledTag} from "./Footer.style.ts";
+import {StyledContainer, StyledFooter, StyledLink, StyledLogo, StyledTag} from "./Footer.style";
 
 function Footer() {
     return (

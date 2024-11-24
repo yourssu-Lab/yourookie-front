@@ -1,6 +1,6 @@
-import {customAxios} from "./index.ts";
+import {customAxios} from "./index";
 
-interface GetMeetingRoomsResponse {
+export interface GetMeetingRoomsResponse {
     name: string,
     spaceImageUrl: string,
     location: string,

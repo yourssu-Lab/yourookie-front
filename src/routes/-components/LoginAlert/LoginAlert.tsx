@@ -1,5 +1,5 @@
 import Modal from "react-modal";
-import {StyledButton, StyledButtonWrapper, StyledLogo, StyledText, StyledWrapper} from "./LoginAlert.style.ts";
+import {StyledButton, StyledButtonWrapper, StyledLogo, StyledText, StyledWrapper} from "./LoginAlert.style";
 
 const customStyles = {
     overlay: {

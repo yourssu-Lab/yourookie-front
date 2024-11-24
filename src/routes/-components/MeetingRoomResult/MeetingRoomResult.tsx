@@ -1,13 +1,13 @@
 import Modal from "react-modal";
-import {GetMeetingRoomsParams} from "../../../api/getMeetingRooms.ts";
-import {useGetMeetingRooms} from "../../../hooks/useGetMeetingRooms.ts";
+import {GetMeetingRoomsParams} from "../../../api/getMeetingRooms";
+import {useGetMeetingRooms} from "../../../hooks/useGetMeetingRooms";
 import {
     StyledTitle,
     StyledCard,
     StyledCardWrapper,
     StyledCardTitle,
     StyledContentWrapper, StyledContentTitle, StyledContent, StyledButton, StyledLink
-} from "./MeetingRoomResult.style.ts";
+} from "./MeetingRoomResult.style";
 
 const customStyles = {
     overlay: {

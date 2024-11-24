@@ -1,6 +1,6 @@
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {ReactElement} from "react";
-import GlobalStyles from "./styles/GlobalStyles.ts";
+import GlobalStyles from "./styles/GlobalStyles";
 
 interface ProviderProps {
     children: ReactElement;

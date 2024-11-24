@@ -16,12 +16,12 @@ import {
     StyledFieldErrorMessage,
     StyledSubmitButton,
     StyledUploadBackground, StyledUploadDescription, StyledEditImage, StyledErrorMessage
-} from "./-index.style.ts";
-import {PostOrganizationParams} from "../../api/postOrganization.ts";
-import {getCheckEmail} from "../../api/getCheckEmail.ts";
+} from "./-index.style";
+import {PostOrganizationParams} from "../../api/postOrganization";
+import {getCheckEmail} from "../../api/getCheckEmail";
 import {ChangeEvent, useEffect, useState} from "react";
 import {isEmail} from "@yourssu/utils";
-import {usePostOrganization} from "../../hooks/usePostOrganization.ts";
+import {usePostOrganization} from "../../hooks/usePostOrganization";
 import UploadImage from "../../assets/upload.svg?react"
 import EditImage from "../../assets/Pencil.svg?react"
 import {AxiosError} from "axios";

@@ -1,4 +1,4 @@
-import {customAxios} from "./index.ts";
+import {customAxios} from "./index";
 
 interface GetCheckEmailParams {
     email: string;

@@ -1,7 +1,7 @@
 import {useMutation} from "@tanstack/react-query";
-import {postOrganization, PostOrganizationParams} from "../api/postOrganization.ts";
+import {postOrganization, PostOrganizationParams} from "../api/postOrganization";
 import {useNavigate} from "@tanstack/react-router";
-import {api} from "../service/TokenService.ts";
+import {api} from "../service/TokenService";
 
 export const usePostOrganization = () => {
   const navigate = useNavigate();

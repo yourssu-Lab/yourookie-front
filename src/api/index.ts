@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 
-import { api } from "../service/TokenService.ts";
-import { postRefreshToken } from "./postRefreshToken.ts";
-import { ErrorData } from "./type.ts";
+import { api } from "../service/TokenService";
+import { postRefreshToken } from "./postRefreshToken";
+import { ErrorData } from "./type";
 
 export const customAxios = axios.create({
   baseURL: import.meta.env.VITE_API_URL,

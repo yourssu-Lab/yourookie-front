@@ -1,5 +1,5 @@
-import {customAxios} from "./index.ts";
-import {api} from "../service/TokenService.ts";
+import {customAxios} from "./index";
+import {api} from "../service/TokenService";
 
 interface PostRefreshTokenResponse {
     accessToken: string;

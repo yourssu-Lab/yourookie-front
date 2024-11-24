@@ -1,5 +1,5 @@
-import { Organization, Space } from "../types/organization.type.ts";
-import { customAxios } from "./index.ts";
+import { Organization, Space } from "../types/organization.type";
+import { customAxios } from "./index";
 
 export interface OrganizationSpacesResponse {
   organization: Organization;

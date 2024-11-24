@@ -1,9 +1,9 @@
 import {useMatchRoute, useNavigate} from "@tanstack/react-router";
 import {FormEvent, useState} from "react";
 import SearchIcon from "../../../assets/search.svg?react";
-import {useLoginState} from "../../../hooks/useLoginState.ts";
-import {api} from "../../../service/TokenService.ts";
-import SignIn from "../SignIn/SignIn.tsx";
+import {useLoginState} from "../../../hooks/useLoginState";
+import {api} from "../../../service/TokenService";
+import SignIn from "../SignIn/SignIn";
 import {
     IconContainer,
     SearchBar,
@@ -13,8 +13,8 @@ import {
     StyledLoginButton,
     StyledLogo,
     StyledNav,
-} from "./Header.style.ts";
-import LoginAlert from "../LoginAlert/LoginAlert.tsx";
+} from "./Header.style";
+import LoginAlert from "../LoginAlert/LoginAlert";
 
 function Header() {
     const {isLoggedIn} = useLoginState();

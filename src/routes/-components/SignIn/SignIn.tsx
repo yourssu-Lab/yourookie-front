@@ -1,7 +1,7 @@
 import {useForm} from "react-hook-form";
 import Modal from "react-modal";
-import {PostLoginParams} from "../../../api/postLogin.ts";
-import {usePostLogin} from "../../../hooks/usePostLogin.ts";
+import {PostLoginParams} from "../../../api/postLogin";
+import {usePostLogin} from "../../../hooks/usePostLogin";
 import {
     StyledButton,
     StyledButtonWrapper,
@@ -13,7 +13,7 @@ import {
     StyledInput,
     StyledLink,
     StyledLogo,
-} from "./SignIn.style.ts";
+} from "./SignIn.style";
 
 const customStyles = {
     overlay: {

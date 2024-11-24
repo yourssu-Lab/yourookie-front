@@ -9,11 +9,11 @@ import {
   StyledInfoSection,
   StyledPasswordSection, StyledQueryButton,
   StyledTitle
-} from "./-index.style.ts";
-import {ReservationCalendar} from "../-components/ReservationCalendar/ReservationCalendar.tsx";
-import {ReservationStatusBar} from "../-components/ReservationStatusBar/ReservationStatusBar.tsx";
-import MeetingRoomResult from "../-components/MeetingRoomResult/MeetingRoomResult.tsx";
-import {GetMeetingRoomsParams} from "../../api/getMeetingRooms.ts";
+} from "./-index.style";
+import {ReservationCalendar} from "../-components/ReservationCalendar/ReservationCalendar";
+import {ReservationStatusBar} from "../-components/ReservationStatusBar/ReservationStatusBar";
+import MeetingRoomResult from "../-components/MeetingRoomResult/MeetingRoomResult";
+import {GetMeetingRoomsParams} from "../../api/getMeetingRooms";
 
 export const Route = createLazyFileRoute('/meetingRooms/')({
   component: RouteComponent,

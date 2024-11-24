@@ -1,6 +1,6 @@
 import { customAxios } from ".";
 
-interface PatchOrganizationRequest {
+export interface PatchOrganizationRequest {
   name: string;
   description: string;
   reservationPassword: string | null;

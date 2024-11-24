@@ -7,7 +7,7 @@ import './index.css';  // CSS 파일 import
 import {routeTree} from './routeTree.gen'
 
 import Modal from "react-modal";
-import Provider from "./Provider.tsx";
+import Provider from "./Provider";
 
 // Create a new router instance
 const router = createRouter({routeTree})

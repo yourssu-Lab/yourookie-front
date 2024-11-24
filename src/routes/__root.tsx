@@ -1,8 +1,8 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import styled from "styled-components";
-import Footer from "./-components/Footer/Footer.tsx";
-import Header from "./-components/Header/Header.tsx";
+import Footer from "./-components/Footer/Footer";
+import Header from "./-components/Header/Header";
 
 const StyledRoot = styled.div`
   min-height: 100vh;

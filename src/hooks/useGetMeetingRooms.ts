@@ -1,5 +1,5 @@
 import {useQuery} from "@tanstack/react-query";
-import {getMeetingRooms, GetMeetingRoomsParams} from "../api/getMeetingRooms.ts";
+import {getMeetingRooms, GetMeetingRoomsParams} from "../api/getMeetingRooms";
 
 export const useGetMeetingRooms = ({startDateTime, endDateTime}: GetMeetingRoomsParams) => {
     return useQuery({

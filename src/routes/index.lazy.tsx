@@ -21,7 +21,7 @@ import {
     StyledThirdSectionDescription,
     StyledThirdSectionTextWrapper,
     StyledThirdSectionTitle
-} from "./-index.style.ts";
+} from "./-index.style";
 import FirstImage from '../assets/hero/first.png';
 import SecondImage from '../assets/hero/second.png';
 import ThirdImage from '../assets/hero/third.png'

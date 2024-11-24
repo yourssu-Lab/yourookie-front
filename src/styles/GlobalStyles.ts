@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { fonts } from './font.ts'; // fonts 파일을 불러온다.
+import { fonts } from './font'; // fonts 파일을 불러온다.
 
 const GlobalStyles = createGlobalStyle`
   ${fonts}

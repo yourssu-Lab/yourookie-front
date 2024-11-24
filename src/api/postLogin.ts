@@ -1,4 +1,4 @@
-import { customAxios } from "./index.ts";
+import { customAxios } from "./index";
 
 export interface PostLoginParams {
   email: string;
