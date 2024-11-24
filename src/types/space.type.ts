@@ -1,8 +1,8 @@
 export interface SpaceFormData {
   name: string;
   location: string;
-  openTime: string;
-  closeTime: string;
+  openingTime: string;
+  closingTime: string;
   capacity: number | string;
   image: File | null;
 }
