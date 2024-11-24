@@ -49,13 +49,14 @@ export const SearchContainer = styled.div`
 `;
 
 export const SearchBar = styled.input`
+    font-family: Pretendard;
     border-radius: 23px;
     background: #FFF;
     height: 44px;
     width: 100%;
     border: none;
     font-size: 18px;
-    padding: 0 44px 0 12px; // 오른쪽 패딩 증가
+    padding: 0 44px 0 31px; // 오른쪽 패딩 증가
     
     &:focus {
         outline: none;

@@ -41,13 +41,13 @@ function Header() {
         <StyledLink to={isLoggedIn ? `/organizations/${userId}` : "#"}>
           공간오픈/관리
         </StyledLink>
-        <StyledLink>교내회의실 찾기</StyledLink>
+        <StyledLink to="/meetingRooms">교내회의실 찾기</StyledLink>
         <SearchContainer>
           <form onSubmit={handleSearch}>
             <SearchBar
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="검색어를 입력하세요"
+              placeholder="단체명을 입력해주세요"
             />
             <IconContainer onClick={handleSearch}>
               <SearchIcon style={{ minWidth: "25px" }} />

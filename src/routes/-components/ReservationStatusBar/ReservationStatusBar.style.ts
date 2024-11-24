@@ -8,7 +8,7 @@ export const StyledReservationWrapper = styled.div`
   padding: 20px;
   /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05); */
   box-shadow: 0 0 0 0.5px #858585;
-  overflow: scroll;
+  overflow: auto;
 `;
 
 export const StyledReservationHeader = styled.div`
