@@ -84,9 +84,9 @@ export const StyledImageUploadBox = styled.div<{
   $isEmpty?: boolean;
   $isMain?: boolean;
 }>`
-  width: ${(props) => (props.$isEmpty ? "100%" : "260px")};
-  aspect-ratio: ${(props) => (props.$isEmpty ? "auto" : "16/10")};
-  min-height: ${(props) => (props.$isEmpty ? "200px" : "auto")};
+  width: ${(props) => (props.$isEmpty ? "560px" : "560px")};
+  /* aspect-ratio: ${(props) => (props.$isEmpty ? "auto" : "16/10")}; */
+  min-height: ${(props) => (props.$isEmpty ? "420px" : "420px")};
   border: 1px solid #e5e8eb;
   border-radius: 5px;
   display: flex;
