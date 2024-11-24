@@ -154,12 +154,18 @@ function RouteComponent() {
           <StyledTimeContainer>
             <StyledTimeInput
               type="time"
+              step="1800"
+              min="06:00"
+              max="21:00"
               {...register("openingTime", { required: true })}
               placeholder="오픈 시간을 선택하세요"
             />
             <span>~</span>
             <StyledTimeInput
               type="time"
+              step="1800"
+              min="06:00"
+              max="21:00"
               {...register("closingTime", { required: true })}
               placeholder="종료 시간을 선택하세요"
             />
