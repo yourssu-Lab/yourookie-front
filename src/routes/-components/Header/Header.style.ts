@@ -1,22 +1,26 @@
 import styled from "styled-components";
 import {Link} from "@tanstack/react-router";
 
-export const StyledHeader = styled.header`
+interface HeaderProps {
+    $primary: boolean;
+}
+
+export const StyledHeader = styled.header<HeaderProps>`
     display: flex;
     max-width: 100%;
     padding: 0 46px;
     align-items: center;
     justify-content: space-between;
     height: 84px;
-    background: #FFF;
+    background: ${({$primary}) => $primary ? "#1781EE" : "#FFF"};
 `;
 
-export const StyledLogo = styled(Link)`
-    color: #1781EE;
-    font-family: Inter;
+export const StyledLogo = styled(Link)<HeaderProps>`
+    color: ${({$primary}) => $primary ? "#FFF" : "#1781EE"};
+    font-family: "Mungyeong Gamhong Apple";
     font-size: 22px;
     font-style: normal;
-    font-weight: 800;
+    font-weight: 400;
     line-height: normal;
     letter-spacing: -1.1px;
     text-decoration: none;
@@ -75,8 +79,8 @@ export const IconContainer = styled.div`
   color: #666; // 아이콘 색상
 `;
 
-export const StyledLink = styled(Link)`
-    color: #1781EE;
+export const StyledLink = styled(Link)<HeaderProps>`
+    color: ${({$primary}) => $primary ? "#FFF" : "#1781EE"} ;
     font-family: Pretendard;
     font-size: 20px;
     font-style: normal;
@@ -86,18 +90,18 @@ export const StyledLink = styled(Link)`
     text-decoration: none;
 `
 
-export const StyledLoginButton = styled.button`
+export const StyledLoginButton = styled.button<HeaderProps>`
     display: flex;
     height: 50px;
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
     border-radius: 12px;
-    background: #1781EE;
+    background: ${({$primary}) => $primary ? "#FFF" : "#1781EE"};
     border: none;
     padding: 8px 20px;
 
-    color: #FFF;
+    color: ${({$primary}) => $primary ? "#1781EE" : "#FFF"};
     font-family: Pretendard;
     font-size: 18px;
     font-style: normal;
