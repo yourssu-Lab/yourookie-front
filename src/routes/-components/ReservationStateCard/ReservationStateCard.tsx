@@ -6,6 +6,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteReservation } from "../../../api/deleteReservation";
 import { getOneSpace } from "../../../api/getOneSpace";
 import { SmallModalStyles } from "../../../styles/editModal";
+import { formatTime } from "../../../utils/formatTime";
 import {
   StyledButton,
   StyledContainer,
@@ -88,7 +89,9 @@ export const ReservationStateCard = ({
       <StyledInfoSection>
         <StyledTitle>{space?.name}</StyledTitle>
         <StyledInfoText>{space?.location}</StyledInfoText>
-        <StyledInfoText>{`${space?.openingTime} ~ ${space?.closingTime}`}</StyledInfoText>
+        <StyledInfoText>
+          {`${formatTime(space?.openingTime || "")} ~ ${formatTime(space?.closingTime || "")}`}
+        </StyledInfoText>
         <StyledInfoText>최대 {space?.capacity}명</StyledInfoText>
       </StyledInfoSection>
 
