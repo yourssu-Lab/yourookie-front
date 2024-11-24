@@ -33,7 +33,7 @@ interface GroupFormData {
   name: string;
   secretNumber: string;
   description: string;
-  images: File[];
+  image: File | null;
   tags: string[];
 }
 
@@ -49,17 +49,17 @@ function RouteComponent() {
   };
 
   const imageInputRef = useRef<HTMLInputElement | null>(null);
-  const { register, handleSubmit, watch, setValue } = useForm<GroupFormData>({
+  const { register, handleSubmit, setValue } = useForm<GroupFormData>({
     defaultValues: {
       name: "",
       secretNumber: "",
       description: "",
-      images: [],
+      image: null,
       tags: [],
     },
   });
 
-  const images = watch("images");
+  // const image = watch("image");
 
   const onSubmit = (data: GroupFormData) => {
     console.log(data);
@@ -72,12 +72,8 @@ function RouteComponent() {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
-    if (files.length + images.length > 3) {
-      alert("최대 3장까지만 업로드할 수 있습니다.");
-      return;
-    }
-    setValue("images", [...images, ...files]);
+    const file = e.target.files?.[0] || null;
+    setValue("image", file);
   };
 
   return (
@@ -130,7 +126,7 @@ function RouteComponent() {
               <StyledImageInput
                 ref={(e) => {
                   imageInputRef.current = e;
-                  register("images").ref(e);
+                  register("image").ref(e);
                 }}
                 id="imageInput"
                 type="file"
@@ -140,7 +136,7 @@ function RouteComponent() {
             </StyledImageUpload>
           </StyledImageRow>
           <StyledInput
-            value={images.map((file) => file.name).join(", ")}
+            value={"image"}
             readOnly
             placeholder="파일을 첨부하세요"
           />

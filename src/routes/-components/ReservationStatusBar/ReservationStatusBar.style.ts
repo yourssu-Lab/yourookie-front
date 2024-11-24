@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const StyledReservationWrapper = styled.div`
   display: flex;
@@ -73,7 +73,7 @@ export const StyledTimeSlotWrapper = styled.div`
 `;
 
 export const StyledTimeSlot = styled.div<{
-  $status: "available" | "reserved" | "selected";
+  $status: "available" | "reserved" | "selected" | "disabled";
   $isSelectionStart?: boolean;
 }>`
   height: 100px;
@@ -97,6 +97,12 @@ export const StyledTimeSlot = styled.div<{
     }};
     opacity: ${(props) => (props.$status === "reserved" ? 1 : 0.8)};
   }
+  ${(props) =>
+    props.$status === "disabled" &&
+    css`
+      background-color: #333333;
+      cursor: not-allowed;
+    `}
 `;
 
 export const StyledTimeLabel = styled.div`

@@ -52,18 +52,26 @@ export const StyledInfoText = styled.p`
   margin-bottom: 12px;
 `;
 
-export const StyledEditIcon = styled.div`
-  border-radius: 10px;
-  background-color: #edf5ff;
-  padding: 10px;
+export const StyledButtonWrapper = styled.div`
   display: flex;
   cursor: pointer;
   position: absolute;
   top: 20px;
   right: 20px;
+`;
 
-  img {
-    width: 35px;
-    height: 30px;
+export const StyledButton = styled.button`
+  width: 200px;
+  padding: 10px 20px;
+  background: #1781ee;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+
+  &:hover {
+    background: #0c6cc3;
   }
 `;

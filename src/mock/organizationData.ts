@@ -8,7 +8,7 @@ export const mockOrganization: Organization = {
   description:
     "유어슈 서로를 존중하고 커뮤니케이션 하는 동아리입니다. 성장하는 문화를 통 같이 있는 것만으로도 즐겁고 배울 수 있는 동아리입니다.",
   logoImageUrl: Logo,
-  tags: ["동아리", "IT", "개발", "디자인", "프로그래밍"],
+  hashtags: ["동아리", "IT", "개발", "디자인", "프로그래밍"],
 };
 
 export const mockSpaces: Space[] = [
