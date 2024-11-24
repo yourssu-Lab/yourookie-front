@@ -24,7 +24,5 @@ export const getMeetingRooms = async (params: GetMeetingRoomsParams) => {
             },
         );
         return data;
-    } catch (e: unknown) {
-        console.log(e);
-    }
+    } catch { /* empty */ }
 }
