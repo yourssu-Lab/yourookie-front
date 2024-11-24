@@ -25,10 +25,13 @@ export const StyledEditIcon = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  background-color: #e2ecf7;
+  padding: 10px;
+  border-radius: 12px;
 
   img {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
   }
 `;
 
