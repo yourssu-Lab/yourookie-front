@@ -181,3 +181,17 @@ export const StyledAddButton = styled(StyledAdd)`
   margin-top: 105px;
   cursor: pointer;
 `;
+
+export const StyledDetailLabel = styled.div`
+  font-size: 12px;
+  font-weight: 400;
+  color: #4f4f4f;
+  margin-bottom: 10px;
+  margin-left: 4px;
+`;
+
+export const StyledLabelRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
