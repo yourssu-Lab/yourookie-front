@@ -141,7 +141,7 @@ export const ReservationStatusBar = ({
 
       setSelectedSlots(newSelectedSlots);
       onTimeSelect(newSelectedSlots);
-      //   setSelectionStart(null);
+      setSelectionStart(null);
     }
   };
 

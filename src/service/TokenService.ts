@@ -14,11 +14,11 @@ class TokenService {
     this.cookie.set("userId", id, { path: "/" });
   }
 
-  setPassword(password: string) {
+  setOrganizationPassword(password: string) {
     this.cookie.set("password", password, { path: "/" });
   }
 
-  getPassword() {
+  getOrganizationPassword() {
     return this.cookie.get("password");
   }
 

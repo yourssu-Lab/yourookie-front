@@ -37,11 +37,8 @@ type SignInFormFields = PostLoginParams;
 const SignIn = ({ open, closeModal }: SignInProps) => {
   const { register, handleSubmit, formState } = useForm<SignInFormFields>();
   const postLoginMutation = usePostLogin({
-    then: () => {
-      closeModal();
-    },
+    then: closeModal,
   });
-
   const onSubmit = handleSubmit((data) => {
     postLoginMutation.mutate(data);
   });

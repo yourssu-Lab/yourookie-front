@@ -53,23 +53,24 @@ function RouteComponent() {
 
   const updateOrganizationMutation = useMutation({
     mutationFn: (data: GroupFormData) => {
-      const currentPassword = api.getPassword();
-      const reservationPassword =
-        data.secretNumber === currentPassword ? null : data.secretNumber;
+      // 비밀번호 필드가 비어있으면 현재 저장된 비밀번호 유지를 위해 null 전송
+      // 비밀번호가 입력된 경우는 새 비밀번호 전송
+      const reservationPassword = data.secretNumber || null;
 
       return patchOrganization(Number(organizationId), {
         name: data.name,
         description: data.description,
-        reservationPassword,
+        reservationPassword, // null이면 서버에서 기존 비밀번호 유지
         hashtags: data.tags.filter((tag) => tag),
         imageFile: data.image,
       });
     },
     onSuccess: (_, variables) => {
-      const currentPassword = api.getPassword();
-      if (variables.secretNumber !== currentPassword) {
-        api.setPassword(variables.secretNumber);
+      // 새 비밀번호가 입력된 경우만 쿠키에 저장
+      if (variables.secretNumber) {
+        api.setOrganizationPassword(variables.secretNumber);
       }
+      // 아닌 경우는 기존 비밀번호 유지됨
       queryClient.invalidateQueries({
         queryKey: ["organization", organizationId],
       });
@@ -99,7 +100,7 @@ function RouteComponent() {
     if (organization) {
       setValue("name", organization.name);
       setValue("description", organization.description);
-      setValue("secretNumber", api.getPassword() || "");
+      setValue("secretNumber", "");
       organization.hashtags.slice(0, 3).forEach((tag, index) => {
         setValue(`tags.${index}`, tag);
       });
@@ -143,11 +144,16 @@ function RouteComponent() {
           />
         </StyledFieldGroup>
         <StyledFieldGroup>
-          <StyledLabel>단체 비밀번호</StyledLabel>
+          <StyledLabelRow>
+            <StyledLabel>단체 비밀번호</StyledLabel>
+            <StyledDetailLabel>
+              비밀번호를 변경 할 경우에만 채워주세요
+            </StyledDetailLabel>
+          </StyledLabelRow>
           <StyledInput
             type="password"
             autoComplete="off"
-            {...register("secretNumber", { required: true })}
+            {...register("secretNumber")}
             placeholder="비밀번호를 입력하세요"
           />
         </StyledFieldGroup>
