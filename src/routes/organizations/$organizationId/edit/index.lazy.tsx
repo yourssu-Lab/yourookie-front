@@ -1,10 +1,14 @@
 import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Modal from "react-modal";
 import Logo from "../../../../assets/OPENSSUpot.svg";
 import { modalStyles } from "../../../../styles/editModal";
 
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getOneOrganization } from "../../../../api/getOneOrganization";
+import { patchOrganization } from "../../../../api/patchOrganization";
+import { api } from "../../../../service/TokenService";
 import {
   StyledButton,
   StyledButtonWrapper,
@@ -40,6 +44,34 @@ interface GroupFormData {
 function RouteComponent() {
   const { organizationId } = Route.useParams();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const { data: organization } = useQuery({
+    queryKey: ["organization", organizationId],
+    queryFn: () => getOneOrganization(Number(organizationId)),
+  });
+
+  const updateOrganizationMutation = useMutation({
+    mutationFn: (data: GroupFormData) => {
+      const currentPassword = api.getPassword();
+      const reservationPassword =
+        data.secretNumber === currentPassword ? null : data.secretNumber;
+
+      return patchOrganization(Number(organizationId), {
+        name: data.name,
+        description: data.description,
+        reservationPassword,
+        hashtags: data.tags.filter((tag) => tag),
+        imageFile: data.image,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["organization", organizationId],
+      });
+      closeModal();
+    },
+  });
 
   const closeModal = () => {
     navigate({
@@ -59,10 +91,19 @@ function RouteComponent() {
     },
   });
 
-  // const image = watch("image");
+  useEffect(() => {
+    if (organization) {
+      setValue("name", organization.name);
+      setValue("description", organization.description);
+      setValue("secretNumber", api.getPassword() || "");
+      organization.hashtags.slice(0, 3).forEach((tag, index) => {
+        setValue(`tags.${index}`, tag);
+      });
+    }
+  }, [organization, setValue]);
 
   const onSubmit = (data: GroupFormData) => {
-    console.log(data);
+    updateOrganizationMutation.mutate(data);
   };
 
   const handleImageUploadClick = () => {
