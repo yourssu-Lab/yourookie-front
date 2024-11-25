@@ -13,19 +13,6 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as rootDImport } from './routes/__root.d'
-import { Route as IndexLazyDImport } from './routes/index.lazy.d'
-import { Route as AboutLazyDImport } from './routes/about.lazy.d'
-import { Route as SignupIndexLazyDImport } from './routes/signup/index.lazy.d'
-import { Route as MeetingRoomsIndexLazyDImport } from './routes/meetingRooms/index.lazy.d'
-import { Route as OrganizationsOrganizationIdIndexLazyDImport } from './routes/organizations/$organizationId/index.lazy.d'
-import { Route as SearchResultQueryIndexLazyDImport } from './routes/SearchResult/$query/index.lazy.d'
-import { Route as ReservationSpaceIdIndexLazyDImport } from './routes/Reservation/$spaceId/index.lazy.d'
-import { Route as OrganizationsOrganizationIdOpenIndexLazyDImport } from './routes/organizations/$organizationId/open/index.lazy.d'
-import { Route as OrganizationsOrganizationIdEditIndexLazyDImport } from './routes/organizations/$organizationId/edit/index.lazy.d'
-import { Route as ReservationSpaceIdStateIndexLazyDImport } from './routes/Reservation/$spaceId/state/index.lazy.d'
-import { Route as OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyDImport } from './routes/organizations/$organizationId/spaceEdit/$spaceId/index.lazy.d'
-import { Route as SearchResultQueryOrganizationsOrganizationIdIndexLazyDImport } from './routes/SearchResult/$query/organizations/$organizationId/index.lazy.d'
 
 // Create Virtual Routes
 
@@ -57,12 +44,6 @@ const SearchResultQueryOrganizationsOrganizationIdIndexLazyImport =
   createFileRoute('/SearchResult/$query/organizations/$organizationId/')()
 
 // Create/Update Routes
-
-const rootDRoute = rootDImport.update({
-  id: '/__root/d',
-  path: '/d',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const AboutLazyRoute = AboutLazyImport.update({
   id: '/about',
@@ -120,30 +101,6 @@ const ReservationSpaceIdIndexLazyRoute =
     import('./routes/Reservation/$spaceId/index.lazy').then((d) => d.Route),
   )
 
-const IndexLazyDRoute = IndexLazyDImport.update({
-  id: '/index/lazy/d',
-  path: '/index/lazy/d',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AboutLazyDRoute = AboutLazyDImport.update({
-  id: '/lazy/d',
-  path: '/lazy/d',
-  getParentRoute: () => AboutLazyRoute,
-} as any)
-
-const SignupIndexLazyDRoute = SignupIndexLazyDImport.update({
-  id: '/signup/index/lazy/d',
-  path: '/signup/index/lazy/d',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const MeetingRoomsIndexLazyDRoute = MeetingRoomsIndexLazyDImport.update({
-  id: '/meetingRooms/index/lazy/d',
-  path: '/meetingRooms/index/lazy/d',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const OrganizationsOrganizationIdOpenIndexLazyRoute =
   OrganizationsOrganizationIdOpenIndexLazyImport.update({
     id: '/organizations/$organizationId/open/',
@@ -177,27 +134,6 @@ const ReservationSpaceIdStateIndexLazyRoute =
     ),
   )
 
-const OrganizationsOrganizationIdIndexLazyDRoute =
-  OrganizationsOrganizationIdIndexLazyDImport.update({
-    id: '/organizations/$organizationId/index/lazy/d',
-    path: '/organizations/$organizationId/index/lazy/d',
-    getParentRoute: () => rootRoute,
-  } as any)
-
-const SearchResultQueryIndexLazyDRoute =
-  SearchResultQueryIndexLazyDImport.update({
-    id: '/SearchResult/$query/index/lazy/d',
-    path: '/SearchResult/$query/index/lazy/d',
-    getParentRoute: () => rootRoute,
-  } as any)
-
-const ReservationSpaceIdIndexLazyDRoute =
-  ReservationSpaceIdIndexLazyDImport.update({
-    id: '/Reservation/$spaceId/index/lazy/d',
-    path: '/Reservation/$spaceId/index/lazy/d',
-    getParentRoute: () => rootRoute,
-  } as any)
-
 const OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyRoute =
   OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyImport.update({
     id: '/organizations/$organizationId/spaceEdit/$spaceId/',
@@ -220,41 +156,6 @@ const SearchResultQueryOrganizationsOrganizationIdIndexLazyRoute =
     ).then((d) => d.Route),
   )
 
-const OrganizationsOrganizationIdOpenIndexLazyDRoute =
-  OrganizationsOrganizationIdOpenIndexLazyDImport.update({
-    id: '/organizations/$organizationId/open/index/lazy/d',
-    path: '/organizations/$organizationId/open/index/lazy/d',
-    getParentRoute: () => rootRoute,
-  } as any)
-
-const OrganizationsOrganizationIdEditIndexLazyDRoute =
-  OrganizationsOrganizationIdEditIndexLazyDImport.update({
-    id: '/organizations/$organizationId/edit/index/lazy/d',
-    path: '/organizations/$organizationId/edit/index/lazy/d',
-    getParentRoute: () => rootRoute,
-  } as any)
-
-const ReservationSpaceIdStateIndexLazyDRoute =
-  ReservationSpaceIdStateIndexLazyDImport.update({
-    id: '/Reservation/$spaceId/state/index/lazy/d',
-    path: '/Reservation/$spaceId/state/index/lazy/d',
-    getParentRoute: () => rootRoute,
-  } as any)
-
-const OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyDRoute =
-  OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyDImport.update({
-    id: '/organizations/$organizationId/spaceEdit/$spaceId/index/lazy/d',
-    path: '/organizations/$organizationId/spaceEdit/$spaceId/index/lazy/d',
-    getParentRoute: () => rootRoute,
-  } as any)
-
-const SearchResultQueryOrganizationsOrganizationIdIndexLazyDRoute =
-  SearchResultQueryOrganizationsOrganizationIdIndexLazyDImport.update({
-    id: '/SearchResult/$query/organizations/$organizationId/index/lazy/d',
-    path: '/SearchResult/$query/organizations/$organizationId/index/lazy/d',
-    getParentRoute: () => rootRoute,
-  } as any)
-
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -273,13 +174,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutLazyImport
       parentRoute: typeof rootRoute
     }
-    '/__root/d': {
-      id: '/__root/d'
-      path: '/d'
-      fullPath: '/d'
-      preLoaderRoute: typeof rootDImport
-      parentRoute: typeof rootRoute
-    }
     '/meetingRooms/': {
       id: '/meetingRooms/'
       path: '/meetingRooms'
@@ -292,20 +186,6 @@ declare module '@tanstack/react-router' {
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/about/lazy/d': {
-      id: '/about/lazy/d'
-      path: '/lazy/d'
-      fullPath: '/about/lazy/d'
-      preLoaderRoute: typeof AboutLazyDImport
-      parentRoute: typeof AboutLazyImport
-    }
-    '/index/lazy/d': {
-      id: '/index/lazy/d'
-      path: '/index/lazy/d'
-      fullPath: '/index/lazy/d'
-      preLoaderRoute: typeof IndexLazyDImport
       parentRoute: typeof rootRoute
     }
     '/Reservation/$spaceId/': {
@@ -350,20 +230,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrganizationsOrganizationIdOpenIndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/meetingRooms/index/lazy/d': {
-      id: '/meetingRooms/index/lazy/d'
-      path: '/meetingRooms/index/lazy/d'
-      fullPath: '/meetingRooms/index/lazy/d'
-      preLoaderRoute: typeof MeetingRoomsIndexLazyDImport
-      parentRoute: typeof rootRoute
-    }
-    '/signup/index/lazy/d': {
-      id: '/signup/index/lazy/d'
-      path: '/signup/index/lazy/d'
-      fullPath: '/signup/index/lazy/d'
-      preLoaderRoute: typeof SignupIndexLazyDImport
-      parentRoute: typeof rootRoute
-    }
     '/SearchResult/$query/organizations/$organizationId/': {
       id: '/SearchResult/$query/organizations/$organizationId/'
       path: '/SearchResult/$query/organizations/$organizationId'
@@ -378,162 +244,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/Reservation/$spaceId/index/lazy/d': {
-      id: '/Reservation/$spaceId/index/lazy/d'
-      path: '/Reservation/$spaceId/index/lazy/d'
-      fullPath: '/Reservation/$spaceId/index/lazy/d'
-      preLoaderRoute: typeof ReservationSpaceIdIndexLazyDImport
-      parentRoute: typeof rootRoute
-    }
-    '/SearchResult/$query/index/lazy/d': {
-      id: '/SearchResult/$query/index/lazy/d'
-      path: '/SearchResult/$query/index/lazy/d'
-      fullPath: '/SearchResult/$query/index/lazy/d'
-      preLoaderRoute: typeof SearchResultQueryIndexLazyDImport
-      parentRoute: typeof rootRoute
-    }
-    '/organizations/$organizationId/index/lazy/d': {
-      id: '/organizations/$organizationId/index/lazy/d'
-      path: '/organizations/$organizationId/index/lazy/d'
-      fullPath: '/organizations/$organizationId/index/lazy/d'
-      preLoaderRoute: typeof OrganizationsOrganizationIdIndexLazyDImport
-      parentRoute: typeof rootRoute
-    }
-    '/Reservation/$spaceId/state/index/lazy/d': {
-      id: '/Reservation/$spaceId/state/index/lazy/d'
-      path: '/Reservation/$spaceId/state/index/lazy/d'
-      fullPath: '/Reservation/$spaceId/state/index/lazy/d'
-      preLoaderRoute: typeof ReservationSpaceIdStateIndexLazyDImport
-      parentRoute: typeof rootRoute
-    }
-    '/organizations/$organizationId/edit/index/lazy/d': {
-      id: '/organizations/$organizationId/edit/index/lazy/d'
-      path: '/organizations/$organizationId/edit/index/lazy/d'
-      fullPath: '/organizations/$organizationId/edit/index/lazy/d'
-      preLoaderRoute: typeof OrganizationsOrganizationIdEditIndexLazyDImport
-      parentRoute: typeof rootRoute
-    }
-    '/organizations/$organizationId/open/index/lazy/d': {
-      id: '/organizations/$organizationId/open/index/lazy/d'
-      path: '/organizations/$organizationId/open/index/lazy/d'
-      fullPath: '/organizations/$organizationId/open/index/lazy/d'
-      preLoaderRoute: typeof OrganizationsOrganizationIdOpenIndexLazyDImport
-      parentRoute: typeof rootRoute
-    }
-    '/SearchResult/$query/organizations/$organizationId/index/lazy/d': {
-      id: '/SearchResult/$query/organizations/$organizationId/index/lazy/d'
-      path: '/SearchResult/$query/organizations/$organizationId/index/lazy/d'
-      fullPath: '/SearchResult/$query/organizations/$organizationId/index/lazy/d'
-      preLoaderRoute: typeof SearchResultQueryOrganizationsOrganizationIdIndexLazyDImport
-      parentRoute: typeof rootRoute
-    }
-    '/organizations/$organizationId/spaceEdit/$spaceId/index/lazy/d': {
-      id: '/organizations/$organizationId/spaceEdit/$spaceId/index/lazy/d'
-      path: '/organizations/$organizationId/spaceEdit/$spaceId/index/lazy/d'
-      fullPath: '/organizations/$organizationId/spaceEdit/$spaceId/index/lazy/d'
-      preLoaderRoute: typeof OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyDImport
-      parentRoute: typeof rootRoute
-    }
   }
 }
 
 // Create and export the route tree
 
-interface AboutLazyRouteChildren {
-  AboutLazyDRoute: typeof AboutLazyDRoute
-}
-
-const AboutLazyRouteChildren: AboutLazyRouteChildren = {
-  AboutLazyDRoute: AboutLazyDRoute,
-}
-
-const AboutLazyRouteWithChildren = AboutLazyRoute._addFileChildren(
-  AboutLazyRouteChildren,
-)
-
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
-  '/about': typeof AboutLazyRouteWithChildren
-  '/d': typeof rootDRoute
+  '/about': typeof AboutLazyRoute
   '/meetingRooms': typeof MeetingRoomsIndexLazyRoute
   '/signup': typeof SignupIndexLazyRoute
-  '/about/lazy/d': typeof AboutLazyDRoute
-  '/index/lazy/d': typeof IndexLazyDRoute
   '/Reservation/$spaceId': typeof ReservationSpaceIdIndexLazyRoute
   '/SearchResult/$query': typeof SearchResultQueryIndexLazyRoute
   '/organizations/$organizationId': typeof OrganizationsOrganizationIdIndexLazyRoute
   '/Reservation/$spaceId/state': typeof ReservationSpaceIdStateIndexLazyRoute
   '/organizations/$organizationId/edit': typeof OrganizationsOrganizationIdEditIndexLazyRoute
   '/organizations/$organizationId/open': typeof OrganizationsOrganizationIdOpenIndexLazyRoute
-  '/meetingRooms/index/lazy/d': typeof MeetingRoomsIndexLazyDRoute
-  '/signup/index/lazy/d': typeof SignupIndexLazyDRoute
   '/SearchResult/$query/organizations/$organizationId': typeof SearchResultQueryOrganizationsOrganizationIdIndexLazyRoute
   '/organizations/$organizationId/spaceEdit/$spaceId': typeof OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyRoute
-  '/Reservation/$spaceId/index/lazy/d': typeof ReservationSpaceIdIndexLazyDRoute
-  '/SearchResult/$query/index/lazy/d': typeof SearchResultQueryIndexLazyDRoute
-  '/organizations/$organizationId/index/lazy/d': typeof OrganizationsOrganizationIdIndexLazyDRoute
-  '/Reservation/$spaceId/state/index/lazy/d': typeof ReservationSpaceIdStateIndexLazyDRoute
-  '/organizations/$organizationId/edit/index/lazy/d': typeof OrganizationsOrganizationIdEditIndexLazyDRoute
-  '/organizations/$organizationId/open/index/lazy/d': typeof OrganizationsOrganizationIdOpenIndexLazyDRoute
-  '/SearchResult/$query/organizations/$organizationId/index/lazy/d': typeof SearchResultQueryOrganizationsOrganizationIdIndexLazyDRoute
-  '/organizations/$organizationId/spaceEdit/$spaceId/index/lazy/d': typeof OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyDRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
-  '/about': typeof AboutLazyRouteWithChildren
-  '/d': typeof rootDRoute
+  '/about': typeof AboutLazyRoute
   '/meetingRooms': typeof MeetingRoomsIndexLazyRoute
   '/signup': typeof SignupIndexLazyRoute
-  '/about/lazy/d': typeof AboutLazyDRoute
-  '/index/lazy/d': typeof IndexLazyDRoute
   '/Reservation/$spaceId': typeof ReservationSpaceIdIndexLazyRoute
   '/SearchResult/$query': typeof SearchResultQueryIndexLazyRoute
   '/organizations/$organizationId': typeof OrganizationsOrganizationIdIndexLazyRoute
   '/Reservation/$spaceId/state': typeof ReservationSpaceIdStateIndexLazyRoute
   '/organizations/$organizationId/edit': typeof OrganizationsOrganizationIdEditIndexLazyRoute
   '/organizations/$organizationId/open': typeof OrganizationsOrganizationIdOpenIndexLazyRoute
-  '/meetingRooms/index/lazy/d': typeof MeetingRoomsIndexLazyDRoute
-  '/signup/index/lazy/d': typeof SignupIndexLazyDRoute
   '/SearchResult/$query/organizations/$organizationId': typeof SearchResultQueryOrganizationsOrganizationIdIndexLazyRoute
   '/organizations/$organizationId/spaceEdit/$spaceId': typeof OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyRoute
-  '/Reservation/$spaceId/index/lazy/d': typeof ReservationSpaceIdIndexLazyDRoute
-  '/SearchResult/$query/index/lazy/d': typeof SearchResultQueryIndexLazyDRoute
-  '/organizations/$organizationId/index/lazy/d': typeof OrganizationsOrganizationIdIndexLazyDRoute
-  '/Reservation/$spaceId/state/index/lazy/d': typeof ReservationSpaceIdStateIndexLazyDRoute
-  '/organizations/$organizationId/edit/index/lazy/d': typeof OrganizationsOrganizationIdEditIndexLazyDRoute
-  '/organizations/$organizationId/open/index/lazy/d': typeof OrganizationsOrganizationIdOpenIndexLazyDRoute
-  '/SearchResult/$query/organizations/$organizationId/index/lazy/d': typeof SearchResultQueryOrganizationsOrganizationIdIndexLazyDRoute
-  '/organizations/$organizationId/spaceEdit/$spaceId/index/lazy/d': typeof OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyDRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
-  '/about': typeof AboutLazyRouteWithChildren
-  '/__root/d': typeof rootDRoute
+  '/about': typeof AboutLazyRoute
   '/meetingRooms/': typeof MeetingRoomsIndexLazyRoute
   '/signup/': typeof SignupIndexLazyRoute
-  '/about/lazy/d': typeof AboutLazyDRoute
-  '/index/lazy/d': typeof IndexLazyDRoute
   '/Reservation/$spaceId/': typeof ReservationSpaceIdIndexLazyRoute
   '/SearchResult/$query/': typeof SearchResultQueryIndexLazyRoute
   '/organizations/$organizationId/': typeof OrganizationsOrganizationIdIndexLazyRoute
   '/Reservation/$spaceId/state/': typeof ReservationSpaceIdStateIndexLazyRoute
   '/organizations/$organizationId/edit/': typeof OrganizationsOrganizationIdEditIndexLazyRoute
   '/organizations/$organizationId/open/': typeof OrganizationsOrganizationIdOpenIndexLazyRoute
-  '/meetingRooms/index/lazy/d': typeof MeetingRoomsIndexLazyDRoute
-  '/signup/index/lazy/d': typeof SignupIndexLazyDRoute
   '/SearchResult/$query/organizations/$organizationId/': typeof SearchResultQueryOrganizationsOrganizationIdIndexLazyRoute
   '/organizations/$organizationId/spaceEdit/$spaceId/': typeof OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyRoute
-  '/Reservation/$spaceId/index/lazy/d': typeof ReservationSpaceIdIndexLazyDRoute
-  '/SearchResult/$query/index/lazy/d': typeof SearchResultQueryIndexLazyDRoute
-  '/organizations/$organizationId/index/lazy/d': typeof OrganizationsOrganizationIdIndexLazyDRoute
-  '/Reservation/$spaceId/state/index/lazy/d': typeof ReservationSpaceIdStateIndexLazyDRoute
-  '/organizations/$organizationId/edit/index/lazy/d': typeof OrganizationsOrganizationIdEditIndexLazyDRoute
-  '/organizations/$organizationId/open/index/lazy/d': typeof OrganizationsOrganizationIdOpenIndexLazyDRoute
-  '/SearchResult/$query/organizations/$organizationId/index/lazy/d': typeof SearchResultQueryOrganizationsOrganizationIdIndexLazyDRoute
-  '/organizations/$organizationId/spaceEdit/$spaceId/index/lazy/d': typeof OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyDRoute
 }
 
 export interface FileRouteTypes {
@@ -541,120 +300,67 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
-    | '/d'
     | '/meetingRooms'
     | '/signup'
-    | '/about/lazy/d'
-    | '/index/lazy/d'
     | '/Reservation/$spaceId'
     | '/SearchResult/$query'
     | '/organizations/$organizationId'
     | '/Reservation/$spaceId/state'
     | '/organizations/$organizationId/edit'
     | '/organizations/$organizationId/open'
-    | '/meetingRooms/index/lazy/d'
-    | '/signup/index/lazy/d'
     | '/SearchResult/$query/organizations/$organizationId'
     | '/organizations/$organizationId/spaceEdit/$spaceId'
-    | '/Reservation/$spaceId/index/lazy/d'
-    | '/SearchResult/$query/index/lazy/d'
-    | '/organizations/$organizationId/index/lazy/d'
-    | '/Reservation/$spaceId/state/index/lazy/d'
-    | '/organizations/$organizationId/edit/index/lazy/d'
-    | '/organizations/$organizationId/open/index/lazy/d'
-    | '/SearchResult/$query/organizations/$organizationId/index/lazy/d'
-    | '/organizations/$organizationId/spaceEdit/$spaceId/index/lazy/d'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/d'
     | '/meetingRooms'
     | '/signup'
-    | '/about/lazy/d'
-    | '/index/lazy/d'
     | '/Reservation/$spaceId'
     | '/SearchResult/$query'
     | '/organizations/$organizationId'
     | '/Reservation/$spaceId/state'
     | '/organizations/$organizationId/edit'
     | '/organizations/$organizationId/open'
-    | '/meetingRooms/index/lazy/d'
-    | '/signup/index/lazy/d'
     | '/SearchResult/$query/organizations/$organizationId'
     | '/organizations/$organizationId/spaceEdit/$spaceId'
-    | '/Reservation/$spaceId/index/lazy/d'
-    | '/SearchResult/$query/index/lazy/d'
-    | '/organizations/$organizationId/index/lazy/d'
-    | '/Reservation/$spaceId/state/index/lazy/d'
-    | '/organizations/$organizationId/edit/index/lazy/d'
-    | '/organizations/$organizationId/open/index/lazy/d'
-    | '/SearchResult/$query/organizations/$organizationId/index/lazy/d'
-    | '/organizations/$organizationId/spaceEdit/$spaceId/index/lazy/d'
   id:
     | '__root__'
     | '/'
     | '/about'
-    | '/__root/d'
     | '/meetingRooms/'
     | '/signup/'
-    | '/about/lazy/d'
-    | '/index/lazy/d'
     | '/Reservation/$spaceId/'
     | '/SearchResult/$query/'
     | '/organizations/$organizationId/'
     | '/Reservation/$spaceId/state/'
     | '/organizations/$organizationId/edit/'
     | '/organizations/$organizationId/open/'
-    | '/meetingRooms/index/lazy/d'
-    | '/signup/index/lazy/d'
     | '/SearchResult/$query/organizations/$organizationId/'
     | '/organizations/$organizationId/spaceEdit/$spaceId/'
-    | '/Reservation/$spaceId/index/lazy/d'
-    | '/SearchResult/$query/index/lazy/d'
-    | '/organizations/$organizationId/index/lazy/d'
-    | '/Reservation/$spaceId/state/index/lazy/d'
-    | '/organizations/$organizationId/edit/index/lazy/d'
-    | '/organizations/$organizationId/open/index/lazy/d'
-    | '/SearchResult/$query/organizations/$organizationId/index/lazy/d'
-    | '/organizations/$organizationId/spaceEdit/$spaceId/index/lazy/d'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
-  AboutLazyRoute: typeof AboutLazyRouteWithChildren
-  rootDRoute: typeof rootDRoute
+  AboutLazyRoute: typeof AboutLazyRoute
   MeetingRoomsIndexLazyRoute: typeof MeetingRoomsIndexLazyRoute
   SignupIndexLazyRoute: typeof SignupIndexLazyRoute
-  IndexLazyDRoute: typeof IndexLazyDRoute
   ReservationSpaceIdIndexLazyRoute: typeof ReservationSpaceIdIndexLazyRoute
   SearchResultQueryIndexLazyRoute: typeof SearchResultQueryIndexLazyRoute
   OrganizationsOrganizationIdIndexLazyRoute: typeof OrganizationsOrganizationIdIndexLazyRoute
   ReservationSpaceIdStateIndexLazyRoute: typeof ReservationSpaceIdStateIndexLazyRoute
   OrganizationsOrganizationIdEditIndexLazyRoute: typeof OrganizationsOrganizationIdEditIndexLazyRoute
   OrganizationsOrganizationIdOpenIndexLazyRoute: typeof OrganizationsOrganizationIdOpenIndexLazyRoute
-  MeetingRoomsIndexLazyDRoute: typeof MeetingRoomsIndexLazyDRoute
-  SignupIndexLazyDRoute: typeof SignupIndexLazyDRoute
   SearchResultQueryOrganizationsOrganizationIdIndexLazyRoute: typeof SearchResultQueryOrganizationsOrganizationIdIndexLazyRoute
   OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyRoute: typeof OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyRoute
-  ReservationSpaceIdIndexLazyDRoute: typeof ReservationSpaceIdIndexLazyDRoute
-  SearchResultQueryIndexLazyDRoute: typeof SearchResultQueryIndexLazyDRoute
-  OrganizationsOrganizationIdIndexLazyDRoute: typeof OrganizationsOrganizationIdIndexLazyDRoute
-  ReservationSpaceIdStateIndexLazyDRoute: typeof ReservationSpaceIdStateIndexLazyDRoute
-  OrganizationsOrganizationIdEditIndexLazyDRoute: typeof OrganizationsOrganizationIdEditIndexLazyDRoute
-  OrganizationsOrganizationIdOpenIndexLazyDRoute: typeof OrganizationsOrganizationIdOpenIndexLazyDRoute
-  SearchResultQueryOrganizationsOrganizationIdIndexLazyDRoute: typeof SearchResultQueryOrganizationsOrganizationIdIndexLazyDRoute
-  OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyDRoute: typeof OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyDRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
-  AboutLazyRoute: AboutLazyRouteWithChildren,
-  rootDRoute: rootDRoute,
+  AboutLazyRoute: AboutLazyRoute,
   MeetingRoomsIndexLazyRoute: MeetingRoomsIndexLazyRoute,
   SignupIndexLazyRoute: SignupIndexLazyRoute,
-  IndexLazyDRoute: IndexLazyDRoute,
   ReservationSpaceIdIndexLazyRoute: ReservationSpaceIdIndexLazyRoute,
   SearchResultQueryIndexLazyRoute: SearchResultQueryIndexLazyRoute,
   OrganizationsOrganizationIdIndexLazyRoute:
@@ -664,26 +370,10 @@ const rootRouteChildren: RootRouteChildren = {
     OrganizationsOrganizationIdEditIndexLazyRoute,
   OrganizationsOrganizationIdOpenIndexLazyRoute:
     OrganizationsOrganizationIdOpenIndexLazyRoute,
-  MeetingRoomsIndexLazyDRoute: MeetingRoomsIndexLazyDRoute,
-  SignupIndexLazyDRoute: SignupIndexLazyDRoute,
   SearchResultQueryOrganizationsOrganizationIdIndexLazyRoute:
     SearchResultQueryOrganizationsOrganizationIdIndexLazyRoute,
   OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyRoute:
     OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyRoute,
-  ReservationSpaceIdIndexLazyDRoute: ReservationSpaceIdIndexLazyDRoute,
-  SearchResultQueryIndexLazyDRoute: SearchResultQueryIndexLazyDRoute,
-  OrganizationsOrganizationIdIndexLazyDRoute:
-    OrganizationsOrganizationIdIndexLazyDRoute,
-  ReservationSpaceIdStateIndexLazyDRoute:
-    ReservationSpaceIdStateIndexLazyDRoute,
-  OrganizationsOrganizationIdEditIndexLazyDRoute:
-    OrganizationsOrganizationIdEditIndexLazyDRoute,
-  OrganizationsOrganizationIdOpenIndexLazyDRoute:
-    OrganizationsOrganizationIdOpenIndexLazyDRoute,
-  SearchResultQueryOrganizationsOrganizationIdIndexLazyDRoute:
-    SearchResultQueryOrganizationsOrganizationIdIndexLazyDRoute,
-  OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyDRoute:
-    OrganizationsOrganizationIdSpaceEditSpaceIdIndexLazyDRoute,
 }
 
 export const routeTree = rootRoute
@@ -694,112 +384,57 @@ export const routeTree = rootRoute
 {
   "routes": {
     "__root__": {
-      "filePath": "__root.js",
+      "filePath": "__root.tsx",
       "children": [
         "/",
         "/about",
-        "/__root/d",
         "/meetingRooms/",
         "/signup/",
-        "/index/lazy/d",
         "/Reservation/$spaceId/",
         "/SearchResult/$query/",
         "/organizations/$organizationId/",
         "/Reservation/$spaceId/state/",
         "/organizations/$organizationId/edit/",
         "/organizations/$organizationId/open/",
-        "/meetingRooms/index/lazy/d",
-        "/signup/index/lazy/d",
         "/SearchResult/$query/organizations/$organizationId/",
-        "/organizations/$organizationId/spaceEdit/$spaceId/",
-        "/Reservation/$spaceId/index/lazy/d",
-        "/SearchResult/$query/index/lazy/d",
-        "/organizations/$organizationId/index/lazy/d",
-        "/Reservation/$spaceId/state/index/lazy/d",
-        "/organizations/$organizationId/edit/index/lazy/d",
-        "/organizations/$organizationId/open/index/lazy/d",
-        "/SearchResult/$query/organizations/$organizationId/index/lazy/d",
-        "/organizations/$organizationId/spaceEdit/$spaceId/index/lazy/d"
+        "/organizations/$organizationId/spaceEdit/$spaceId/"
       ]
     },
     "/": {
-      "filePath": "index.lazy.js"
+      "filePath": "index.lazy.tsx"
     },
     "/about": {
-      "filePath": "about.lazy.js",
-      "children": [
-        "/about/lazy/d"
-      ]
-    },
-    "/__root/d": {
-      "filePath": "__root.d.ts"
+      "filePath": "about.lazy.tsx"
     },
     "/meetingRooms/": {
-      "filePath": "meetingRooms/index.lazy.js"
+      "filePath": "meetingRooms/index.lazy.tsx"
     },
     "/signup/": {
-      "filePath": "signup/index.lazy.js"
-    },
-    "/about/lazy/d": {
-      "filePath": "about.lazy.d.ts",
-      "parent": "/about"
-    },
-    "/index/lazy/d": {
-      "filePath": "index.lazy.d.ts"
+      "filePath": "signup/index.lazy.tsx"
     },
     "/Reservation/$spaceId/": {
-      "filePath": "Reservation/$spaceId/index.lazy.js"
+      "filePath": "Reservation/$spaceId/index.lazy.tsx"
     },
     "/SearchResult/$query/": {
-      "filePath": "SearchResult/$query/index.lazy.js"
+      "filePath": "SearchResult/$query/index.lazy.tsx"
     },
     "/organizations/$organizationId/": {
-      "filePath": "organizations/$organizationId/index.lazy.js"
+      "filePath": "organizations/$organizationId/index.lazy.tsx"
     },
     "/Reservation/$spaceId/state/": {
-      "filePath": "Reservation/$spaceId/state/index.lazy.js"
+      "filePath": "Reservation/$spaceId/state/index.lazy.tsx"
     },
     "/organizations/$organizationId/edit/": {
-      "filePath": "organizations/$organizationId/edit/index.lazy.js"
+      "filePath": "organizations/$organizationId/edit/index.lazy.tsx"
     },
     "/organizations/$organizationId/open/": {
-      "filePath": "organizations/$organizationId/open/index.lazy.js"
-    },
-    "/meetingRooms/index/lazy/d": {
-      "filePath": "meetingRooms/index.lazy.d.ts"
-    },
-    "/signup/index/lazy/d": {
-      "filePath": "signup/index.lazy.d.ts"
+      "filePath": "organizations/$organizationId/open/index.lazy.tsx"
     },
     "/SearchResult/$query/organizations/$organizationId/": {
-      "filePath": "SearchResult/$query/organizations/$organizationId/index.lazy.js"
+      "filePath": "SearchResult/$query/organizations/$organizationId/index.lazy.tsx"
     },
     "/organizations/$organizationId/spaceEdit/$spaceId/": {
-      "filePath": "organizations/$organizationId/spaceEdit/$spaceId/index.lazy.js"
-    },
-    "/Reservation/$spaceId/index/lazy/d": {
-      "filePath": "Reservation/$spaceId/index.lazy.d.ts"
-    },
-    "/SearchResult/$query/index/lazy/d": {
-      "filePath": "SearchResult/$query/index.lazy.d.ts"
-    },
-    "/organizations/$organizationId/index/lazy/d": {
-      "filePath": "organizations/$organizationId/index.lazy.d.ts"
-    },
-    "/Reservation/$spaceId/state/index/lazy/d": {
-      "filePath": "Reservation/$spaceId/state/index.lazy.d.ts"
-    },
-    "/organizations/$organizationId/edit/index/lazy/d": {
-      "filePath": "organizations/$organizationId/edit/index.lazy.d.ts"
-    },
-    "/organizations/$organizationId/open/index/lazy/d": {
-      "filePath": "organizations/$organizationId/open/index.lazy.d.ts"
-    },
-    "/SearchResult/$query/organizations/$organizationId/index/lazy/d": {
-      "filePath": "SearchResult/$query/organizations/$organizationId/index.lazy.d.ts"
-    },
-    "/organizations/$organizationId/spaceEdit/$spaceId/index/lazy/d": {
-      "filePath": "organizations/$organizationId/spaceEdit/$spaceId/index.lazy.d.ts"
+      "filePath": "organizations/$organizationId/spaceEdit/$spaceId/index.lazy.tsx"
     }
   }
 }

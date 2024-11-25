@@ -29,6 +29,7 @@ import {
   StyledPasswordSection,
   StyledTitle,
 } from "./-index.style";
+import {AxiosError} from "axios";
 
 export const Route = createLazyFileRoute("/Reservation/$spaceId/")({
   component: RouteComponent,
@@ -89,8 +90,9 @@ function RouteComponent() {
         params: { spaceId },
       });
     },
-    onError: () => {
-      alert("예약에 실패했습니다. 다시 시도해주세요.");
+    onError: (error: AxiosError<{message: string}>) => {
+      const errorMessage = error.response?.data.message ?? '예약에 실패했습니다. 다시 시도해주세요.';
+      alert(errorMessage);
     },
   });
 
