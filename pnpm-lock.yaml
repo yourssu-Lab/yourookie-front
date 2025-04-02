@@ -78,6 +78,9 @@ importers:
       globals:
         specifier: ^15.11.0
         version: 15.12.0
+      prettier:
+        specifier: ^3.5.3
+        version: 3.5.3
       typescript:
         specifier: ~5.6.2
         version: 5.6.3
@@ -1482,8 +1485,8 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prettier@3.3.3:
-    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
+  prettier@3.5.3:
+    resolution: {integrity: sha512-QQtaxnoDJeAkDvDKWCLiwIXkTgRhwYDEQCghU9Z6q03iyek/rxRh/2lC3HB7P8sWT2xC/y5JDctPLBIGzHKbhw==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -2311,7 +2314,7 @@ snapshots:
   '@tanstack/router-generator@1.79.0':
     dependencies:
       '@tanstack/virtual-file-routes': 1.64.0
-      prettier: 3.3.3
+      prettier: 3.5.3
       tsx: 4.19.2
       zod: 3.23.8
 
@@ -3025,7 +3028,7 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier@3.3.3: {}
+  prettier@3.5.3: {}
 
   prop-types@15.8.1:
     dependencies:
