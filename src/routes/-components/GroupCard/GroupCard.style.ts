@@ -22,6 +22,14 @@ export const CardWrapper = styled.div`
   padding: 40px;
   align-items: center;
   gap: 40px;
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    padding: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
+    position: relative;
+  }
 `;
 
 export const GroupImage = styled.div`
@@ -34,6 +42,12 @@ export const GroupImage = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 12px;
+  }
+
+  @media (max-width: 768px) {
+    width: 120px;
+    height: 120px;
   }
 `;
 
@@ -43,11 +57,26 @@ export const GroupContent = styled.div`
   gap: 12px;
   flex: 1;
   color: #000;
+
+  @media (max-width: 768px) {
+    gap: 8px;
+    padding-right: 100px;
+  }
+
+  @media (max-width: 480px) {
+    padding-right: 0;
+    margin-bottom: 50px;
+    width: 100%;
+  }
 `;
 
 export const GroupName = styled.div`
   font-size: 24px;
   font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 export const GroupDescription = styled.div`
@@ -56,12 +85,22 @@ export const GroupDescription = styled.div`
   line-height: 1.5;
   margin: 10px 0;
   max-width: 430px;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    margin: 5px 0;
+    line-height: 1.4;
+  }
 `;
 
 export const StyledTags = styled.div`
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
 `;
 
 export const StyledTag = styled.span`
@@ -72,6 +111,12 @@ export const StyledTag = styled.span`
   font-size: 18px;
   font-weight: 500;
   color: #3a3a3a;
+
+  @media (max-width: 768px) {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 20px;
+  }
 `;
 
 export const StyledViewSpaceButton = styled.button`
@@ -83,4 +128,21 @@ export const StyledViewSpaceButton = styled.button`
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    padding: 8px 16px;
+    font-size: 14px;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  @media (max-width: 480px) {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    top: auto;
+    transform: none;
+  }
 `;
