@@ -13,10 +13,10 @@ export const StyledContainer = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: row;
+    flex-wrap: wrap;
     padding: 20px;
     gap: 20px;
-    align-items: center;
-    flex-wrap: wrap;
+    align-items: flex-start;
   }
 `;
 
@@ -44,9 +44,13 @@ export const StyledInfoSection = styled.div`
   margin-bottom: 27px;
 
   @media (max-width: 768px) {
-    flex: 1;
+    width: calc(100% - 140px);
     margin-bottom: 0;
-    min-width: 120px;
+    min-width: 160px;
+  }
+
+  @media (max-width: 480px) {
+    flex: 1;
   }
 `;
 
@@ -81,9 +85,16 @@ export const StyledReservationSection = styled.div`
   gap: 21px;
 
   @media (max-width: 768px) {
-    width: auto;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
     gap: 12px;
-    margin-left: auto;
+    margin-top: 10px;
+  }
+
+  @media (max-width: 480px) {
+    justify-content: center;
   }
 `;
 
@@ -99,10 +110,13 @@ export const StyledReservationInfo = styled.div`
   cursor: default;
 
   @media (max-width: 768px) {
-    width: auto;
-    min-width: 100px;
+    width: calc(50% - 6px);
     font-size: 14px;
-    padding: 6px 12px;
+    padding: 8px 12px;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
   }
 `;
 
@@ -118,10 +132,11 @@ export const StyledButton = styled.button`
   text-align: center;
 
   @media (max-width: 768px) {
-    width: auto;
-    min-width: 100px;
-    font-size: 14px;
-    padding: 6px 12px;
+    width: 100%;
+    font-size: 16px;
+    padding: 8px 16px;
+    order: 3;
+    margin-top: 6px;
   }
 `;
 
@@ -133,7 +148,7 @@ export const StyledModalTitle = styled.h2`
 
   @media (max-width: 768px) {
     font-size: 22px;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
     text-align: center;
   }
 `;
@@ -151,9 +166,9 @@ export const StyledModalInput = styled.input`
   }
 
   @media (max-width: 768px) {
-    font-size: 16px;
     padding: 10px 15px;
-    margin-bottom: 25px;
+    font-size: 16px;
+    margin-bottom: 24px;
   }
 `;
 
