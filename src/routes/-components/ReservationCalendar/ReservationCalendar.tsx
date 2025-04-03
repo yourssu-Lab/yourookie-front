@@ -1,5 +1,5 @@
-import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
 import {
   StyledCalendarCell,
   StyledCalendarGrid,
@@ -7,7 +7,7 @@ import {
   StyledHr,
   StyledWeekDay,
   StyledWeekDaysGrid,
-} from "./ReservationCalendar.style";
+} from './ReservationCalendar.style';
 
 interface CalendarDate {
   date: Date;
@@ -20,12 +20,9 @@ interface ReservationCalendarProps {
   onDateSelect: (date: Date) => void;
 }
 
-export const ReservationCalendar = ({
-  selectedDate,
-  onDateSelect,
-}: ReservationCalendarProps) => {
+export const ReservationCalendar = ({ selectedDate, onDateSelect }: ReservationCalendarProps) => {
   const [fixedDates, setFixedDates] = useState<CalendarDate[]>([]);
-  const weekDays: string[] = ["일", "월", "화", "수", "목", "금", "토"];
+  const weekDays: string[] = ['일', '월', '화', '수', '목', '금', '토'];
 
   useEffect(() => {
     const initialDates = calculateInitialDates();
@@ -38,7 +35,7 @@ export const ReservationCalendar = ({
 
     // 오늘부터 시작하여 28일 분량의 날짜를 생성
     for (let i = 0; i < 28; i++) {
-      const currentDate = today.add(i, "day");
+      const currentDate = today.add(i, 'day');
       dates.push({
         date: currentDate.toDate(),
         day: currentDate.date(),
@@ -51,7 +48,7 @@ export const ReservationCalendar = ({
     const emptyDates = Array(firstDayIndex)
       .fill(null)
       .map((_, index) => {
-        const emptyDate = today.subtract(firstDayIndex - index, "day");
+        const emptyDate = today.subtract(firstDayIndex - index, 'day');
         return {
           date: emptyDate.toDate(),
           day: emptyDate.date(),
@@ -70,7 +67,7 @@ export const ReservationCalendar = ({
     return fixedDates.map((dateObj, index) => (
       <StyledCalendarCell
         key={`date-${index}`}
-        $isSelected={dayjs(dateObj.date).isSame(selectedDate, "day")}
+        $isSelected={dayjs(dateObj.date).isSame(selectedDate, 'day')}
         onClick={() => handleDateClick(dateObj.date)}
       >
         {dateObj.day}

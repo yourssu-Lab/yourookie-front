@@ -1,24 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
-import {
-  createLazyFileRoute,
-  Outlet,
-  useNavigate,
-} from "@tanstack/react-router";
-import { useEffect } from "react";
-import { OrganizationInfoCard } from "../../-components/OrganizationInfoCard/OrganizationInfoCard";
-import { SpaceCard } from "../../-components/SpaceCard/SpaceCard";
+import { useQuery } from '@tanstack/react-query';
+import { createLazyFileRoute, Outlet, useNavigate } from '@tanstack/react-router';
+import { useEffect } from 'react';
+import { OrganizationInfoCard } from '../../-components/OrganizationInfoCard/OrganizationInfoCard';
+import { SpaceCard } from '../../-components/SpaceCard/SpaceCard';
 import {
   getOrganizationSpaces,
   OrganizationSpacesResponse,
-} from "../../../api/getOrganizationSpaces";
-import { useLoginState } from "../../../hooks/useLoginState";
-import {
-  StyledAddSpaceButton,
-  StyledContainer,
-  StyledSpaceGrid,
-} from "./-index.style";
+} from '../../../api/getOrganizationSpaces';
+import { useLoginState } from '../../../hooks/useLoginState';
+import { StyledAddSpaceButton, StyledContainer, StyledSpaceGrid } from './-index.style';
 
-export const Route = createLazyFileRoute("/organizations/$organizationId/")({
+export const Route = createLazyFileRoute('/organizations/$organizationId/')({
   component: RouteComponent,
 });
 
@@ -29,12 +21,12 @@ function RouteComponent() {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate({ to: "/" });
+      navigate({ to: '/' });
     }
   }, [isLoggedIn, navigate]);
 
   const { data, isLoading, isError } = useQuery<OrganizationSpacesResponse>({
-    queryKey: ["organizationSpaces", organizationId],
+    queryKey: ['organizationSpaces', organizationId],
     queryFn: () => getOrganizationSpaces(organizationId),
   });
 
@@ -49,14 +41,14 @@ function RouteComponent() {
   const { organization, spaces = [] } = data;
   const handleEditOrganization = () => {
     navigate({
-      to: "/organizations/$organizationId/edit",
+      to: '/organizations/$organizationId/edit',
       params: { organizationId },
     });
   };
 
   const handleEditSpace = (spaceId: number) => {
     navigate({
-      to: "/organizations/$organizationId/spaceEdit/$spaceId",
+      to: '/organizations/$organizationId/spaceEdit/$spaceId',
       params: {
         organizationId,
         spaceId: spaceId.toString(),
@@ -66,7 +58,7 @@ function RouteComponent() {
 
   const handleAddSpace = () => {
     navigate({
-      to: "/organizations/$organizationId/open",
+      to: '/organizations/$organizationId/open',
       params: { organizationId },
     });
   };
@@ -77,22 +69,13 @@ function RouteComponent() {
 
   return (
     <StyledContainer>
-      <OrganizationInfoCard
-        organization={organization}
-        onEditClick={handleEditOrganization}
-      />
+      <OrganizationInfoCard organization={organization} onEditClick={handleEditOrganization} />
 
-      <StyledAddSpaceButton onClick={handleAddSpace}>
-        + 공간 추가
-      </StyledAddSpaceButton>
+      <StyledAddSpaceButton onClick={handleAddSpace}>+ 공간 추가</StyledAddSpaceButton>
 
       <StyledSpaceGrid>
         {spaces?.map((space) => (
-          <SpaceCard
-            onEditClick={() => handleEditSpace(space.id)}
-            key={space.id}
-            space={space}
-          />
+          <SpaceCard onEditClick={() => handleEditSpace(space.id)} key={space.id} space={space} />
         ))}
       </StyledSpaceGrid>
       <Outlet />

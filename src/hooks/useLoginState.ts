@@ -1,5 +1,5 @@
-import {api} from "../service/TokenService";
+import { api } from '../service/TokenService';
 
 export const useLoginState = () => {
-    return {isLoggedIn: api.getAccessToken() !== undefined};
-}
+  return { isLoggedIn: api.getAccessToken() !== undefined };
+};

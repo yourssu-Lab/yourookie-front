@@ -1,10 +1,10 @@
-import { useMutation } from "@tanstack/react-query";
-import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
-import { useForm } from "react-hook-form";
-import { postOpen, SpaceParams } from "../../../../api/postOpen";
-import { useLoginState } from "../../../../hooks/useLoginState";
-import { SpaceFormData } from "../../../../types/space.type";
+import { useMutation } from '@tanstack/react-query';
+import { createLazyFileRoute, useNavigate } from '@tanstack/react-router';
+import { useEffect, useRef } from 'react';
+import { useForm } from 'react-hook-form';
+import { postOpen, SpaceParams } from '../../../../api/postOpen';
+import { useLoginState } from '../../../../hooks/useLoginState';
+import { SpaceFormData } from '../../../../types/space.type';
 import {
   StyledAdd,
   StyledButton,
@@ -25,11 +25,9 @@ import {
   StyledTimeContainer,
   StyledTimeInput,
   StyledTitle,
-} from "./-index.style";
+} from './-index.style';
 
-export const Route = createLazyFileRoute(
-  "/organizations/$organizationId/open/"
-)({
+export const Route = createLazyFileRoute('/organizations/$organizationId/open/')({
   component: RouteComponent,
 });
 
@@ -40,34 +38,34 @@ function RouteComponent() {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate({ to: "/" });
+      navigate({ to: '/' });
     }
   }, [isLoggedIn, navigate]);
   const imageInputRef = useRef<HTMLInputElement | null>(null);
   const { register, handleSubmit, watch, setValue } = useForm<SpaceFormData>({
     defaultValues: {
-      name: "",
-      location: "",
-      openingTime: "",
-      closingTime: "",
-      capacity: "",
+      name: '',
+      location: '',
+      openingTime: '',
+      closingTime: '',
+      capacity: '',
       image: null,
     },
   });
 
-  const image = watch("image");
+  const image = watch('image');
 
   const mutation = useMutation({
     mutationFn: (data: SpaceParams) => postOpen(data),
     onSuccess: () => {
       navigate({
-        to: "/organizations/$organizationId",
+        to: '/organizations/$organizationId',
         params: { organizationId },
       });
     },
     onError: (error) => {
-      console.error("공간 생성 실패:", error);
-      alert("공간 생성에 실패했습니다. 다시 시도해주세요.");
+      console.error('공간 생성 실패:', error);
+      alert('공간 생성에 실패했습니다. 다시 시도해주세요.');
     },
   });
 
@@ -90,7 +88,7 @@ function RouteComponent() {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
-    setValue("image", file);
+    setValue('image', file);
   };
 
   return (
@@ -102,7 +100,7 @@ function RouteComponent() {
           <StyledFieldGroup>
             <StyledLabel>공간명</StyledLabel>
             <StyledInput
-              {...register("name", { required: true })}
+              {...register('name', { required: true })}
               placeholder="공간명을 입력하세요"
             />
           </StyledFieldGroup>
@@ -110,7 +108,7 @@ function RouteComponent() {
           <StyledFieldGroup>
             <StyledLabel>공간 위치</StyledLabel>
             <StyledInput
-              {...register("location", { required: true })}
+              {...register('location', { required: true })}
               placeholder="공간의 위치를 입력하세요"
             />
           </StyledFieldGroup>
@@ -120,9 +118,7 @@ function RouteComponent() {
           <StyledFieldGroup>
             <StyledLabelRow>
               <StyledLabel>공간 사용 가능 시간</StyledLabel>
-              <StyledDetailLabel>
-                예약 가능한 시간은 6-21시로 제한됩니다
-              </StyledDetailLabel>
+              <StyledDetailLabel>예약 가능한 시간은 6-21시로 제한됩니다</StyledDetailLabel>
             </StyledLabelRow>
             <StyledTimeContainer>
               <StyledTimeInput
@@ -130,7 +126,7 @@ function RouteComponent() {
                 min="06:00"
                 max="21:00"
                 step="1800"
-                {...register("openingTime", { required: true })}
+                {...register('openingTime', { required: true })}
                 placeholder="오픈 시간을 선택하세요"
               />
               <span>~</span>
@@ -139,7 +135,7 @@ function RouteComponent() {
                 step="1800"
                 min="06:00"
                 max="21:00"
-                {...register("closingTime", { required: true })}
+                {...register('closingTime', { required: true })}
                 placeholder="종료 시간을 선택하세요"
               />
             </StyledTimeContainer>
@@ -147,7 +143,7 @@ function RouteComponent() {
           <StyledFieldGroup>
             <StyledLabel>수용 가능 인원</StyledLabel>
             <StyledInput
-              {...register("capacity", { required: true })}
+              {...register('capacity', { required: true })}
               placeholder="수용 가능 인원을 입력하세요"
             />
           </StyledFieldGroup>
@@ -172,7 +168,7 @@ function RouteComponent() {
           <StyledImageInput
             ref={(e) => {
               imageInputRef.current = e;
-              register("image").ref(e);
+              register('image').ref(e);
             }}
             type="file"
             accept="image/*"

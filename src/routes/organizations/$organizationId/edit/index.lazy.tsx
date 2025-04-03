@@ -1,14 +1,14 @@
-import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
-import { useForm } from "react-hook-form";
-import Modal from "react-modal";
-import Logo from "../../../../assets/OPENSSUpot.svg";
-import { modalStyles } from "../../../../styles/editModal";
+import { createLazyFileRoute, useNavigate } from '@tanstack/react-router';
+import { useEffect, useRef } from 'react';
+import { useForm } from 'react-hook-form';
+import Modal from 'react-modal';
+import Logo from '../../../../assets/OPENSSUpot.svg';
+import { modalStyles } from '../../../../styles/editModal';
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getOneOrganization } from "../../../../api/getOneOrganization";
-import { patchOrganization } from "../../../../api/patchOrganization";
-import { api } from "../../../../service/TokenService";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { getOneOrganization } from '../../../../api/getOneOrganization';
+import { patchOrganization } from '../../../../api/patchOrganization';
+import { api } from '../../../../service/TokenService';
 import {
   StyledButton,
   StyledButtonWrapper,
@@ -25,11 +25,9 @@ import {
   StyledLogoWrapper,
   StyledTagRow,
   StyledTitle,
-} from "./-index.style";
+} from './-index.style';
 
-export const Route = createLazyFileRoute(
-  "/organizations/$organizationId/edit/"
-)({
+export const Route = createLazyFileRoute('/organizations/$organizationId/edit/')({
   component: RouteComponent,
 });
 
@@ -47,7 +45,7 @@ function RouteComponent() {
   const queryClient = useQueryClient();
 
   const { data: organization } = useQuery({
-    queryKey: ["organization", organizationId],
+    queryKey: ['organization', organizationId],
     queryFn: () => getOneOrganization(Number(organizationId)),
   });
 
@@ -72,7 +70,7 @@ function RouteComponent() {
       }
       // 아닌 경우는 기존 비밀번호 유지됨
       queryClient.invalidateQueries({
-        queryKey: ["organization", organizationId],
+        queryKey: ['organization', organizationId],
       });
       closeModal();
     },
@@ -80,7 +78,7 @@ function RouteComponent() {
 
   const closeModal = () => {
     navigate({
-      to: "/organizations/$organizationId",
+      to: '/organizations/$organizationId',
       params: { organizationId },
     });
   };
@@ -88,9 +86,9 @@ function RouteComponent() {
   const imageInputRef = useRef<HTMLInputElement | null>(null);
   const { register, handleSubmit, setValue } = useForm<GroupFormData>({
     defaultValues: {
-      name: "",
-      secretNumber: "",
-      description: "",
+      name: '',
+      secretNumber: '',
+      description: '',
       image: null,
       tags: [],
     },
@@ -98,9 +96,9 @@ function RouteComponent() {
 
   useEffect(() => {
     if (organization) {
-      setValue("name", organization.name);
-      setValue("description", organization.description);
-      setValue("secretNumber", "");
+      setValue('name', organization.name);
+      setValue('description', organization.description);
+      setValue('secretNumber', '');
       organization.hashtags.slice(0, 3).forEach((tag, index) => {
         setValue(`tags.${index}`, tag);
       });
@@ -119,7 +117,7 @@ function RouteComponent() {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
-    setValue("image", file);
+    setValue('image', file);
   };
 
   return (
@@ -139,21 +137,19 @@ function RouteComponent() {
         <StyledFieldGroup>
           <StyledLabel>단체명</StyledLabel>
           <StyledInput
-            {...register("name", { required: true })}
+            {...register('name', { required: true })}
             placeholder="단체명을 입력하세요"
           />
         </StyledFieldGroup>
         <StyledFieldGroup>
           <StyledLabelRow>
             <StyledLabel>단체 비밀번호</StyledLabel>
-            <StyledDetailLabel>
-              비밀번호를 변경 할 경우에만 채워주세요
-            </StyledDetailLabel>
+            <StyledDetailLabel>비밀번호를 변경 할 경우에만 채워주세요</StyledDetailLabel>
           </StyledLabelRow>
           <StyledInput
             type="password"
             autoComplete="off"
-            {...register("secretNumber")}
+            {...register('secretNumber')}
             placeholder="비밀번호를 입력하세요"
           />
         </StyledFieldGroup>
@@ -165,7 +161,7 @@ function RouteComponent() {
             </StyledDetailLabel>
           </StyledLabelRow>
           <StyledInput
-            {...register("description", { required: true })}
+            {...register('description', { required: true })}
             placeholder="단체에 대한 설명을 입력하세요"
           />
         </StyledFieldGroup>
@@ -177,7 +173,7 @@ function RouteComponent() {
               <StyledImageInput
                 ref={(e) => {
                   imageInputRef.current = e;
-                  register("image").ref(e);
+                  register('image').ref(e);
                 }}
                 id="imageInput"
                 type="file"
@@ -186,18 +182,14 @@ function RouteComponent() {
               />
             </StyledImageUpload>
           </StyledImageRow>
-          <StyledInput
-            value={"image"}
-            readOnly
-            placeholder="파일을 첨부하세요"
-          />
+          <StyledInput value={'image'} readOnly placeholder="파일을 첨부하세요" />
         </StyledFieldGroup>
         <StyledFieldGroup>
           <StyledLabel>해시태그</StyledLabel>
           <StyledTagRow>
-            <StyledInput {...register("tags.0")} placeholder="해시태그1" />
-            <StyledInput {...register("tags.1")} placeholder="해시태그2" />
-            <StyledInput {...register("tags.2")} placeholder="해시태그3" />
+            <StyledInput {...register('tags.0')} placeholder="해시태그1" />
+            <StyledInput {...register('tags.1')} placeholder="해시태그2" />
+            <StyledInput {...register('tags.2')} placeholder="해시태그3" />
           </StyledTagRow>
         </StyledFieldGroup>
 

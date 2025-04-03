@@ -1,23 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
-import {
-  createLazyFileRoute,
-  Outlet,
-  useNavigate,
-} from "@tanstack/react-router";
-import { SearchInfoCard } from "../../../../-components/OrganizationInfoCard/SearchInfoCard";
-import { SearchSpaceCard } from "../../../../-components/SpaceCard/SearchSpaceCard";
+import { useQuery } from '@tanstack/react-query';
+import { createLazyFileRoute, Outlet, useNavigate } from '@tanstack/react-router';
+import { SearchInfoCard } from '../../../../-components/OrganizationInfoCard/SearchInfoCard';
+import { SearchSpaceCard } from '../../../../-components/SpaceCard/SearchSpaceCard';
 import {
   getOrganizationSpaces,
   OrganizationSpacesResponse,
-} from "../../../../../api/getOrganizationSpaces";
-import {
-  StyledAddSpaceButton,
-  StyledContainer,
-  StyledSpaceGrid,
-} from "./-index.style";
-export const Route = createLazyFileRoute(
-  "/SearchResult/$query/organizations/$organizationId/"
-)({
+} from '../../../../../api/getOrganizationSpaces';
+import { StyledAddSpaceButton, StyledContainer, StyledSpaceGrid } from './-index.style';
+export const Route = createLazyFileRoute('/SearchResult/$query/organizations/$organizationId/')({
   component: RouteComponent,
 });
 
@@ -26,7 +16,7 @@ function RouteComponent() {
   const navigate = useNavigate();
 
   const { data, isLoading, isError } = useQuery<OrganizationSpacesResponse>({
-    queryKey: ["organizationSpaces", organizationId],
+    queryKey: ['organizationSpaces', organizationId],
     queryFn: () => getOrganizationSpaces(organizationId),
   });
 
@@ -42,7 +32,7 @@ function RouteComponent() {
 
   const handleReservationSpace = (spaceId: number) => {
     navigate({
-      to: "/Reservation/$spaceId",
+      to: '/Reservation/$spaceId',
       params: {
         spaceId: spaceId.toString(),
       },

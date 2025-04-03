@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledCalendarWrapper = styled.div`
   display: flex;
@@ -71,9 +71,8 @@ export const StyledCalendarCell = styled.div<{ $isSelected: boolean }>`
   height: 50px;
   font-size: 18px;
   font-weight: 500;
-  color: ${({ $isSelected }) => ($isSelected ? "white" : "#333")};
-  background-color: ${({ $isSelected }) =>
-    $isSelected ? "#1781EE" : "transparent"};
+  color: ${({ $isSelected }) => ($isSelected ? 'white' : '#333')};
+  background-color: ${({ $isSelected }) => ($isSelected ? '#1781EE' : 'transparent')};
   border-radius: 50%;
   cursor: pointer;
 

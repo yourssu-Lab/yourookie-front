@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
-import styled from "styled-components";
+import { Link } from '@tanstack/react-router';
+import styled from 'styled-components';
 
 export const StyledFooter = styled.footer`
   display: flex;
@@ -47,7 +47,7 @@ export const StyledLink = styled(Link)`
 export const StyledLogo = styled.span`
   margin-left: 77px;
   color: #1781ee;
-  font-family: "Mungyeong Gamhong Apple";
+  font-family: 'Mungyeong Gamhong Apple';
   font-size: 20px;
   font-style: normal;
   font-weight: 400;

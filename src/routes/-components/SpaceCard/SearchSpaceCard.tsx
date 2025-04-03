@@ -1,9 +1,9 @@
-import clock from "../../../assets/orga/clock.svg";
-import marker from "../../../assets/orga/marker.svg";
-import user from "../../../assets/orga/user.svg";
+import clock from '../../../assets/orga/clock.svg';
+import marker from '../../../assets/orga/marker.svg';
+import user from '../../../assets/orga/user.svg';
 
-import { Space } from "../../../types/organization.type";
-import { formatTime } from "../../../utils/formatTime";
+import { Space } from '../../../types/organization.type';
+import { formatTime } from '../../../utils/formatTime';
 import {
   StyledCapacityInfo,
   StyledCard,
@@ -15,7 +15,7 @@ import {
   StyledSpaceLocation,
   StyledTimeInfo,
   StyledTitle,
-} from "./SpaceCard.style";
+} from './SpaceCard.style';
 
 interface SpaceCardProps {
   space: Space;

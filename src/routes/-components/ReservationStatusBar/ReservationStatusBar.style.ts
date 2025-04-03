@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const StyledReservationWrapper = styled.div`
   display: flex;
@@ -70,16 +70,16 @@ export const StyledLegendItem = styled.div`
 `;
 
 export const StyledLegendDot = styled.div<{
-  $status: "available" | "reserved" | "selected";
+  $status: 'available' | 'reserved' | 'selected';
 }>`
   width: 17px;
   height: 17px;
   border-radius: 50%;
   background-color: ${(props) => {
-    if (props.$status === "available") return "#ECF5FF";
-    if (props.$status === "reserved") return "#E1E2E3";
-    if (props.$status === "selected") return "#1781EE";
-    return "transparent";
+    if (props.$status === 'available') return '#ECF5FF';
+    if (props.$status === 'reserved') return '#E1E2E3';
+    if (props.$status === 'selected') return '#1781EE';
+    return 'transparent';
   }};
 
   @media (max-width: 768px) {
@@ -118,32 +118,31 @@ export const StyledTimeSlotWrapper = styled.div`
 `;
 
 export const StyledTimeSlot = styled.div<{
-  $status: "available" | "reserved" | "selected" | "disabled";
+  $status: 'available' | 'reserved' | 'selected' | 'disabled';
   $isSelectionStart?: boolean;
 }>`
   height: 100px;
   width: 28px;
   border-radius: 4px;
   background-color: ${(props) => {
-    if (props.$isSelectionStart) return "#1781EE";
-    if (props.$status === "available") return "#ECF5FF";
-    if (props.$status === "reserved") return "#E1E2E3";
-    if (props.$status === "selected") return "#1781EE";
-    return "transparent";
+    if (props.$isSelectionStart) return '#1781EE';
+    if (props.$status === 'available') return '#ECF5FF';
+    if (props.$status === 'reserved') return '#E1E2E3';
+    if (props.$status === 'selected') return '#1781EE';
+    return 'transparent';
   }};
-  cursor: ${(props) =>
-    props.$status === "reserved" ? "not-allowed" : "pointer"};
+  cursor: ${(props) => (props.$status === 'reserved' ? 'not-allowed' : 'pointer')};
   transition: all 0.2s ease;
 
   &:hover {
     background-color: ${(props) => {
-      if (props.$status === "reserved") return "#E1E2E3";
-      return "#1781EE";
+      if (props.$status === 'reserved') return '#E1E2E3';
+      return '#1781EE';
     }};
-    opacity: ${(props) => (props.$status === "reserved" ? 1 : 0.8)};
+    opacity: ${(props) => (props.$status === 'reserved' ? 1 : 0.8)};
   }
   ${(props) =>
-    props.$status === "disabled" &&
+    props.$status === 'disabled' &&
     css`
       background-color: #333333;
       cursor: not-allowed;

@@ -1,23 +1,26 @@
-import { createLazyFileRoute } from '@tanstack/react-router'
-import {useState} from "react";
-import dayjs from "dayjs";
+import { createLazyFileRoute } from '@tanstack/react-router';
+import dayjs from 'dayjs';
+import { useState } from 'react';
+import MeetingRoomResult from '../-components/MeetingRoomResult/MeetingRoomResult';
+import { ReservationCalendar } from '../-components/ReservationCalendar/ReservationCalendar';
+import { ReservationStatusBar } from '../-components/ReservationStatusBar/ReservationStatusBar';
+import { GetMeetingRoomsParams } from '../../api/getMeetingRooms';
 import {
   StyledButtonWrapper,
-  StyledContainer, StyledDate, StyledDateTimeBox,
+  StyledContainer,
+  StyledDate,
+  StyledDateTimeBox,
   StyledHr,
   StyledImageSection,
   StyledInfoSection,
-  StyledPasswordSection, StyledQueryButton,
-  StyledTitle
-} from "./-index.style";
-import {ReservationCalendar} from "../-components/ReservationCalendar/ReservationCalendar";
-import {ReservationStatusBar} from "../-components/ReservationStatusBar/ReservationStatusBar";
-import MeetingRoomResult from "../-components/MeetingRoomResult/MeetingRoomResult";
-import {GetMeetingRoomsParams} from "../../api/getMeetingRooms";
+  StyledPasswordSection,
+  StyledQueryButton,
+  StyledTitle,
+} from './-index.style';
 
 export const Route = createLazyFileRoute('/meetingRooms/')({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -31,26 +34,26 @@ function RouteComponent() {
 
   const onSubmit = () => {
     if (!selectedDate || !selectedTime) {
-      alert("날짜와 시간을 선택해주세요");
+      alert('날짜와 시간을 선택해주세요');
       return;
     }
 
     const startDateTime = dayjs(selectedDate)
-        .hour(selectedTime.start.hour)
-        .minute(selectedTime.start.minute)
-        .format("YYYY-MM-DDTHH:mm:00");
+      .hour(selectedTime.start.hour)
+      .minute(selectedTime.start.minute)
+      .format('YYYY-MM-DDTHH:mm:00');
 
     const endDateTime = dayjs(selectedDate)
-        .hour(selectedTime.end.hour)
-        .minute(selectedTime.end.minute)
-        .format("YYYY-MM-DDTHH:mm:00");
+      .hour(selectedTime.end.hour)
+      .minute(selectedTime.end.minute)
+      .format('YYYY-MM-DDTHH:mm:00');
 
-    setMeetingRoomParams({startDateTime, endDateTime});
+    setMeetingRoomParams({ startDateTime, endDateTime });
     setMeetingRoomResultModelOpen(true);
   };
 
   const formatDate = (date: Date) => {
-    const days = ["일", "월", "화", "수", "목", "금", "토"];
+    const days = ['일', '월', '화', '수', '목', '금', '토'];
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
@@ -67,7 +70,7 @@ function RouteComponent() {
       if (time.minute === 60) {
         return `${time.hour + 1}:00`;
       }
-      return `${time.hour}:${time.minute === 30 ? "30" : "00"}`;
+      return `${time.hour}:${time.minute === 30 ? '30' : '00'}`;
     };
 
     const startMinutes = time.start.hour * 60 + time.start.minute;
@@ -81,7 +84,7 @@ function RouteComponent() {
     const diffHours = Math.floor(diffMinutes / 60);
     const remainingMinutes = diffMinutes % 60;
 
-    let duration = "";
+    let duration = '';
     if (diffHours > 0 && remainingMinutes > 0) {
       duration = `${diffHours}시간 ${remainingMinutes}분`;
     } else if (diffHours > 0) {
@@ -96,7 +99,7 @@ function RouteComponent() {
   const handleTimeSelect = (slots: { hour: number; minute: number }[]) => {
     if (slots.length > 0) {
       const sortedSlots = [...slots].sort(
-          (a, b) => a.hour * 60 + a.minute - (b.hour * 60 + b.minute)
+        (a, b) => a.hour * 60 + a.minute - (b.hour * 60 + b.minute),
       );
 
       const lastSlot = sortedSlots[sortedSlots.length - 1];
@@ -124,43 +127,46 @@ function RouteComponent() {
   };
 
   return (
-      <StyledContainer>
-        <StyledInfoSection>
-          <StyledTitle>교내 회의실 예약</StyledTitle>
-          <StyledHr />
-          <StyledButtonWrapper>
-            <StyledImageSection>
-              <StyledPasswordSection>
-                <StyledDateTimeBox>
-                  {selectedDate ? formatDate(selectedDate) : "날짜를 선택해주세요"}
-                </StyledDateTimeBox>
-              </StyledPasswordSection>
-              <StyledPasswordSection>
-                <StyledDateTimeBox>
-                  {selectedTime ? formatTime(selectedTime) : "시간을 선택해주세요"}
-                </StyledDateTimeBox>
-              </StyledPasswordSection>
-            </StyledImageSection>
-            <StyledQueryButton type="button" onClick={onSubmit}>조회</StyledQueryButton>
-            {
-              meetingRoomParams && <MeetingRoomResult
-                  open={meetingRoomResultModalOpen}
-                  closeModal={() => setMeetingRoomResultModelOpen(false)}
-                  meetingRoomParams={meetingRoomParams ?? {startDateTime: '', endDateTime: ''}}
-              />
-            }
+    <StyledContainer>
+      <StyledInfoSection>
+        <StyledTitle>교내 회의실 예약</StyledTitle>
+        <StyledHr />
+        <StyledButtonWrapper>
+          <StyledImageSection>
+            <StyledPasswordSection>
+              <StyledDateTimeBox>
+                {selectedDate ? formatDate(selectedDate) : '날짜를 선택해주세요'}
+              </StyledDateTimeBox>
+            </StyledPasswordSection>
+            <StyledPasswordSection>
+              <StyledDateTimeBox>
+                {selectedTime ? formatTime(selectedTime) : '시간을 선택해주세요'}
+              </StyledDateTimeBox>
+            </StyledPasswordSection>
+          </StyledImageSection>
+          <StyledQueryButton type="button" onClick={onSubmit}>
+            조회
+          </StyledQueryButton>
+          {meetingRoomParams && (
+            <MeetingRoomResult
+              open={meetingRoomResultModalOpen}
+              closeModal={() => setMeetingRoomResultModelOpen(false)}
+              meetingRoomParams={meetingRoomParams ?? { startDateTime: '', endDateTime: '' }}
+            />
+          )}
+        </StyledButtonWrapper>
 
-
-          </StyledButtonWrapper>
-
-          <StyledDate>날짜 및 시간 선택</StyledDate>
-          <ReservationCalendar
-              selectedDate={selectedDate}
-              onDateSelect={setSelectedDate}
-          />
-          <div style={{height: '20px'}}></div>
-          <ReservationStatusBar reservations={[]} openingTime="" closingTime="" type="meetingRoom" onTimeSelect={handleTimeSelect} />
-        </StyledInfoSection>
-      </StyledContainer>
+        <StyledDate>날짜 및 시간 선택</StyledDate>
+        <ReservationCalendar selectedDate={selectedDate} onDateSelect={setSelectedDate} />
+        <div style={{ height: '20px' }}></div>
+        <ReservationStatusBar
+          reservations={[]}
+          openingTime=""
+          closingTime=""
+          type="meetingRoom"
+          onTimeSelect={handleTimeSelect}
+        />
+      </StyledInfoSection>
+    </StyledContainer>
   );
 }

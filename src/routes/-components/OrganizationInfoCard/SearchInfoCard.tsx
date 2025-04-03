@@ -11,7 +11,7 @@ import {
   StyledTag,
   StyledTags,
   StyledTitle,
-} from "./OrganizationInfoCard.style";
+} from './OrganizationInfoCard.style';
 
 interface OrganizationInfoProps {
   name: string;
@@ -20,12 +20,7 @@ interface OrganizationInfoProps {
   hashtags: string[];
 }
 
-export const SearchInfoCard = ({
-  name,
-  description,
-  image,
-  hashtags,
-}: OrganizationInfoProps) => {
+export const SearchInfoCard = ({ name, description, image, hashtags }: OrganizationInfoProps) => {
   return (
     <StyledSection>
       <StyledHeader>
