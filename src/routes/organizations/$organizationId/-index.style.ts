@@ -5,12 +5,21 @@ export const StyledContainer = styled.div`
   max-width: 1220px;
   margin: 0 auto;
   padding: 60px 0;
+
+  @media (max-width: 768px) {
+    padding: 20px 16px;
+  }
 `;
 
 export const StyledSpaceGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px 18px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 `;
 
 export const StyledAddSpaceButton = styled.button`
@@ -32,5 +41,13 @@ export const StyledAddSpaceButton = styled.button`
 
   &:hover {
     background: #e3f2fd;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 20px;
+    font-size: 16px;
+    margin: 16px 0px 12px 0px;
   }
 `;

@@ -8,12 +8,21 @@ export const StyledCalendarWrapper = styled.div`
   border-radius: 20px;
   padding: 24px;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 16px;
+    border-radius: 16px;
+  }
 `;
 
 export const StyledHr = styled.div`
   width: 100%;
   border-top: 0.5px solid #858585;
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 12px;
+  }
 `;
 
 export const StyledWeekDaysGrid = styled.div`
@@ -22,6 +31,12 @@ export const StyledWeekDaysGrid = styled.div`
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 12px;
   margin-bottom: 12px;
+
+  @media (max-width: 768px) {
+    padding: 6px 0;
+    grid-gap: 6px;
+    margin-bottom: 8px;
+  }
 `;
 
 export const StyledWeekDay = styled.div`
@@ -31,12 +46,20 @@ export const StyledWeekDay = styled.div`
   font-size: 20px;
   font-weight: 500;
   color: #000;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export const StyledCalendarGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 24px;
+
+  @media (max-width: 768px) {
+    grid-gap: 12px;
+  }
 `;
 
 export const StyledCalendarCell = styled.div<{ $isSelected: boolean }>`
@@ -53,4 +76,17 @@ export const StyledCalendarCell = styled.div<{ $isSelected: boolean }>`
     $isSelected ? "#1781EE" : "transparent"};
   border-radius: 50%;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  @media (max-width: 480px) {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
 `;
