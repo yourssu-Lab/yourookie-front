@@ -1,17 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import { createLazyFileRoute } from "@tanstack/react-router";
-import dayjs from "dayjs";
-import { useState } from "react";
-import { ReservationStateCard } from "../../../-components/ReservationStateCard/ReservationStateCard";
-import { getReservationsTime } from "../../../../api/getReservationInfoTime";
-import {
-  StyledContainer,
-  StyledGrid,
-  StyledNoResults,
-  StyledTitle,
-} from "./-index.style";
+import { useQuery } from '@tanstack/react-query';
+import { createLazyFileRoute } from '@tanstack/react-router';
+import dayjs from 'dayjs';
+import { useState } from 'react';
+import { ReservationStateCard } from '../../../-components/ReservationStateCard/ReservationStateCard';
+import { getReservationsTime } from '../../../../api/getReservationInfoTime';
+import { StyledContainer, StyledGrid, StyledNoResults, StyledTitle } from './-index.style';
 
-export const Route = createLazyFileRoute("/Reservation/$spaceId/state/")({
+export const Route = createLazyFileRoute('/Reservation/$spaceId/state/')({
   component: RouteComponent,
 });
 
@@ -19,10 +14,10 @@ function RouteComponent() {
   const { spaceId } = Route.useParams();
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
 
-  const currentDate = dayjs().format("YYYY-MM-DDTHH:mm:00");
+  const currentDate = dayjs().format('YYYY-MM-DDTHH:mm:00');
 
   const { data: reservations = [] } = useQuery({
-    queryKey: ["reservations", spaceId, currentDate],
+    queryKey: ['reservations', spaceId, currentDate],
     queryFn: () => getReservationsTime(Number(spaceId), currentDate),
     enabled: !!spaceId,
   });

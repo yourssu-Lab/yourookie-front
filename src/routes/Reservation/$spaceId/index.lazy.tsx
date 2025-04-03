@@ -1,18 +1,16 @@
-import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
+import { createLazyFileRoute, useNavigate } from '@tanstack/react-router';
 
-import { useMutation, useQuery } from "@tanstack/react-query";
-import dayjs from "dayjs";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { ReservationCalendar } from "../../-components/ReservationCalendar/ReservationCalendar";
-import { ReservationInfoCard } from "../../-components/ReservationInfoCard/ReservationInfoCard";
-import { ReservationStatusBar } from "../../-components/ReservationStatusBar/ReservationStatusBar";
-import { getOneSpace, getOneSpaceOrga } from "../../../api/getOneSpace";
-import { getReservationInfo } from "../../../api/getReservationInfo";
-import {
-  postSpaceReservation,
-  SpaceReservationRequest,
-} from "../../../api/postSpaceReservation";
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+import dayjs from 'dayjs';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { ReservationCalendar } from '../../-components/ReservationCalendar/ReservationCalendar';
+import { ReservationInfoCard } from '../../-components/ReservationInfoCard/ReservationInfoCard';
+import { ReservationStatusBar } from '../../-components/ReservationStatusBar/ReservationStatusBar';
+import { getOneSpace, getOneSpaceOrga } from '../../../api/getOneSpace';
+import { getReservationInfo } from '../../../api/getReservationInfo';
+import { postSpaceReservation, SpaceReservationRequest } from '../../../api/postSpaceReservation';
 import {
   StyledButton,
   StyledButtonContainer,
@@ -28,10 +26,9 @@ import {
   StyledName,
   StyledPasswordSection,
   StyledTitle,
-} from "./-index.style";
-import {AxiosError} from "axios";
+} from './-index.style';
 
-export const Route = createLazyFileRoute("/Reservation/$spaceId/")({
+export const Route = createLazyFileRoute('/Reservation/$spaceId/')({
   component: RouteComponent,
 });
 
@@ -53,64 +50,56 @@ function RouteComponent() {
   } | null>(null);
 
   const { data: space } = useQuery({
-    queryKey: ["space", spaceId],
+    queryKey: ['space', spaceId],
     queryFn: () => getOneSpace(Number(spaceId)),
     enabled: !!spaceId,
   });
 
   const { data: organization } = useQuery({
-    queryKey: ["organization", spaceId],
+    queryKey: ['organization', spaceId],
     queryFn: () => getOneSpaceOrga(Number(spaceId)),
     enabled: !!spaceId,
   });
 
   const { data: reservations } = useQuery({
-    queryKey: [
-      "reservations",
-      spaceId,
-      dayjs(selectedDate).format("YYYY-MM-DD"),
-    ],
-    queryFn: () =>
-      getReservationInfo(
-        Number(spaceId),
-        dayjs(selectedDate).format("YYYY-MM-DD")
-      ),
+    queryKey: ['reservations', spaceId, dayjs(selectedDate).format('YYYY-MM-DD')],
+    queryFn: () => getReservationInfo(Number(spaceId), dayjs(selectedDate).format('YYYY-MM-DD')),
     enabled: !!spaceId && !!selectedDate,
   });
 
   const { register, handleSubmit } = useForm<ReservationFormData>();
 
   const mutation = useMutation({
-    mutationFn: (data: SpaceReservationRequest) =>
-      postSpaceReservation(Number(spaceId), data),
+    mutationFn: (data: SpaceReservationRequest) => postSpaceReservation(Number(spaceId), data),
     onSuccess: () => {
-      alert("예약이 완료되었습니다.");
+      alert('예약이 완료되었습니다.');
       navigate({
-        to: "/Reservation/$spaceId/state",
+        to: '/Reservation/$spaceId/state',
         params: { spaceId },
       });
     },
-    onError: (error: AxiosError<{message: string}>) => {
-      const errorMessage = error.response?.data.message ?? '예약에 실패했습니다. 다시 시도해주세요.';
+    onError: (error: AxiosError<{ message: string }>) => {
+      const errorMessage =
+        error.response?.data.message ?? '예약에 실패했습니다. 다시 시도해주세요.';
       alert(errorMessage);
     },
   });
 
   const onSubmit = (data: ReservationFormData) => {
     if (!selectedDate || !selectedTime) {
-      alert("날짜와 시간을 선택해주세요");
+      alert('날짜와 시간을 선택해주세요');
       return;
     }
 
     const startDateTime = dayjs(selectedDate)
       .hour(selectedTime.start.hour)
       .minute(selectedTime.start.minute)
-      .format("YYYY-MM-DDTHH:mm:00");
+      .format('YYYY-MM-DDTHH:mm:00');
 
     const endDateTime = dayjs(selectedDate)
       .hour(selectedTime.end.hour)
       .minute(selectedTime.end.minute)
-      .format("YYYY-MM-DDTHH:mm:00");
+      .format('YYYY-MM-DDTHH:mm:00');
 
     const reservationData: SpaceReservationRequest = {
       name: data.name,
@@ -124,7 +113,7 @@ function RouteComponent() {
   };
 
   const formatDate = (date: Date) => {
-    const days = ["일", "월", "화", "수", "목", "금", "토"];
+    const days = ['일', '월', '화', '수', '목', '금', '토'];
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
@@ -141,7 +130,7 @@ function RouteComponent() {
       if (time.minute === 60) {
         return `${time.hour + 1}:00`;
       }
-      return `${time.hour}:${time.minute === 30 ? "30" : "00"}`;
+      return `${time.hour}:${time.minute === 30 ? '30' : '00'}`;
     };
 
     const startMinutes = time.start.hour * 60 + time.start.minute;
@@ -155,7 +144,7 @@ function RouteComponent() {
     const diffHours = Math.floor(diffMinutes / 60);
     const remainingMinutes = diffMinutes % 60;
 
-    let duration = "";
+    let duration = '';
     if (diffHours > 0 && remainingMinutes > 0) {
       duration = `${diffHours}시간 ${remainingMinutes}분`;
     } else if (diffHours > 0) {
@@ -170,7 +159,7 @@ function RouteComponent() {
   const handleTimeSelect = (slots: { hour: number; minute: number }[]) => {
     if (slots.length > 0) {
       const sortedSlots = [...slots].sort(
-        (a, b) => a.hour * 60 + a.minute - (b.hour * 60 + b.minute)
+        (a, b) => a.hour * 60 + a.minute - (b.hour * 60 + b.minute),
       );
 
       const lastSlot = sortedSlots[sortedSlots.length - 1];
@@ -208,13 +197,13 @@ function RouteComponent() {
         <StyledImageSection>
           <StyledPasswordSection>
             <StyledDateTimeBox>
-              {selectedDate ? formatDate(selectedDate) : "날짜를 선택해주세요"}
+              {selectedDate ? formatDate(selectedDate) : '날짜를 선택해주세요'}
             </StyledDateTimeBox>
           </StyledPasswordSection>
 
           <StyledPasswordSection>
             <StyledDateTimeBox>
-              {selectedTime ? formatTime(selectedTime) : "시간을 선택해주세요"}
+              {selectedTime ? formatTime(selectedTime) : '시간을 선택해주세요'}
             </StyledDateTimeBox>
           </StyledPasswordSection>
         </StyledImageSection>
@@ -222,21 +211,18 @@ function RouteComponent() {
           <StyledDate>날짜 및 시간 선택</StyledDate>
           <StyledDetailLabel>1시간 이상 선택해주세요</StyledDetailLabel>
         </StyledLabelRow>
-        <ReservationCalendar
-          selectedDate={selectedDate}
-          onDateSelect={setSelectedDate}
-        />
+        <ReservationCalendar selectedDate={selectedDate} onDateSelect={setSelectedDate} />
         <ReservationStatusBar
           onTimeSelect={handleTimeSelect}
           reservations={reservations || []}
-          openingTime={space?.openingTime || "00:00:00"}
-          closingTime={space?.closingTime || "23:59:59"}
+          openingTime={space?.openingTime || '00:00:00'}
+          closingTime={space?.closingTime || '23:59:59'}
           type="reservation"
         />
       </StyledInfoSection>
       <StyledTitle>예약자 명</StyledTitle>
       <StyledInput
-        {...register("name", { required: true })}
+        {...register('name', { required: true })}
         type="text"
         placeholder="예약자 명을 입력하세요"
         autoComplete="new-password"
@@ -246,7 +232,7 @@ function RouteComponent() {
         <StyledPasswordSection>
           <StyledTitle>공간 비밀번호</StyledTitle>
           <StyledInput
-            {...register("password", { required: true })}
+            {...register('password', { required: true })}
             type="password"
             placeholder="공간 비밀번호를 입력하세요"
             autoComplete="new-password"
@@ -259,7 +245,7 @@ function RouteComponent() {
             <StyledDetailLabel>예약 취소 시 사용됩니다.</StyledDetailLabel>
           </StyledLabelRow>
           <StyledInput
-            {...register("personalPassword", { required: true })}
+            {...register('personalPassword', { required: true })}
             type="password"
             placeholder="개인 비밀번호를 입력하세요"
             autoComplete="new-password"

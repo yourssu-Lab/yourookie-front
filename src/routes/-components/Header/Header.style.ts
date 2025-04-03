@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
-import styled from "styled-components";
+import { Link } from '@tanstack/react-router';
+import styled from 'styled-components';
 
 interface HeaderProps {
   $primary: boolean;
@@ -12,7 +12,7 @@ export const StyledHeader = styled.header<HeaderProps>`
   align-items: center;
   justify-content: space-between;
   height: 84px;
-  background: ${({ $primary }) => ($primary ? "#1781EE" : "#FFF")};
+  background: ${({ $primary }) => ($primary ? '#1781EE' : '#FFF')};
 
   @media (max-width: 1024px) {
     padding: 0 20px;
@@ -29,8 +29,8 @@ export const StyledHeader = styled.header<HeaderProps>`
 `;
 
 export const StyledLogo = styled(Link)<HeaderProps>`
-  color: ${({ $primary }) => ($primary ? "#FFF" : "#1781EE")};
-  font-family: "Mungyeong Gamhong Apple";
+  color: ${({ $primary }) => ($primary ? '#FFF' : '#1781EE')};
+  font-family: 'Mungyeong Gamhong Apple';
   font-size: 22px;
   font-style: normal;
   font-weight: 400;
@@ -126,7 +126,7 @@ export const IconContainer = styled.div`
 `;
 
 export const StyledLink = styled(Link)<HeaderProps>`
-  color: ${({ $primary }) => ($primary ? "#FFF" : "#1781EE")};
+  color: ${({ $primary }) => ($primary ? '#FFF' : '#1781EE')};
   font-family: Pretendard;
   font-size: 20px;
   font-style: normal;
@@ -147,10 +147,10 @@ export const StyledLoginButton = styled.button<HeaderProps>`
   align-items: center;
   flex-shrink: 0;
   border-radius: 12px;
-  background: ${({ $primary }) => ($primary ? "#FFF" : "#1781EE")};
+  background: ${({ $primary }) => ($primary ? '#FFF' : '#1781EE')};
   border: none;
   padding: 8px 20px;
-  color: ${({ $primary }) => ($primary ? "#1781EE" : "#FFF")};
+  color: ${({ $primary }) => ($primary ? '#1781EE' : '#FFF')};
   font-family: Pretendard;
   font-size: 18px;
   font-style: normal;

@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
-import { formatTime } from "../../../utils/formatTime";
+import { Link } from '@tanstack/react-router';
+import { formatTime } from '../../../utils/formatTime';
 import {
   StyledButton,
   StyledButtonWrapper,
@@ -8,7 +8,7 @@ import {
   StyledInfoSection,
   StyledInfoText,
   StyledTitle,
-} from "./ReservationInfoCard.style";
+} from './ReservationInfoCard.style';
 
 export interface ReservationInfoCardProps {
   id?: number;
@@ -40,12 +40,12 @@ export const ReservationInfoCard = ({
         <StyledTitle>{name}</StyledTitle>
         <StyledInfoText>{location}</StyledInfoText>
         <StyledInfoText>
-          {formatTime(openingTime || "")}~{formatTime(closingTime || "")}
+          {formatTime(openingTime || '')}~{formatTime(closingTime || '')}
         </StyledInfoText>
         <StyledInfoText>최대 {capacity}명</StyledInfoText>
       </StyledInfoSection>
       <StyledButtonWrapper>
-        <Link to={to} style={{ textDecoration: "none" }}>
+        <Link to={to} style={{ textDecoration: 'none' }}>
           <StyledButton>예약 현황 조회</StyledButton>
         </Link>
       </StyledButtonWrapper>

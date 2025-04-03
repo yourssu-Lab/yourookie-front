@@ -8,7 +8,7 @@ import {
   StyledTag,
   StyledTags,
   StyledViewSpaceButton,
-} from "./GroupCard.style";
+} from './GroupCard.style';
 
 export const GroupCard = ({ group, onClick }: GroupCardProps) => {
   const handleSpaceView = (space: string) => {

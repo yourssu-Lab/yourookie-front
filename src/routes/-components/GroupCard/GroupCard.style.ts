@@ -11,7 +11,7 @@ export interface GroupCardProps {
   onClick: (space: string, groupId: number) => void;
 }
 
-import styled from "styled-components";
+import styled from 'styled-components';
 export const CardWrapper = styled.div`
   display: flex;
   background: white;

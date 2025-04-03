@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
   width: 100%;
@@ -15,10 +15,10 @@ export const StyledTitle = styled.h1`
 `;
 
 export const StyledDate = styled.p`
-    font-size: 28px;
-    font-weight: 700;
-    color: #3a3a3a;
-    margin-bottom: 26px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #3a3a3a;
+  margin-bottom: 26px;
 `;
 
 export const StyledInfoSection = styled.div`
@@ -27,42 +27,42 @@ export const StyledInfoSection = styled.div`
 `;
 
 export const StyledButtonWrapper = styled.div`
-    display: flex;
-    gap: 38px;
+  display: flex;
+  gap: 38px;
 `;
 
 export const StyledQueryButton = styled.button`
-    display: flex;
-    width: 190px;
-    height: 50px;
-    padding: 10px 20px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 12px;
-    background: #1781EE;
-    color: #FFF;
-    
-    font-family: Pretendard;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    border: none;
+  display: flex;
+  width: 190px;
+  height: 50px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  background: #1781ee;
+  color: #fff;
 
-    cursor: pointer;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  border: none;
+
+  cursor: pointer;
 `;
 
 export const StyledImageSection = styled.div`
-    display: flex;
-    gap: 18px;
-    align-items: flex-start;
-    margin-bottom: 40px;
-    flex: 1;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  flex: 1;
 `;
 
 export const StyledHr = styled.div`
-    width: 100%;
-    border-top: 1px solid #D6D6D6;
-    margin-bottom: 40px;
+  width: 100%;
+  border-top: 1px solid #d6d6d6;
+  margin-bottom: 40px;
 `;
 
 export const StyledInput = styled.input`
@@ -83,11 +83,11 @@ export const StyledPasswordSection = styled.div`
 `;
 
 export const StyledDateTimeBox = styled.div`
-    padding: 16px 20px;
-    border-radius: 12px;
-    border: 1px solid #d6d6d6;
-    font-size: 18px;
-    color: #3a3a3a;
-    text-align: center;
-    height: 50px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 1px solid #d6d6d6;
+  font-size: 18px;
+  color: #3a3a3a;
+  text-align: center;
+  height: 50px;
 `;

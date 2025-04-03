@@ -1,31 +1,27 @@
-import { useQuery } from "@tanstack/react-query";
-import {
-  createLazyFileRoute,
-  useParams,
-  useRouter,
-} from "@tanstack/react-router";
-import { GroupCard } from "../../-components/GroupCard/GroupCard";
-import { getOrganization } from "../../../api/getOrganization";
+import { useQuery } from '@tanstack/react-query';
+import { createLazyFileRoute, useParams, useRouter } from '@tanstack/react-router';
+import { GroupCard } from '../../-components/GroupCard/GroupCard';
+import { getOrganization } from '../../../api/getOrganization';
 import {
   SearchContainer,
   SearchHeader,
   SearchResultsGrid,
   StyledHr,
   StyledNoResults,
-} from "./-index.style";
+} from './-index.style';
 
-export const Route = createLazyFileRoute("/SearchResult/$query/")({
+export const Route = createLazyFileRoute('/SearchResult/$query/')({
   component: SearchResults,
 });
 
 function SearchResults() {
   const router = useRouter();
   const { query } = useParams({
-    from: "/SearchResult/$query/",
+    from: '/SearchResult/$query/',
   });
 
   const { data: organizations = [] } = useQuery({
-    queryKey: ["organizations", query],
+    queryKey: ['organizations', query],
     queryFn: () => getOrganization(query),
     enabled: !!query,
   });
