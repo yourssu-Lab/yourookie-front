@@ -34,6 +34,8 @@ export const SmallModalStyles = {
     padding: "50px",
     borderRadius: "20px",
     border: "none",
+    maxWidth: "90%",
+    maxHeight: "auto",
   },
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.4)",
