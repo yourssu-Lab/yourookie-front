@@ -2,7 +2,6 @@ import Modal from 'react-modal';
 import {
   StyledButton,
   StyledButtonWrapper,
-  StyledLogo,
   StyledText,
   StyledWrapper,
 } from './LoginAlert.style';
@@ -12,15 +11,13 @@ const customStyles = {
     background: 'rgba(0, 0, 0, 0.40)',
   },
   content: {
-    top: '166px',
+    top: '50%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, 0)',
-    padding: '23px 35px',
+    transform: 'translate(-50%, -50%)',
+    padding: '24px 36px',
     width: '400px',
-    height: '250px',
     borderRadius: '20px',
   },
 };
@@ -39,7 +36,6 @@ const LoginAlert = ({ open, closeModal }: LoginAlertProps) => {
       contentLabel="Example Modal"
     >
       <StyledWrapper>
-        <StyledLogo>OPENSSUpot</StyledLogo>
         <StyledText>로그인 후 이용 가능합니다.</StyledText>
         <StyledButtonWrapper>
           <StyledButton onClick={closeModal}>닫기</StyledButton>
