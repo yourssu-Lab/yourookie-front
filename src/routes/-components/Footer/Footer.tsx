@@ -1,11 +1,11 @@
-import { StyledContainer, StyledFooter, StyledLink, StyledTag } from './Footer.style';
+import { StyledContainer, StyledFooter, StyledLink } from './Footer.style';
 import LogoBlue from '../../../assets/spacer_logo_blue.svg'
 
 function Footer() {
   return (
     <StyledFooter>
+      <img width={100} src={LogoBlue} />
       <StyledContainer>
-        <img width={100} src={LogoBlue} />
         <StyledLink
           target="_blank"
           to="https://docs.google.com/document/d/1XuQiTSiq4O4UQw6ABSVT821sfy9lUos44JaIKRRF69g/edit?tab=t.0"
@@ -21,7 +21,6 @@ function Footer() {
           이용약관
         </StyledLink>
       </StyledContainer>
-      <StyledTag>@OPENSSUpot</StyledTag>
     </StyledFooter>
   );
 }
