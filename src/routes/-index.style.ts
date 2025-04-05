@@ -65,7 +65,7 @@ export const StyledSecondSectionThirdText = styled.h1`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-top: 39px;
+  margin-top: 22px;
 `;
 
 export const StyledSecondSectionLastText = styled.h1`
