@@ -9,7 +9,6 @@ export const StyledContainer = styled.div`
   overflow: hidden;
   align-items: center;
   gap: 40px;
-  cursor: pointer;
 
   @media (max-width: 768px) {
     flex-direction: row;
@@ -41,7 +40,6 @@ export const StyledImageSection = styled.div`
 
 export const StyledInfoSection = styled.div`
   flex: 1;
-  margin-bottom: 27px;
 
   @media (max-width: 768px) {
     width: calc(100% - 140px);

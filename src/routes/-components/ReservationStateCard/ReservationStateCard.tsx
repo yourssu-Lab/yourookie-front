@@ -26,18 +26,14 @@ interface ReservationStateCardProps {
   spaceId: number;
   startDateTime: string;
   endDateTime: string;
-  isSelected: boolean;
-  onCardSelect: () => void;
 }
 
 export const ReservationStateCard = ({
-  id,
-  spaceId,
-  startDateTime,
-  endDateTime,
-  isSelected,
-  onCardSelect,
-}: ReservationStateCardProps) => {
+                                       id,
+                                       spaceId,
+                                       startDateTime,
+                                       endDateTime,
+                                     }: ReservationStateCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [password, setPassword] = useState('');
   const queryClient = useQueryClient();
@@ -64,7 +60,6 @@ export const ReservationStateCard = ({
     },
   });
 
-  const date = dayjs(startDateTime).format('YYYY.MM.DD');
   const time = `${dayjs(startDateTime).format('HH:mm')}~${dayjs(endDateTime).format('HH:mm')}`;
 
   const handleDelete = (e: React.MouseEvent) => {
@@ -85,7 +80,7 @@ export const ReservationStateCard = ({
   };
 
   return (
-    <StyledContainer onClick={onCardSelect}>
+    <StyledContainer>
       <StyledImageSection>
         <img src={space?.spaceImageUrl} alt={space?.name} />
       </StyledImageSection>
@@ -100,13 +95,10 @@ export const ReservationStateCard = ({
       </StyledInfoSection>
 
       <StyledReservationSection>
-        <StyledReservationInfo>{date}</StyledReservationInfo>
         <StyledReservationInfo>{time}</StyledReservationInfo>
-        {isSelected && (
-          <StyledButton onClick={handleDelete} disabled={deleteMutation.isPending}>
-            삭제
-          </StyledButton>
-        )}
+        <StyledButton onClick={handleDelete} disabled={deleteMutation.isPending}>
+          예약 취소
+        </StyledButton>
       </StyledReservationSection>
       <div onClick={handleModalClick}>
         <Modal

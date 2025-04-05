@@ -4,7 +4,8 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import { ReservationStateCard } from '../../../-components/ReservationStateCard/ReservationStateCard';
 import { getReservationsTime } from '../../../../api/getReservationInfoTime';
-import { StyledContainer, StyledGrid, StyledNoResults, StyledTitle } from './-index.style';
+import { StyledContainer, StyledDivider, StyledGrid, StyledNoResults, StyledTitle } from './-index.style';
+import { ReservationCalendar } from '../../../-components/ReservationCalendar/ReservationCalendar.tsx';
 
 export const Route = createLazyFileRoute('/Reservation/$spaceId/state/')({
   component: RouteComponent,
@@ -12,9 +13,10 @@ export const Route = createLazyFileRoute('/Reservation/$spaceId/state/')({
 
 function RouteComponent() {
   const { spaceId } = Route.useParams();
-  const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
 
-  const currentDate = dayjs().format('YYYY-MM-DDTHH:mm:00');
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+
+  const currentDate = dayjs(selectedDate).format('YYYY-MM-DDTHH:mm:00');
 
   const { data: reservations = [] } = useQuery({
     queryKey: ['reservations', spaceId, currentDate],
@@ -22,13 +24,11 @@ function RouteComponent() {
     enabled: !!spaceId,
   });
 
-  const handleCardSelect = (id: number) => {
-    setSelectedCardId(selectedCardId === id ? null : id);
-  };
-
   return (
     <StyledContainer>
-      <StyledTitle>공간 예약 현황 조회</StyledTitle>
+      <StyledTitle>예약 현황 조회</StyledTitle>
+      <ReservationCalendar selectedDate={selectedDate} onDateSelect={setSelectedDate} />
+      <StyledDivider />
       <StyledGrid>
         {reservations.length > 0 ? (
           reservations.map((reservation) => (
@@ -36,8 +36,6 @@ function RouteComponent() {
               key={reservation.id}
               spaceId={Number(spaceId)}
               {...reservation}
-              isSelected={selectedCardId === reservation.id}
-              onCardSelect={() => handleCardSelect(reservation.id)}
             />
           ))
         ) : (
