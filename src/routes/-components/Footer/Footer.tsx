@@ -1,10 +1,11 @@
-import { StyledContainer, StyledFooter, StyledLink, StyledLogo, StyledTag } from './Footer.style';
+import { StyledContainer, StyledFooter, StyledLink, StyledTag } from './Footer.style';
+import LogoBlue from '../../../assets/spacer_logo_blue.svg'
 
 function Footer() {
   return (
     <StyledFooter>
       <StyledContainer>
-        <StyledLogo>OPENSSUpot</StyledLogo>
+        <img width={100} src={LogoBlue} />
         <StyledLink
           target="_blank"
           to="https://docs.google.com/document/d/1XuQiTSiq4O4UQw6ABSVT821sfy9lUos44JaIKRRF69g/edit?tab=t.0"

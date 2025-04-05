@@ -40,16 +40,6 @@ export const StyledFirstSectionSecondText = styled.h1`
   margin-top: 15px;
 `;
 
-export const StyledFirstSectionLastText = styled.h1`
-  color: #fff;
-  font-family: 'Mungyeong Gamhong Apple';
-  font-size: 55px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  margin-top: 24px;
-`;
-
 export const StyledSecondSection = styled.section`
   height: 979px;
   background: #f9f9f9;
@@ -57,15 +47,6 @@ export const StyledSecondSection = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 97px;
-`;
-
-export const StyledSecondSectionFirstText = styled.h1`
-  color: #1781ee;
-  font-family: 'Mungyeong Gamhong Apple';
-  font-size: 50px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
 `;
 
 export const StyledSecondSectionSecondText = styled.h1`

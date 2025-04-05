@@ -28,29 +28,6 @@ export const StyledHeader = styled.header<HeaderProps>`
   }
 `;
 
-export const StyledLogo = styled(Link)<HeaderProps>`
-  color: ${({ $primary }) => ($primary ? '#FFF' : '#1781EE')};
-  font-family: 'Mungyeong Gamhong Apple';
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -1.1px;
-  text-decoration: none;
-
-  display: flex;
-  width: 144px;
-  height: 28px;
-  padding: 0 5px;
-  align-items: center;
-  flex-shrink: 0;
-
-  @media (max-width: 768px) {
-    margin: 5px 0;
-    font-size: 20px;
-  }
-`;
-
 export const StyledNav = styled.nav`
   display: flex;
   align-items: center;
