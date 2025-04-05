@@ -13,8 +13,8 @@ import {
   StyledHeader,
   StyledInput,
   StyledLink,
-  StyledLogo,
 } from './SignIn.style';
+import LogoBlue from '../../../assets/spacer_logo_blue.svg';
 
 const customStyles = {
   overlay: {
@@ -57,7 +57,7 @@ const SignIn = ({ open, closeModal }: SignInProps) => {
       <StyledContent>
         <StyledHeader>
           <StyledH2>로그인</StyledH2>
-          <StyledLogo>openssupot</StyledLogo>
+          <img width={100} src={LogoBlue} />
         </StyledHeader>
 
         <form onSubmit={onSubmit}>

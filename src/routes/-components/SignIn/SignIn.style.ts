@@ -1,14 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import styled from 'styled-components';
 
-export const StyledLogo = styled.span`
-  color: #1781ee;
-  font-family: 'Mungyeong Gamhong Apple';
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 400;
-`;
-
 export const StyledHeader = styled.div`
   display: flex;
   justify-content: space-between;
