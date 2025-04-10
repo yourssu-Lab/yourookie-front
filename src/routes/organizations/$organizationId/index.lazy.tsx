@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { createLazyFileRoute, Outlet, useNavigate } from '@tanstack/react-router';
 import { useEffect } from 'react';
-import { OrganizationInfoCard } from '../../-components/OrganizationInfoCard/OrganizationInfoCard';
-import { SpaceCard } from '../../-components/SpaceCard/SpaceCard';
+import { OrganizationInfoCard } from '@/components/OrganizationInfoCard/OrganizationInfoCard';
+import { SpaceCard } from '@/components/SpaceCard/SpaceCard';
 import {
   getOrganizationSpaces,
   OrganizationSpacesResponse,

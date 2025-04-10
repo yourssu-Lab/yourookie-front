@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import Modal from 'react-modal';
 import { getOneSpace } from '../../../../../api/getOneSpace';
 import { patchSpace, SpaceFormData, UpdateSpaceParams } from '../../../../../api/patchSpace';
-import Logo from '../../../../../assets/OPENSSUpot.svg';
+import Logo from '../../../../../assets/spacer_logo_blue.svg';
 import { modalStyles } from '../../../../../styles/editModal';
 import {
   StyledButton,

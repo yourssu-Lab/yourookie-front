@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { createLazyFileRoute, useParams, useRouter } from '@tanstack/react-router';
-import { GroupCard } from '../../-components/GroupCard/GroupCard';
+import { GroupCard } from '@/components/GroupCard/GroupCard';
 import { getOrganization } from '../../../api/getOrganization';
 import {
   SearchContainer,
