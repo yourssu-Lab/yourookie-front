@@ -2,10 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import { createLazyFileRoute } from '@tanstack/react-router';
 import dayjs from 'dayjs';
 import { useState } from 'react';
-import { ReservationStateCard } from '../../../-components/ReservationStateCard/ReservationStateCard';
+import { ReservationStateCard } from '@/components/ReservationStateCard/ReservationStateCard';
 import { getReservationsTime } from '../../../../api/getReservationInfoTime';
 import { StyledContainer, StyledDivider, StyledGrid, StyledNoResults, StyledTitle } from './-index.style';
-import { ReservationCalendar } from '../../../-components/ReservationCalendar/ReservationCalendar.tsx';
+import { ReservationCalendar } from '@/components/ReservationCalendar/ReservationCalendar.tsx';
 
 export const Route = createLazyFileRoute('/Reservation/$spaceId/state/')({
   component: RouteComponent,

@@ -1,9 +1,9 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
 import dayjs from 'dayjs';
 import { useState } from 'react';
-import MeetingRoomResult from '../-components/MeetingRoomResult/MeetingRoomResult';
-import { ReservationCalendar } from '../-components/ReservationCalendar/ReservationCalendar';
-import { ReservationStatusBar } from '../-components/ReservationStatusBar/ReservationStatusBar';
+import MeetingRoomResult from '@/components/MeetingRoomResult/MeetingRoomResult';
+import { ReservationCalendar } from '@/components/ReservationCalendar/ReservationCalendar';
+import { ReservationStatusBar } from '@/components/ReservationStatusBar/ReservationStatusBar';
 import { GetMeetingRoomsParams } from '../../api/getMeetingRooms';
 import {
   StyledButtonWrapper,
