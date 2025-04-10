@@ -121,42 +121,43 @@ export const StyledTimeSlot = styled.div<{
   $status: 'available' | 'reserved' | 'selected' | 'disabled';
   $isSelectionStart?: boolean;
 }>`
-  height: 100px;
-  width: 28px;
-  border-radius: 4px;
-  background-color: ${(props) => {
-    if (props.$isSelectionStart) return '#1781EE';
-    if (props.$status === 'available') return '#ECF5FF';
-    if (props.$status === 'reserved') return '#E1E2E3';
-    if (props.$status === 'selected') return '#1781EE';
-    return 'transparent';
-  }};
-  cursor: ${(props) => (props.$status === 'reserved' ? 'not-allowed' : 'pointer')};
-  transition: all 0.2s ease;
-
-  &:hover {
+    height: 100px;
+    width: 28px;
+    border-radius: 4px;
     background-color: ${(props) => {
-      if (props.$status === 'reserved') return '#E1E2E3';
-      return '#1781EE';
+        if (props.$isSelectionStart) return '#1781EE';
+        if (props.$status === 'available') return '#ECF5FF';
+        if (props.$status === 'reserved') return '#E1E2E3';
+        if (props.$status === 'selected') return '#1781EE';
+        return 'transparent';
     }};
-    opacity: ${(props) => (props.$status === 'reserved' ? 1 : 0.8)};
-  }
-  ${(props) =>
-    props.$status === 'disabled' &&
-    css`
-      background-color: #333333;
-      cursor: not-allowed;
-    `}
+    cursor: ${(props) => (props.$status === 'reserved' ? 'not-allowed' : 'pointer')};
+    transition: all 0.2s ease;
 
-  @media (max-width: 768px) {
-    height: 60px;
-    width: 20px;
-  }
+    &:hover {
+        background-color: ${(props) => {
+            if (props.$status === 'reserved') return '#E1E2E3';
+            return '#1781EE';
+        }};
+        opacity: ${(props) => (props.$status === 'reserved' ? 1 : 0.8)};
+    }
 
-  @media (max-width: 480px) {
-    height: 50px;
-    width: 16px;
-  }
+    ${(props) =>
+            props.$status === 'disabled' &&
+            css`
+                background-color: #333333;
+                cursor: not-allowed;
+            `};
+
+    @media (max-width: 768px) {
+        height: 60px;
+        width: 20px;
+    }
+
+    @media (max-width: 480px) {
+        height: 50px;
+        width: 16px;
+    }
 `;
 
 export const StyledTimeLabel = styled.div`
