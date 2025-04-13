@@ -60,7 +60,7 @@ export const ReservationCalendar = ({ selectedDate, onDateSelect }: ReservationC
   };
 
   const handleDateClick = (date: Date) => {
-    onDateSelect(dayjs(date).startOf('day').toDate());
+    onDateSelect(date);
   };
 
   const renderCalendarCells = () => {
