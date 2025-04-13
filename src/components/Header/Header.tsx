@@ -1,12 +1,12 @@
 import { Link, useMatchRoute, useNavigate } from '@tanstack/react-router';
 import { FormEvent, useState } from 'react';
 import SearchIcon from '../../assets/search.svg?react';
+import LogoBlue from '../../assets/spacer_logo_blue.svg';
+import LogoWhite from '../../assets/spacer_logo_white.svg';
 import { useLoginState } from '../../hooks/useLoginState.ts';
 import { api } from '../../service/TokenService.ts';
 import LoginAlert from '../LoginAlert/LoginAlert.tsx';
 import SignIn from '../SignIn/SignIn.tsx';
-import LogoBlue from '../../assets/spacer_logo_blue.svg';
-import LogoWhite from '../../assets/spacer_logo_white.svg';
 
 import {
   IconContainer,
@@ -42,7 +42,8 @@ function Header() {
 
   return (
     <StyledHeader $primary={!isHome}>
-      <Link to="/">
+      {/* <Link to="/"> */}
+      <Link>
         <img width={100} src={isHome ? LogoBlue : LogoWhite} />
       </Link>
       <StyledNav>
