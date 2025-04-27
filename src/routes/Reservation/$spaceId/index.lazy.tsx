@@ -1,13 +1,13 @@
 import { createLazyFileRoute, useNavigate } from '@tanstack/react-router';
 
+import { ReservationCalendar } from '@/components/ReservationCalendar/ReservationCalendar';
+import { ReservationInfoCard } from '@/components/ReservationInfoCard/ReservationInfoCard';
+import { ReservationStatusBar } from '@/components/ReservationStatusBar/ReservationStatusBar';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { ReservationCalendar } from '@/components/ReservationCalendar/ReservationCalendar';
-import { ReservationInfoCard } from '@/components/ReservationInfoCard/ReservationInfoCard';
-import { ReservationStatusBar } from '@/components/ReservationStatusBar/ReservationStatusBar';
 import { getOneSpace, getOneSpaceOrga } from '../../../api/getOneSpace';
 import { getReservationInfo } from '../../../api/getReservationInfo';
 import { postSpaceReservation, SpaceReservationRequest } from '../../../api/postSpaceReservation';
@@ -161,12 +161,15 @@ function RouteComponent() {
       const sortedSlots = [...slots].sort(
         (a, b) => a.hour * 60 + a.minute - (b.hour * 60 + b.minute),
       );
-
       const lastSlot = sortedSlots[sortedSlots.length - 1];
+
       let endHour = lastSlot.hour;
       let endMinute = lastSlot.minute + 30;
 
-      if (endMinute === 60) {
+      if (endHour === 23 && endMinute === 60) {
+        endHour = 23;
+        endMinute = 59;
+      } else if (endMinute === 60) {
         endHour += 1;
         endMinute = 0;
       }
