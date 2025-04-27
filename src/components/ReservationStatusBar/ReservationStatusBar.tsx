@@ -55,6 +55,9 @@ export const ReservationStatusBar = ({
     minute: parseInt(closingTime.split(':')[1]),
   };
 
+  const startHour = openTime.hour;
+  const endHour = closeTime.hour;
+
   const generateTimeSlots = (startHour: number, endHour: number, reservations: Reservation[]) => {
     const slots: TimeSlot[] = [];
 
@@ -94,7 +97,7 @@ export const ReservationStatusBar = ({
     return slots;
   };
 
-  const timeSlots = generateTimeSlots(6, 21, reservations);
+  const timeSlots = generateTimeSlots(startHour, endHour, reservations);
 
   const handleSelect = (hour: number, minute: number) => {
     const slot = timeSlots.find((slot) => slot.hour === hour && slot.minute === minute);
