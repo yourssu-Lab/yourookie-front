@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { createLazyFileRoute, useNavigate } from '@tanstack/react-router';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { postOpen, SpaceParams } from '../../../../api/postOpen';
 import { useLoginState } from '../../../../hooks/useLoginState';
@@ -9,6 +9,9 @@ import {
   StyledAdd,
   StyledButton,
   StyledButtonWrapper,
+  StyledCheckbox,
+  StyledCheckboxLabel,
+  StyledCheckboxWrapper,
   StyledContainer,
   StyledContents,
   StyledDetailLabel,
@@ -35,12 +38,14 @@ function RouteComponent() {
   const { organizationId } = Route.useParams();
   const navigate = useNavigate();
   const { isLoggedIn } = useLoginState();
+  const [is24Hours, setIs24Hours] = useState(false);
 
   useEffect(() => {
     if (!isLoggedIn) {
       navigate({ to: '/' });
     }
   }, [isLoggedIn, navigate]);
+
   const imageInputRef = useRef<HTMLInputElement | null>(null);
   const { register, handleSubmit, watch, setValue } = useForm<SpaceFormData>({
     defaultValues: {
@@ -73,8 +78,8 @@ function RouteComponent() {
     const spaceParams: SpaceParams = {
       name: data.name,
       location: data.location,
-      openingTime: data.openingTime,
-      closingTime: data.closingTime,
+      openingTime: is24Hours ? '00:00' : data.openingTime,
+      closingTime: is24Hours ? '23:59' : data.closingTime,
       capacity: Number(data.capacity),
       image: data.image,
     };
@@ -89,6 +94,17 @@ function RouteComponent() {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
     setValue('image', file);
+  };
+
+  const handle24HoursToggle = () => {
+    setIs24Hours(!is24Hours);
+    if (!is24Hours) {
+      setValue('openingTime', '00:00');
+      setValue('closingTime', '23:59');
+    } else {
+      setValue('openingTime', '');
+      setValue('closingTime', '');
+    }
   };
 
   return (
@@ -118,23 +134,37 @@ function RouteComponent() {
           <StyledFieldGroup>
             <StyledLabelRow>
               <StyledLabel>공간 사용 가능 시간</StyledLabel>
-              <StyledDetailLabel>예약 가능한 시간은 6-21시로 제한됩니다</StyledDetailLabel>
+              <StyledCheckboxWrapper>
+                <StyledCheckbox
+                  type="checkbox"
+                  id="is24Hours"
+                  checked={is24Hours}
+                  onChange={handle24HoursToggle}
+                />
+                <StyledCheckboxLabel htmlFor="is24Hours">24시간 운영</StyledCheckboxLabel>
+              </StyledCheckboxWrapper>
             </StyledLabelRow>
-            <StyledTimeContainer>
-              <StyledTimeInput
-                type="time"
-                step="1800"
-                {...register('openingTime', { required: true })}
-                placeholder="오픈 시간을 선택하세요"
-              />
-              <span>~</span>
-              <StyledTimeInput
-                type="time"
-                step="1800"
-                {...register('closingTime', { required: true })}
-                placeholder="종료 시간을 선택하세요"
-              />
-            </StyledTimeContainer>
+            {!is24Hours ? (
+              <StyledTimeContainer>
+                <StyledTimeInput
+                  type="time"
+                  step="1800"
+                  {...register('openingTime', { required: !is24Hours })}
+                  placeholder="오픈 시간을 선택하세요"
+                  disabled={is24Hours}
+                />
+                <span>~</span>
+                <StyledTimeInput
+                  type="time"
+                  step="1800"
+                  {...register('closingTime', { required: !is24Hours })}
+                  placeholder="종료 시간을 선택하세요"
+                  disabled={is24Hours}
+                />
+              </StyledTimeContainer>
+            ) : (
+              <StyledDetailLabel>24시간 운영됩니다 (00:00 ~ 23:59)</StyledDetailLabel>
+            )}
           </StyledFieldGroup>
           <StyledFieldGroup>
             <StyledLabel>수용 가능 인원</StyledLabel>
