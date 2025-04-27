@@ -2,7 +2,7 @@ import { createLazyFileRoute, useNavigate } from '@tanstack/react-router';
 import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import Modal from 'react-modal';
-import Logo from '../../../../assets/OPENSSUpot.svg';
+import Logo from '../../../../assets/spacer_logo_blue.svg';
 import { modalStyles } from '../../../../styles/editModal';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';

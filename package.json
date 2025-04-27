@@ -21,7 +21,8 @@
     "react-hook-form": "^7.53.2",
     "react-modal": "^3.16.1",
     "styled-components": "^6.1.13",
-    "vite-plugin-svgr": "^4.3.0"
+    "vite-plugin-svgr": "^4.3.0",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
