@@ -154,3 +154,18 @@ export const StyledImageNameInput = styled.input`
     color: #858585;
   }
 `;
+
+export const StyledCheckboxWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 8px;
+`;
+
+export const StyledCheckbox = styled.input`
+  margin-right: 4px;
+`;
+
+export const StyledCheckboxLabel = styled.label`
+  font-size: 14px;
+`;
