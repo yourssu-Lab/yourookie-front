@@ -195,3 +195,18 @@ export const StyledLabelRow = styled.div`
   align-items: center;
   gap: 8px;
 `;
+
+export const StyledCheckboxWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 8px;
+`;
+
+export const StyledCheckbox = styled.input`
+  margin-right: 4px;
+`;
+
+export const StyledCheckboxLabel = styled.label`
+  font-size: 14px;
+`;

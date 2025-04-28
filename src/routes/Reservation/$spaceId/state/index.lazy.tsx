@@ -1,10 +1,10 @@
+import { getReservationInfo } from '@/api/getReservationInfo';
 import { ReservationCalendar } from '@/components/ReservationCalendar/ReservationCalendar.tsx';
 import { ReservationStateCard } from '@/components/ReservationStateCard/ReservationStateCard';
 import { useQuery } from '@tanstack/react-query';
 import { createLazyFileRoute } from '@tanstack/react-router';
 import dayjs from 'dayjs';
 import { useState } from 'react';
-import { getReservationsTime } from '../../../../api/getReservationInfoTime';
 import {
   StyledContainer,
   StyledDivider,
@@ -21,11 +21,11 @@ function RouteComponent() {
   const { spaceId } = Route.useParams();
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
-  const currentDate = dayjs(selectedDate).format('YYYY-MM-DDTHH:mm:00');
+  const formattedDate = dayjs(selectedDate).format('YYYY-MM-DD');
 
   const { data: reservations = [] } = useQuery({
-    queryKey: ['reservations', spaceId, currentDate],
-    queryFn: () => getReservationsTime(Number(spaceId), currentDate),
+    queryKey: ['reservations', spaceId, formattedDate],
+    queryFn: () => getReservationInfo(Number(spaceId), formattedDate),
     enabled: !!spaceId,
   });
 
