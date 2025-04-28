@@ -127,9 +127,18 @@ function RouteComponent() {
     end: { hour: number; minute: number };
   }) => {
     const formatHour = (time: { hour: number; minute: number }) => {
+      if (time.hour === 23 && time.minute === 59) {
+        return '23:59';
+      }
+
       if (time.minute === 60) {
         return `${time.hour + 1}:00`;
       }
+
+      if (time.minute !== 0 && time.minute !== 30) {
+        return `${time.hour}:${time.minute < 10 ? '0' + time.minute : time.minute}`;
+      }
+
       return `${time.hour}:${time.minute === 30 ? '30' : '00'}`;
     };
 
