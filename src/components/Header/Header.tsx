@@ -18,9 +18,9 @@ import {
 } from './Header.style.ts';
 
 const SIMPLE_HEADER_PATTERNS = [
-  /^\/SearchResult\/[^/]+\/organizations\/[^/]+\/?$/,
-  /^\/Reservation\/[^/]+\/?$/,
-  /^\/reservation\/[^/]+\/state\/?$/,
+  /^\/SearchResult\/[^/]+\/organizations\/[^/]+\/?$/i,
+  /^\/Reservation\/[^/]+\/?$/i,
+  /^\/Reservation\/[^/]+\/state\/?$/i,
 ];
 
 function Header() {
