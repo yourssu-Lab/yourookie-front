@@ -73,7 +73,11 @@ function Header() {
               공간오픈/관리
             </StyledLink>
             <LoginAlert open={loginAlertOpen} closeModal={() => setLoginAlertOpen(false)} />
-            <StyledLink $primary={!isHome} to="/meetingRooms">
+            <StyledLink
+              $primary={!isHome}
+              to="/meetingRooms"
+              style={{ pointerEvents: 'none', opacity: 0.5 }}
+            >
               교내회의실 찾기
             </StyledLink>
             <SearchContainer>
