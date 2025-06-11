@@ -23,17 +23,19 @@ import {
 
 interface ReservationStateCardProps {
   id: number;
+  name: string;
   spaceId: number;
   startDateTime: string;
   endDateTime: string;
 }
 
 export const ReservationStateCard = ({
-                                       id,
-                                       spaceId,
-                                       startDateTime,
-                                       endDateTime,
-                                     }: ReservationStateCardProps) => {
+  id,
+  name,
+  spaceId,
+  startDateTime,
+  endDateTime,
+}: ReservationStateCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [password, setPassword] = useState('');
   const queryClient = useQueryClient();
@@ -86,7 +88,7 @@ export const ReservationStateCard = ({
       </StyledImageSection>
 
       <StyledInfoSection>
-        <StyledTitle>{space?.name}</StyledTitle>
+        <StyledTitle>{name}</StyledTitle>
         <StyledInfoText>{space?.location}</StyledInfoText>
         <StyledInfoText>
           {`${formatTime(space?.openingTime || '')} ~ ${formatTime(space?.closingTime || '')}`}
