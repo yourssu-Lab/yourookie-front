@@ -161,8 +161,8 @@ function RouteComponent() {
         <div style={{ height: '20px' }}></div>
         <ReservationStatusBar
           reservations={[]}
-          openingTime=""
-          closingTime=""
+          openingTime="00:00:00"
+          closingTime="23:59:59"
           type="meetingRoom"
           onTimeSelect={handleTimeSelect}
         />
